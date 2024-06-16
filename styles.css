@@ -8,9 +8,18 @@ body {
     color: #333333; /* Define el color del texto del cuerpo del documento */
 }
 
-h1, h2, h3 {
+h1, h3 {
     font-family: 'Playfair Display', serif;
     color: #2A9D8F;
+}
+
+h2 {
+    font-family: 'Playfair Display', serif;
+    color: #000;
+    text-align: left;
+    margin: 20px auto;
+    max-width: 1200px;
+    font-size: 32px;
 }
 
 * {
@@ -103,13 +112,6 @@ header ul li a:hover {
 
 .welcome-content button:hover {
     background-color: #333;
-}
-
-h2 {
-    text-align: left;
-    margin: 20px auto;
-    max-width: 1200px;
-    font-size: 32px;
 }
 
 .product-grid {
