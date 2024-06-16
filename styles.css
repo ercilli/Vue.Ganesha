@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif; /* Define la fuente del cuerpo del documento */
+    font-family: Inter, sans-serif; /* Define la fuente del cuerpo del documento */
     margin: 0; /* Elimina los márgenes del cuerpo del documento */
     padding: 0; /* Elimina el padding del cuerpo del documento */
     background-color: #fff; /* Define el color de fondo del cuerpo del documento */
@@ -54,12 +54,14 @@ header ul li a:hover {
 }
 
 .welcome-section {
-    background-image: url('path/to/your/image.jpg');
-    background-size: cover;
+    background-image: url('./img/vivivero-ganesha-1.png');
+    background-size: 40%;
+    background-repeat: no-repeat;
     background-position: center;
-    color: #fff;
+    color: #ED9039;
     text-align: center;
-    padding: 60px 20px;
+    padding: 150px 20px;
+    margin: 0 -600px 0 -600px; /* Reduce el margen a 20px a los lados para hacer el div más ancho */
 }
 
 .welcome-content {
@@ -136,8 +138,8 @@ footer {
 }
 
 .footer-title {
-    font-size: 16px;
-    margin-bottom: 40px;
+    font-size: 20px;
+    margin: 10px 0px 0px 40px;
     grid-column: 1;
     grid-row: 1;
 }
@@ -183,6 +185,8 @@ footer {
     gap: 15px;
     grid-column: 1;
     grid-row: 2;
+    margin: 10px 0px 0px 40px;
+
 }
 
 .social-icons a {
