@@ -1,0 +1,195 @@
+body {
+    font-family: Arial, sans-serif; /* Define la fuente del cuerpo del documento */
+    margin: 0; /* Elimina los márgenes del cuerpo del documento */
+    padding: 0; /* Elimina el padding del cuerpo del documento */
+    background-color: #fff; /* Define el color de fondo del cuerpo del documento */
+    color: #333; /* Define el color del texto del cuerpo del documento */
+}
+
+header {
+    background-color: #fff; /* Define el color de fondo del encabezado */
+    color: #000; /* Define el color del texto del encabezado */
+    padding: 20px 0; /* Agrega padding en la parte superior e inferior del encabezado */
+    margin-bottom: 50px; /* Agrega un margen en la parte inferior del encabezado */
+}
+
+header nav {
+    display: flex; /* Establece el modelo de caja flexible para la navegación del encabezado */
+    justify-content: space-between; /* Los elementos flexibles se distribuyen uniformemente en la línea con espacio alrededor de ellos */
+    align-items: center; /* Los elementos flexibles se alinean al centro del contenedor en el eje transversal */
+    max-width: 1200px; /* Establece el ancho máximo de la navegación del encabezado */
+    margin: 0 auto; /* Centra la navegación del encabezado horizontalmente */
+    padding: 0 20px; /* Agrega padding a los lados de la navegación del encabezado */
+}
+
+header .logo {
+    font-size: 24px; /* Define el tamaño de la fuente del logo */
+    font-weight: bold; /* Define el peso de la fuente del logo */
+}
+
+header ul {
+    list-style: none; /* Elimina los estilos de lista del ul */
+    margin: 0; /* Elimina los márgenes del ul */
+    padding: 0; /* Elimina el padding del ul */
+    display: flex; /* Establece el modelo de caja flexible para el ul */
+    gap: 20px; /* Agrega un espacio entre los elementos del ul */
+}
+
+header ul li a {
+    color: #000; /* Define el color del texto de los enlaces */
+    text-decoration: none; /* Elimina la decoración de los enlaces */
+    padding: 5px 10px; /* Agrega padding a los enlaces */
+    border-radius: 4px; /* Agrega bordes redondeados a los enlaces */
+    transition: background 0.3s; /* Agrega una transición al fondo de los enlaces */
+}
+
+header ul li a.menu-button {
+    background-color: #000; /* Define el color de fondo del botón del menú */
+    color: #fff; /* Define el color del texto del botón del menú */
+    padding: 10px 20px; /* Agrega padding al botón del menú */
+}
+
+header ul li a:hover {
+    background-color: #555; /* Define el color de fondo de los enlaces al pasar el mouse */
+}
+
+.welcome-section {
+    background-image: url('path/to/your/image.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.welcome-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.welcome-content h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.welcome-content p {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.welcome-content button {
+    background-color: #000;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background 0.3s;
+}
+
+.welcome-content button:hover {
+    background-color: #333;
+}
+
+h2 {
+    text-align: left;
+    margin: 20px auto;
+    max-width: 1200px;
+    font-size: 32px;
+}
+
+.product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.product-item {
+    flex: 1 1 calc(33.333% - 20px);
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.product-item.large {
+    flex: 2 1 calc(66.666% - 20px);
+}
+
+footer {
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-top: 1px solid #e7e7e7;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: auto auto;
+    gap: 20px;
+    width: 100%;
+}
+
+.footer-title {
+    font-size: 16px;
+    margin-bottom: 40px;
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.footer-columns {
+    display: flex;
+    justify-content: space-around;
+    grid-column: 2;
+    grid-row: 1 / span 2;
+}
+
+.footer-column {
+    flex: 1;
+    margin: 0 100px;
+}
+
+.footer-column h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 8px;
+}
+
+.footer-column ul li a {
+    color: #000;
+    text-decoration: none;
+}
+
+.footer-column ul li a:hover {
+    text-decoration: underline;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.social-icons a {
+    display: inline-block;
+}
+
+.social-icons img {
+    width: 24px;
+    height: 24px;
+}
