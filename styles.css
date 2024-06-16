@@ -207,7 +207,7 @@ footer {
 @media (max-width: 768px) {
 
     .logo {
-        margin-bottom: 15px; /* Ajusta este valor según tus necesidades */
+        margin: 20px 20px 30px 20px; /* Ajusta este valor según tus necesidades */
     }
 
     .about-button, .contact-button {
@@ -219,7 +219,7 @@ footer {
     }
 
     .welcome-section {
-        margin: 0 20px;
+        margin: 20px 20px 20px 20px;
         padding: 50px 20px;
     }
 
