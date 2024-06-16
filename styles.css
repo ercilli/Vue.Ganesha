@@ -245,6 +245,20 @@ footer {
         flex-direction: column;
     }
 
+    header .logo {
+        order: -1; /* Esto moverá el logo al principio */
+        display: flex;
+        justify-content: center; /* Centra horizontalmente */
+        align-items: center; /* Centra verticalmente */
+    }
+
+    header .menu {
+        order: 1; /* Esto moverá el menú al final */
+        display: flex;
+        justify-content: center; /* Centra horizontalmente */
+        align-items: center; /* Centra verticalmente */
+    }
+
     .welcome-section {
         margin: 20px;
         padding: 50px 20px;
