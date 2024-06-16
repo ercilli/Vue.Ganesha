@@ -6,11 +6,15 @@ body {
     color: #333; /* Define el color del texto del cuerpo del documento */
 }
 
+* {
+    box-sizing: border-box; /* Asegura que el padding y el border se incluyan en el ancho y alto del elemento */
+    max-width: 100%; /* Asegura que ningún elemento sea más ancho que su contenedor */
+}
+
 header {
     background-color: #fff; /* Define el color de fondo del encabezado */
     color: #000; /* Define el color del texto del encabezado */
-    padding: 20px 0; /* Agrega padding en la parte superior e inferior del encabezado */
-    margin-bottom: 50px; /* Agrega un margen en la parte inferior del encabezado */
+    padding: 10px;
 }
 
 header nav {
@@ -55,13 +59,13 @@ header ul li a:hover {
 
 .welcome-section {
     background-image: url('./img/vivivero-ganesha-1.png');
-    background-size: 40%;
+    background-size: 100%;
     background-repeat: no-repeat;
     background-position: center;
     color: #ED9039;
     text-align: center;
-    padding: 150px 20px;
-    margin: 0 -600px 0 -600px; /* Reduce el margen a 20px a los lados para hacer el div más ancho */
+    padding: 100px 10px 10px 50px;
+    margin: 10px 170px 10px 170px;
 }
 
 .welcome-content {
@@ -196,4 +200,54 @@ footer {
 .social-icons img {
     width: 24px;
     height: 24px;
+}
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+
+    .logo {
+        margin-bottom: 15px; /* Ajusta este valor según tus necesidades */
+    }
+
+    .about-button, .contact-button {
+        font-size: 12px; /* Ajusta este valor según tus necesidades */
+    }
+
+    header nav {
+        flex-direction: column;
+    }
+
+    .welcome-section {
+        margin: 0 20px;
+        padding: 50px 20px;
+    }
+
+    .product-grid {
+        flex-direction: column;
+    }
+
+    .product-item {
+        flex: 1 1 100%;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+    }
+
+    .footer-columns {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-column {
+        margin: 0;
+        margin-bottom: 20px;
+    }
+
+    .social-icons {
+        justify-content: center;
+        margin: 20px 0;
+    }
 }
