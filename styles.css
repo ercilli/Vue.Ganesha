@@ -1,111 +1,96 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&family=Raleway:wght@400;700&display=swap');
 
 * {
-    box-sizing: border-box; /* Asegura que el padding y el border se incluyan en el ancho y alto del elemento */
-    max-width: 100%; /* Asegura que ningún elemento sea más ancho que su contenedor */
+    box-sizing: border-box;
+    max-width: 100%;
 }
 
 body {
-    font-family: 'Montserrat', sans-serif; /* Define la fuente del cuerpo del documento */
-    margin: 0; /* Elimina los márgenes del cuerpo del documento */
-    padding: 0; /* Elimina el padding del cuerpo del documento */
-    background-color: #fff; /* Define el color de fondo del cuerpo del documento */
-    color: #333333; /* Define el color del texto del cuerpo del documento */
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    color: #333333;
     width: 100%;
 }
 
 .container {
-    max-width: 1200px; /* Limita el ancho máximo del contenedor */
-    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .full-height-section {
-    height: 100vh; /* Hace que la sección ocupe toda la altura de la ventana del navegador */
+    height: 100vh;
+}
+
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
 }
 
 h1, h3 {
-    font-family: 'Playfair Display', serif;
     color: #2A9D8F;
 }
 
 h2 {
-    font-family: 'Playfair Display', serif;
     color: #000;
     text-align: left;
     margin: 20px auto;
-    max-width: 1200px;
+    max-width: 1100px;
     font-size: 32px;
 }
 
 header {
     background-color: #fff;
     color: #000;
-    padding: 10px 10px 10px 10px;
-    margin: 10px 10px 10px 10px;
-    height: 164px;
-    width: 1200px;
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between; /* Añade esto */
+    padding: 10px;
 }
 
 header nav {
     display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    width: 100%; /* Cambia esto */
-    margin: 0; /* Cambia esto */
+    justify-content: space-between;
+    width: 100%;
+    margin: 0;
 }
 
 header .logo {
     font-size: 24px; 
     font-weight: bold; 
-    padding: 10px 10px 10px 10px;
-    margin: 10px 20px 10px 20px; 
+    padding: 10px;
+    margin: 10px 20px; 
     order: 1;
     display: flex;
-    align-items: center; /* Centra verticalmente el contenido dentro del logo */
 }
 
 header .menu {
     order: 2; 
     display: flex;
-    align-items: center; /* Centra verticalmente el contenido dentro del menú */
-}
-
-header .menu ul {
-    display: flex;
-    gap: 20px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    align-items: center;
 }
 
 header ul {
-    list-style: none; /* Elimina los estilos de lista del ul */
-    margin: 0; /* Elimina los márgenes del ul */
-    padding: 0; /* Elimina el padding del ul */
-    display: flex; /* Establece el modelo de caja flexible para el ul */
-    gap: 20px; /* Agrega un espacio entre los elementos del ul */
-    order: 2;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
 }
 
 header ul li a {
-    color: #000; /* Define el color del texto de los enlaces */
-    text-decoration: none; /* Elimina la decoración de los enlaces */
-    padding: 5px 10px; /* Agrega padding a los enlaces */
-    border-radius: 4px; /* Agrega bordes redondeados a los enlaces */
-    transition: background 0.3s; /* Agrega una transición al fondo de los enlaces */
+    color: #000;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background 0.3s;
 }
 
 header ul li a.menu-button {
-    background-color: #000; /* Define el color de fondo del botón del menú */
-    color: #fff; /* Define el color del texto del botón del menú */
-    padding: 10px 20px; /* Agrega padding al botón del menú */
+    background-color: #000;
+    color: #fff;
+    padding: 10px 20px;
 }
 
 header ul li a:hover {
-    background-color: #555; /* Define el color de fondo de los enlaces al pasar el mouse */
+    background-color: #555;
 }
 
 .welcome-section {
@@ -115,8 +100,8 @@ header ul li a:hover {
     background-position: center;
     color: #2A9D8F;
     text-align: center;
-    padding: 150px 10px 150px 10px;
-    margin: 10px 170px 10px 170px;
+    padding: 150px 10px;
+    margin: 10px 170px;
 }
 
 .welcome-content {
@@ -134,7 +119,7 @@ header ul li a:hover {
     color: #F4A261;
 }
 
-.welcome-content button {
+.welcome-content button, .button {
     background-color: #000;
     color: #fff;
     padding: 10px 20px;
@@ -145,7 +130,7 @@ header ul li a:hover {
     transition: background 0.3s;
 }
 
-.welcome-content button:hover {
+.welcome-content button:hover, .button:hover {
     background-color: #333;
 }
 
@@ -159,7 +144,7 @@ header ul li a:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 20px auto;
 }
 
@@ -240,7 +225,6 @@ footer {
     grid-column: 1;
     grid-row: 2;
     margin: 10px 0px 0px 40px;
-
 }
 
 .social-icons a {
@@ -252,29 +236,9 @@ footer {
     height: 24px;
 }
 
-.button {
-    background-color: #000000;
-    color: #FFFFFF;
-    padding: 10px 20px;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: background 0.3s;
-}
-
-.button:hover {
-    background-color: #333333;
-}
-
-/* Responsive Design */
-
 @media (max-width: 768px) {
-
     h2 {
-        font-size: 20px; /* Ajusta este valor según tus necesidades */
-    }
-
-    .about-button, .contact-button {
-        font-size: 12px; /* Ajusta este valor según tus necesidades */
+        font-size: 20px;
     }
 
     header nav {
@@ -282,7 +246,7 @@ footer {
     }
 
     .welcome-section {
-        margin: 20px 20px 20px 20px;
+        margin: 20px;
         padding: 50px 20px;
     }
 
