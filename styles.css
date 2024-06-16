@@ -1,9 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&family=Raleway:wght@400;700&display=swap');
+
 body {
-    font-family: Inter, sans-serif; /* Define la fuente del cuerpo del documento */
+    font-family: 'Montserrat', sans-serif; /* Define la fuente del cuerpo del documento */
     margin: 0; /* Elimina los márgenes del cuerpo del documento */
     padding: 0; /* Elimina el padding del cuerpo del documento */
     background-color: #fff; /* Define el color de fondo del cuerpo del documento */
-    color: #333; /* Define el color del texto del cuerpo del documento */
+    color: #333333; /* Define el color del texto del cuerpo del documento */
+}
+
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    color: #2A9D8F;
 }
 
 * {
@@ -62,7 +69,7 @@ header ul li a:hover {
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: center;
-    color: #ED9039;
+    color: #2A9D8F;
     text-align: center;
     padding: 100px 10px 10px 50px;
     margin: 10px 170px 10px 170px;
@@ -79,8 +86,8 @@ header ul li a:hover {
 }
 
 .welcome-content p {
-    font-size: 24px;
-    margin-bottom: 20px;
+    font-family: 'Raleway', sans-serif;
+    color: #F4A261;
 }
 
 .welcome-content button {
@@ -200,6 +207,19 @@ footer {
 .social-icons img {
     width: 24px;
     height: 24px;
+}
+
+.button {
+    background-color: #000000;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.button:hover {
+    background-color: #333333;
 }
 
 /* Responsive Design */
