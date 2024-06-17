@@ -177,10 +177,10 @@ footer {
 }
 
 .footer-title {
-    font-size: 20px;
-    margin: 10px 0px 0px 40px;
-    grid-column: 1;
-    grid-row: 1;
+    grid-column: 1; /* Esto colocará el título en la primera columna */
+    grid-row: 1; /* Esto colocará el título en la primera fila */
+    text-align: center; /* Esto centrará el título horizontalmente */
+    margin: 0 auto; /* Esto centrará el título en su contenedor */
 }
 
 .footer-columns {
@@ -221,14 +221,16 @@ footer {
 
 .social-icons {
     display: flex;
-    gap: 15px;
+    gap: 0px;
     grid-column: 1;
     grid-row: 2;
-    margin: 10px 0px 0px 40px;
+    justify-content: center; /* Esto centrará los iconos horizontalmente */
+    gap: 15px; /* Esto añadirá un espacio entre los iconos */
 }
 
 .social-icons a {
-    display: inline-block;
+    grid-column: 1; /* Esto colocará los iconos sociales en la primera columna */
+    grid-row: 2; /* Esto colocará los iconos sociales en la segunda fila */
 }
 
 .social-icons img {
@@ -264,6 +266,11 @@ footer {
         padding: 50px 20px;
     }
 
+    #products {
+        margin-left: 20px; /* Ajusta este valor a tus necesidades */
+        margin-right: 20px; /* Ajusta este valor a tus necesidades */
+    }
+
     .product-grid {
         flex-direction: column;
     }
@@ -272,23 +279,27 @@ footer {
         flex: 1 1 100%;
     }
 
-    .footer-container {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto;
+    .footer-title {
+        display: block;
+        text-align: center; /* Esto centrará el texto horizontalmente */
+        margin-bottom: 10px; /* Esto añadirá un espacio debajo del título */
     }
-
-    .footer-columns {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .footer-column {
-        margin: 0;
-        margin-bottom: 20px;
-    }
-
     .social-icons {
-        justify-content: center;
-        margin: 20px 0;
+        display: block;
+        text-align: center;
+        gap: 0px; /* Esto añadirá un espacio entre los iconos */
+    }
+    .social-icons img {
+        width: 16px; /* Esto mantendrá el tamaño original de los iconos */
+        height: 16px; /* Esto mantendrá el tamaño original de los iconos */
+    }
+    .footer-column {
+        margin: 0 10px; /* Ajusta este valor a tus necesidades */
+    }
+    .footer-column h3 {
+        font-size: 16px; /* Ajusta este valor a tus necesidades */
+    }
+    .footer-column ul li a {
+        font-size: 0.50em; /* Esto hará que el tamaño de fuente sea el 75% del tamaño de fuente de h3 */
     }
 }
