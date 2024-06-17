@@ -282,7 +282,6 @@ footer {
     .footer-title {
         display: block;
         text-align: center; /* Esto centrará el texto horizontalmente */
-        margin-bottom: 10px; /* Esto añadirá un espacio debajo del título */
     }
     .social-icons {
         display: block;
