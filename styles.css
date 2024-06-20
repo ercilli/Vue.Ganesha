@@ -1,10 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&family=Raleway:wght@400;700&display=swap');
 
-* {
-    box-sizing: border-box;
-    max-width: 100%;
-}
-
 body {
     font-family: 'Montserrat', sans-serif;
     margin: 0;
@@ -12,8 +7,9 @@ body {
     background-color: #fff;
     color: #333333;
     width: 100%;
+    max-width: 1200px; /* Esto limitará el ancho máximo del contenido de tu página a 1000px */
+    margin: 0 auto; /* Esto centrará el contenido de tu página horizontalmente */
 }
-
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -272,11 +268,10 @@ footer {
     }
 
     .product-grid {
-        flex-direction: column;
+        flex-wrap: wrap; /* Esto permitirá que los elementos se envuelvan en nuevas líneas */
     }
-
     .product-item {
-        flex: 1 1 100%;
+        flex: 0 0 calc(33.333% - 20px); /* Esto hará que cada elemento ocupe aproximadamente un tercio del ancho del contenedor */
     }
 
     .footer-title {
