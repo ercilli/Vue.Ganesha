@@ -24,7 +24,7 @@ h1, h2, h3 {
 }
 
 h1, h3 {
-    color: #2A9D8F;
+    color: #2F4F4F;
 }
 
 h2 {
@@ -89,7 +89,7 @@ header ul li a:hover {
 }
 
 .welcome-section {
-    background-image: url('./img/vivivero-ganesha-1.png');
+    background-image: url('./img/vivivero-ganesha-1.webp');
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: center;
@@ -100,7 +100,7 @@ header ul li a:hover {
 }
 
 .welcome-content {
-    max-width: 800px;
+    max-width: 100%;
     margin: 0 auto;
 }
 
@@ -111,12 +111,12 @@ header ul li a:hover {
 
 .welcome-content p {
     font-family: 'Raleway', sans-serif;
-    color: #F4A261;
+    color: #a45b1f;
 }
 
 .welcome-content button, .button {
-    background-color: #000;
-    color: #fff;
+    background-color: #2F4F4F;
+    color: #FFFFFF;
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
