@@ -31,7 +31,7 @@ h2 {
     color: #000;
     text-align: left;
     margin: 20px auto;
-    max-width: 1100px;
+    max-width: 1200px;
     font-size: 32px;
 }
 
@@ -97,7 +97,7 @@ header ul li a:hover {
     color: #2A9D8F;
     text-align: center;
     padding: 150px 10px;
-    margin: 10px 170px;
+    margin: 10px;
 }
 
 .welcome-content {
@@ -268,8 +268,10 @@ footer {
     }
 
     .product-grid {
-        flex-wrap: wrap; /* Esto permitirá que los elementos se envuelvan en nuevas líneas */
+        flex-wrap: nowrap; /* Esto evitará que los elementos se envuelvan en nuevas líneas */
+        overflow-x: auto; /* Esto permitirá el desplazamiento horizontal */
     }
+
     .product-item {
         flex: 0 0 calc(33.333% - 20px); /* Esto hará que cada elemento ocupe aproximadamente un tercio del ancho del contenedor */
     }
@@ -278,21 +280,26 @@ footer {
         display: block;
         text-align: center; /* Esto centrará el texto horizontalmente */
     }
+
     .social-icons {
         display: block;
         text-align: center;
         gap: 0px; /* Esto añadirá un espacio entre los iconos */
     }
+
     .social-icons img {
         width: 16px; /* Esto mantendrá el tamaño original de los iconos */
         height: 16px; /* Esto mantendrá el tamaño original de los iconos */
     }
+
     .footer-column {
         margin: 0 10px; /* Ajusta este valor a tus necesidades */
     }
+
     .footer-column h3 {
         font-size: 16px; /* Ajusta este valor a tus necesidades */
     }
+    
     .footer-column ul li a {
         font-size: 0.50em; /* Esto hará que el tamaño de fuente sea el 75% del tamaño de fuente de h3 */
     }
