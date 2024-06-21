@@ -257,6 +257,15 @@ footer {
         align-items: center; /* Centra verticalmente */
     }
 
+    header ul li a.about-button {
+        font-size: 12px;
+    }
+
+    header ul li a.menu-button {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+
     .welcome-section {
         margin: 20px;
         padding: 50px 20px;
