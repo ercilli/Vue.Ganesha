@@ -129,12 +129,6 @@ header ul li a:hover {
     background-color: #333;
 }
 
-.product-section {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
 .product-grid {
     display: flex; /* Esto permitirá que los elementos se muestren en línea */
     flex-wrap: wrap; /* Esto permitirá que los elementos se envuelvan en nuevas líneas */
@@ -254,18 +248,21 @@ footer {
 
 @media only screen and (min-width: 360px) and (max-width: 429px) {
     h2 {
-        font-size: 16px;
+        font-size: 20px;
     }
 
-    header nav {
+    header nav, .product-section {
         flex-direction: column;
+    }
+
+    header .logo, header .menu {
+        display: flex;
+        justify-content: center; /* Centra horizontalmente */
+        align-items: center; /* Centra verticalmente */
     }
 
     header .logo {
         order: -1; /* Esto moverá el logo al principio */
-        display: flex;
-        justify-content: center; /* Centra horizontalmente */
-        align-items: center; /* Centra verticalmente */
     }
 
     header .menu {
@@ -295,32 +292,36 @@ footer {
     }
 
     .product-grid {
-        flex-wrap: nowrap; /* Esto evitará que los elementos se envuelvan en nuevas líneas */
+        display: flex; /* Esto permitirá que los elementos se muestren en línea */
+        flex-wrap: nowrap; /* Esto permitirá que los elementos se envuelvan en nuevas líneas */
         overflow-x: auto; /* Esto permitirá el desplazamiento horizontal */
-        gap: 5px; /* Esto añadirá un espacio entre los elementos */
+        gap: 16px;
+        max-width: 100%;
+        justify-content: flex-start; /* Alinea los elementos al inicio */
     }
 
     .product-item {
-        flex: 0 0 calc(100% / 3 - 20px); /* Esto hará que cada elemento ocupe aproximadamente un tercio del ancho del contenedor */
+        flex: 0 0 30%; /* Esto asegura que cada elemento ocupe un 30% del espacio disponible */
+        box-sizing: border-box;
+        padding: 10px;
+        background-color: #f8f8f8;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        text-align: center;
+        height: 100%;
     }
-    
+
     .product-item h3 {
-        font-size: 14px; /* Ajusta este valor a tus necesidades */
+        font-size: 0.8em; /* Ajusta este valor a tus necesidades */
     }
 
     .product-item p {
-        font-size: 12px; /* Ajusta este valor a tus necesidades */
+        font-size: 0.6em; /* Ajusta este valor a tus necesidades */
     }
-
-    .footer-title {
+    
+    .footer-title, .social-icons {
         display: block;
         text-align: center; /* Esto centrará el texto horizontalmente */
-    }
-
-    .social-icons {
-        display: block;
-        text-align: center;
-        gap: 0px; /* Esto añadirá un espacio entre los iconos */
     }
 
     .social-icons img {
@@ -346,22 +347,22 @@ footer {
         font-size: 20px;
     }
 
-    header nav {
+    header nav, .product-section {
         flex-direction: column;
+    }
+
+    header .logo, header .menu {
+        display: flex;
+        justify-content: center; /* Centra horizontalmente */
+        align-items: center; /* Centra verticalmente */
     }
 
     header .logo {
         order: -1; /* Esto moverá el logo al principio */
-        display: flex;
-        justify-content: center; /* Centra horizontalmente */
-        align-items: center; /* Centra verticalmente */
     }
 
     header .menu {
         order: 1; /* Esto moverá el menú al final */
-        display: flex;
-        justify-content: center; /* Centra horizontalmente */
-        align-items: center; /* Centra verticalmente */
     }
 
     .welcome-section {
@@ -375,23 +376,36 @@ footer {
     }
 
     .product-grid {
-        flex-wrap: nowrap; /* Esto evitará que los elementos se envuelvan en nuevas líneas */
+        display: flex; /* Esto permitirá que los elementos se muestren en línea */
+        flex-wrap: nowrap; /* Esto permitirá que los elementos se envuelvan en nuevas líneas */
         overflow-x: auto; /* Esto permitirá el desplazamiento horizontal */
+        gap: 20px;
+        max-width: 100%;
+        justify-content: flex-start; /* Alinea los elementos al inicio */
     }
 
     .product-item {
-        flex: 0 0 calc(100% / 3 - 20px); /* Esto hará que cada elemento ocupe aproximadamente un tercio del ancho del contenedor */
+        flex: 0 0 30%; /* Esto asegura que cada elemento ocupe un 30% del espacio disponible */
+        box-sizing: border-box;
+        padding: 10px;
+        background-color: #f8f8f8;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        text-align: center;
+        height: 100%;
     }
 
-    .footer-title {
+    .product-item h3 {
+        font-size: 0.8em; /* Ajusta este valor a tus necesidades */
+    }
+
+    .product-item p {
+        font-size: 0.6em; /* Ajusta este valor a tus necesidades */
+    }
+    
+    .footer-title, .social-icons {
         display: block;
         text-align: center; /* Esto centrará el texto horizontalmente */
-    }
-
-    .social-icons {
-        display: block;
-        text-align: center;
-        gap: 0px; /* Esto añadirá un espacio entre los iconos */
     }
 
     .social-icons img {
