@@ -106,12 +106,7 @@ header ul li a:hover {
 
 .welcome-content h1 {
     font-size: 48px;
-    margin-bottom: 20px;
-}
-
-.welcome-content p {
-    font-family: 'Raleway', sans-serif;
-    color: #a45b1f;
+    margin-bottom: 150px;
 }
 
 .welcome-content button, .button {
