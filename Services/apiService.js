@@ -1,4 +1,4 @@
-const baseUrl = 'https://localhost:7182/api/Producto';
+const baseUrl = 'https://vivero-ganesha-api.fly.dev/api/Producto';
 
 export const fetchProducts = () => {
   return fetch(baseUrl).then(response => response.json());
