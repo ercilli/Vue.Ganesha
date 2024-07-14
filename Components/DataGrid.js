@@ -72,7 +72,7 @@ export default {
         <td v-else><input v-model="product.descripcion" /></td>
         <td v-if="!product.editing">{{ product.categoria }}</td>
         <td v-else><input v-model="product.categoria" /></td>
-        <td v-if="!product.editing">{{ product.precio }}</td>
+        <td v-if="!product.editing">{{ product.precio.toLocaleString('es-CO', { style: 'currency', currency: 'COP' }) }}</td>
         <td v-else><input v-model="product.precio" type="number" /></td>
         <td>
           <button v-if="!product.editing" @click="editProduct(product)">Editar</button>
