@@ -1,4 +1,5 @@
 import DataGrid from './Components/DataGrid.js';
+import Factura from './Components/Factura.js';
 import { fetchProducts } from './Services/apiService.js';
 
 const app = Vue.createApp({
@@ -8,7 +9,8 @@ const app = Vue.createApp({
     };
   },
   components: {
-    'data-grid': DataGrid
+    'data-grid': DataGrid,
+    'factura': Factura,
   },
   mounted() {
     fetchProducts().then(data => {
