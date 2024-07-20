@@ -1,5 +1,5 @@
 // Importa las funciones desde apiService.js
-import { updateProduct, deleteProduct as apiDeleteProduct } from '../Services/apiService.js';
+import { updateItem, deleteItem } from '../Services/apiService.js';
 
 export default {
   props: ['products'],
@@ -14,16 +14,19 @@ export default {
       product.editing = true;
     },
     saveProduct(product, index) {
-      updateProduct(product).then(response => {
+      // Ajuste para usar updateItem con el controlador 'Producto'
+      updateItem('Producto', product).then(response => {
         product.editing = false;
-        Object.assign(this.products[index], response.data);
+        // Asegúrate de ajustar la respuesta si es necesario
+        Object.assign(this.products[index], response || product);
       }).catch(error => {
         console.error("Error updating product:", error);
       });
     },
     deleteProduct(index) {
       const productId = this.products[index].productoid;
-      apiDeleteProduct(productId).then(() => {
+      // Ajuste para usar deleteItem con el controlador 'Producto'
+      deleteItem('Producto', productId).then(() => {
         this.products.splice(index, 1);
       }).catch(error => {
         console.error("Error deleting product:", error);
