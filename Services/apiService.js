@@ -1,29 +1,43 @@
-//const baseUrl = 'https://localhost:7182/api/Producto';
-const baseUrl = 'https://vivero-ganesha-api.fly.dev/api/Producto';
+//const baseUrl = 'https://vivero-ganesha-api.fly.dev/api';
+const baseUrl = 'https://localhost:7182/api';
 
-
-export const fetchProducts = () => {
-  return fetch(baseUrl).then(response => response.json());
+// Función genérica para obtener datos
+export const fetchItems = (controller) => {
+  return fetch(`${baseUrl}/${controller}`).then(response => response.json());
 };
 
-export const updateProduct = (product) => {
-  return fetch(`${baseUrl}/${product.productoid}`, {
+// Función genérica para obtener un ítem por ID
+export const getItemById = (controller, itemId) => {
+  return fetch(`${baseUrl}/${controller}/${itemId}`).then(response => response.json());
+};
+
+// Función genérica para crear un nuevo item
+export const createItem = (controller, item) => {
+  return fetch(`${baseUrl}/${controller}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(item)
+  }).then(response => response.json());
+};
+
+// Función genérica para actualizar un item
+export const updateItem = (controller, item) => {
+  return fetch(`${baseUrl}/${controller}/${item.id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(product)
+    body: JSON.stringify(item)
   }).then(response => {
     if (response.status === 204) {
-      // No hay contenido para devolver, operación exitosa
-      return null; // O puedes devolver un objeto vacío {} según lo que necesites
+      return null;
     } else {
-      // Si el servidor devuelve algo diferente a 204, asumimos que hay un cuerpo de respuesta
       return response.json();
     }
   });
 };
 
-export const deleteProduct = (productid) => {
-  return fetch(`${baseUrl}/${productid}`, {
-	method: 'DELETE'
+// Función genérica para eliminar un item
+export const deleteItem = (controller, itemId) => {
+  return fetch(`${baseUrl}/${controller}/${itemId}`, {
+    method: 'DELETE'
   });
 };
