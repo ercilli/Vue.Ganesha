@@ -1,4 +1,4 @@
-import { fetchItems, getItemById, createItem, updateItem, deleteItem } from '../Services/apiService.js';
+import { fetchItems, createItem } from '../Services/apiService.js';
 
 export default {
   data() {
@@ -11,7 +11,8 @@ export default {
         telefono: ''
       },
       facturaDetails: [],
-      availableProducts: []
+      availableProducts: [],
+      isSubmitting: false // Nueva propiedad
     }
   },
   mounted() {
@@ -74,6 +75,10 @@ export default {
       this.facturaDetails.splice(index, 1);
     },
     generarVenta() {
+      if (this.isSubmitting) return; // Evitar múltiples envíos
+
+      this.isSubmitting = true; // Bloquear el botón
+
       const venta = {
         clienteid: 1,
         cliente: {
@@ -97,13 +102,15 @@ export default {
         .then(response => {
           if (response) {
             console.log('Venta creada con éxito:', response);
-            // Aquí podrías resetear el formulario o redirigir al usuario
-            this.finalizarFactura(); // Si quieres resetear el formulario
+            this.finalizarFactura();
           } else {
             console.error('Error al crear la venta');
           }
         })
-        .catch(error => console.error('Error al crear la venta:', error));
+        .catch(error => console.error('Error al crear la venta:', error))
+        .finally(() => {
+          this.isSubmitting = false; // Desbloquear el botón
+        });
     }
   },
   template: `
@@ -153,7 +160,7 @@ export default {
         </tbody>
       </table>
       <div>Total Factura: {{ formatCurrency(calcularTotalFactura()) }}</div>
-      <button @click="finalizarFactura">Finalizar Factura</button>
+      <button @click="generarVenta" :disabled="isSubmitting">Finalizar Factura</button>
     </div>
   `,
 }
