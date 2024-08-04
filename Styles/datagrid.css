@@ -1,0 +1,75 @@
+/* Import global styles if necessary */
+@import url('style.css');
+
+/* Styles specific to DataGrid.js */
+.data-grid-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    color: #333333;
+}
+
+.data-grid-header {
+    font-family: 'Playfair Display', serif;
+    color: #2F4F4F;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.data-grid-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.data-grid-table th, .data-grid-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.data-grid-table th {
+    background-color: #f8f8f8;
+    color: #000;
+}
+
+.data-grid-button {
+    background-color: #2F4F4F;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background 0.3s;
+    margin-right: 10px; /* Space between buttons */
+}
+
+.data-grid-button:hover {
+    background-color: #333;
+}
+
+/* Styles for the input fields */
+.data-grid-input {
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 10px; /* Space between input and buttons */
+    width: calc(100% - 40px); /* Adjust input width */
+    box-sizing: border-box; /* Include padding and border in total width */
+}
+
+/* Additional styles for better appearance */
+.data-grid-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.data-grid-form label {
+    font-size: 18px;
+    margin-right: 10px;
+}
