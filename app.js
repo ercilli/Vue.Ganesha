@@ -1,7 +1,8 @@
 import DataGrid from './Components/DataGrid.js';
 import Stock from './Components/Stock.js';
 import Venta from './Components/Venta.js';
-import { fetchItems } from './Services/apiService.js'; // Import fetchItems
+import Facturacion from './Components/Facturacion.js';
+import { fetchItems } from './Services/apiService.js'; 
 
 const app = Vue.createApp({
   data() {
@@ -12,7 +13,8 @@ const app = Vue.createApp({
   components: {
     'data-grid': DataGrid,
     'venta': Venta,
-    'stock': Stock
+    'stock': Stock,
+    'facturacion': Facturacion
   },
   mounted() {
     // Use fetchItems with the 'Producto' controller to fetch products
