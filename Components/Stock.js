@@ -6,7 +6,7 @@ export default {
 	  currentTab: 'Stock',
 	  tabs: ['Stock', 'Ingreso de Stock', 'Perdida de Stock'],
 	  stockItems: [],
-	  availableProducts: [], // Agregado para almacenar los productos disponibles
+	  availableProducts: [],
 	  newStockEntry: {
 		codigo: '',
 		descripcion: '',
@@ -23,60 +23,68 @@ export default {
 	}
   },
   mounted() {
-	this.fetchStockItems();
-	this.fetchAvailableProducts(); // Método agregado para obtener los productos disponibles
+	Promise.all([this.fetchStockItems(), this.fetchAvailableProducts()])
+	  .then(() => {
+		this.updateStockItemsWithProductDetails();
+	  });
   },
   methods: {
 	fetchStockItems() {
-		fetchItems('Stock').then(items => {
-		  // Mapear cada item de stock para incluir código y descripción desde availableProducts
-		  const updatedStockItems = items.map(stockItem => {
-			const product = this.availableProducts.find(product => product.productoid === stockItem.productoId);
-			return {
-			  ...stockItem,
-			  codigo: product ? product.codigo : '',
-			  descripcion: product ? product.descripcion : '',
-			};
-		  });
-		  this.stockItems = updatedStockItems;
+	  fetchItems('Stock').then(items => {
+		const updatedStockItems = items.map(stockItem => {
+		  const product = this.availableProducts.find(product => product.productoid === stockItem.productoId);
+		  return {
+			...stockItem,
+			codigo: product ? product.codigo : '',
+			descripcion: product ? product.descripcion : '',
+		  };
 		});
-	  },
-	fetchAvailableProducts() { // Método agregado para obtener los productos disponibles
+		this.stockItems = updatedStockItems;
+	  });
+	},
+	fetchAvailableProducts() {
 	  fetchItems('Producto').then(products => {
 		this.availableProducts = products;
 	  });
 	},
+	updateStockItemsWithProductDetails() {
+	  this.stockItems = this.stockItems.map(stockItem => {
+		const product = this.availableProducts.find(product => product.productoid === stockItem.productoId);
+		return {
+		  ...stockItem,
+		  codigo: product ? product.codigo : '',
+		  descripcion: product ? product.descripcion : '',
+		};
+	  });
+	},
 	agregarNuevoStock() {
-		const productoEncontrado = this.availableProducts.find(producto => producto.descripcion === this.newStockEntry.descripcion);
-		if (productoEncontrado) {
-		  const stockData = {
-			productoid: productoEncontrado.productoid,
-			proveedorid: parseInt(this.newStockEntry.proveedor),
-			fecha: this.newStockEntry.fecha,
-			cantidad: this.newStockEntry.cantidad
+	  const productoEncontrado = this.availableProducts.find(producto => producto.descripcion === this.newStockEntry.descripcion);
+	  if (productoEncontrado) {
+		const stockData = {
+		  productoid: productoEncontrado.productoid,
+		  proveedorid: parseInt(this.newStockEntry.proveedor),
+		  fecha: this.newStockEntry.fecha,
+		  cantidad: this.newStockEntry.cantidad
+		};
+		createItem('IngresoStock', stockData).then(() => {
+		  this.fetchStockItems();
+		  this.newStockEntry = {
+			codigo: '',
+			descripcion: '',
+			cantidad: 1,
+			fecha: new Date().toISOString().slice(0, 10),
+			proveedor: ''
 		  };
-		  createItem('IngresoStock', stockData).then(() => {
-			this.fetchStockItems();
-			this.newStockEntry = {
-			  codigo: '',
-			  descripcion: '',
-			  cantidad: 1,
-			  fecha: new Date().toISOString().slice(0, 10),
-			  proveedor: '',
-			  productoid: ''
-			};
-		  }).catch(error => {
-			console.error('Error al agregar nuevo stock:', error);
-		  });
-		} else {
-		  console.error('Producto no encontrado');
-		}
-	  },
+		}).catch(error => {
+		  console.error('Error al agregar nuevo stock:', error);
+		});
+	  } else {
+		console.error('Producto no encontrado');
+	  }
+	},
 	agregarPerdidaStock() {
-	  // Assuming there's a method to create stock loss in your API
 	  createItem('StockLoss', this.stockLoss).then(() => {
-		this.fetchStockItems(); // Refresh the list
-		// Reset stockLoss for next input
+		this.fetchStockItems();
 		this.stockLoss = {
 		  codigo: '',
 		  descripcion: '',
@@ -94,7 +102,7 @@ export default {
 	  if (productoEncontrado) {
 		model.codigo = productoEncontrado.codigo;
 		model.descripcion = productoEncontrado.descripcion;
-		if (model.cantidad === undefined) model.cantidad = 1; // Default to 1 for new stock entries
+		if (model.cantidad === undefined) model.cantidad = 1;
 	  }
 	}
   },
