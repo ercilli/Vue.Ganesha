@@ -14,10 +14,8 @@ export default {
       product.editing = true;
     },
     saveProduct(product, index) {
-      // Ajuste para usar updateItem con el controlador 'Producto'
       updateItem('Producto', product).then(response => {
         product.editing = false;
-        // Asegúrate de ajustar la respuesta si es necesario
         Object.assign(this.products[index], response || product);
       }).catch(error => {
         console.error("Error updating product:", error);
@@ -25,7 +23,6 @@ export default {
     },
     deleteProduct(index) {
       const productId = this.products[index].productoid;
-      // Ajuste para usar deleteItem con el controlador 'Producto'
       deleteItem('Producto', productId).then(() => {
         this.products.splice(index, 1);
       }).catch(error => {
@@ -58,32 +55,35 @@ export default {
     }
   },
   template: `
-  <table>
-    <thead>
-      <tr>
-        <th @click="sortProducts('codigo')">ID</th>
-        <th @click="sortProducts('descripcion')">Descripcion</th>
-        <th @click="sortProducts('categoria')">Tipo</th>
-        <th @click="sortProducts('precio')">Precio</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(product, index) in products" :key="product.productoid">
-        <td>{{ product.codigo }}</td>
-        <td v-if="!product.editing">{{ product.descripcion }}</td>
-        <td v-else><input v-model="product.descripcion" /></td>
-        <td v-if="!product.editing">{{ product.categoria }}</td>
-        <td v-else><input v-model="product.categoria" /></td>
-        <td v-if="!product.editing">{{ product.precio.toLocaleString('es-CO', { style: 'currency', currency: 'COP' }) }}</td>
-        <td v-else><input v-model="product.precio" type="number" /></td>
-        <td>
-          <button v-if="!product.editing" @click="editProduct(product)">Editar</button>
-          <button v-if="product.editing" @click="saveProduct(product, index)">Guardar</button>
-          <button @click="deleteProduct(index)">Eliminar</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="data-grid-container">
+    <div class="data-grid-header">Product Data Grid</div>
+    <table class="data-grid-table">
+      <thead>
+        <tr>
+          <th @click="sortProducts('codigo')">ID</th>
+          <th @click="sortProducts('descripcion')">Descripcion</th>
+          <th @click="sortProducts('categoria')">Tipo</th>
+          <th @click="sortProducts('precio')">Precio</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(product, index) in products" :key="product.productoid">
+          <td>{{ product.codigo }}</td>
+          <td v-if="!product.editing">{{ product.descripcion }}</td>
+          <td v-else><input v-model="product.descripcion" class="data-grid-input" /></td>
+          <td v-if="!product.editing">{{ product.categoria }}</td>
+          <td v-else><input v-model="product.categoria" class="data-grid-input" /></td>
+          <td v-if="!product.editing">{{ product.precio.toLocaleString('es-CO', { style: 'currency', currency: 'COP' }) }}</td>
+          <td v-else><input v-model="product.precio" type="number" class="data-grid-input" /></td>
+          <td>
+            <button v-if="!product.editing" @click="editProduct(product)" class="data-grid-button">Editar</button>
+            <button v-if="product.editing" @click="saveProduct(product, index)" class="data-grid-button">Guardar</button>
+            <button @click="deleteProduct(index)" class="data-grid-button">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   `,
 }
