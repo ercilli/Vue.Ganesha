@@ -342,6 +342,14 @@ footer {
         font-size: 20px;
     }
 
+    header ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 0px; /* Reduce el espacio entre los botones */
+    }
+
     header nav, .product-section {
         flex-direction: column;
     }
