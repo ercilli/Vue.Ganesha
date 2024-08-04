@@ -114,30 +114,30 @@ export default {
     }
   },
   template: `
-    <div>
-      <h1>Factura</h1>
-      <div>
+    <div class="venta-container">
+      <h1 class="venta-header">Factura</h1>
+      <div class="venta-form">
         <label>Nombre: </label>
-        <input v-model="facturaHeader.nombre" placeholder="Nombre del Cliente">
+        <input class="venta-input" v-model="facturaHeader.nombre" placeholder="Nombre del Cliente">
       </div>
-      <div>
+      <div class="venta-form">
         <label>Apellido: </label>
-        <input v-model="facturaHeader.apellido" placeholder="Apellido del Cliente">
+        <input class="venta-input" v-model="facturaHeader.apellido" placeholder="Apellido del Cliente">
       </div>
-      <div>
+      <div class="venta-form">
         <label>Fecha: </label>
-        <input type="date" v-model="facturaHeader.fecha">
+        <input class="venta-input" type="date" v-model="facturaHeader.fecha">
       </div>
-      <div>
+      <div class="venta-form">
         <label>Dirección: </label>
-        <input v-model="facturaHeader.direccion" placeholder="Dirección del Cliente">
+        <input class="venta-input" v-model="facturaHeader.direccion" placeholder="Dirección del Cliente">
       </div>
-      <div>
+      <div class="venta-form">
         <label>Teléfono: </label>
-        <input v-model="facturaHeader.telefono" placeholder="Teléfono del Cliente">
+        <input class="venta-input" v-model="facturaHeader.telefono" placeholder="Teléfono del Cliente">
       </div>
-      <button @click="agregarDetalleVacio">Agregar Producto</button>
-      <table>
+      <button class="venta-button" @click="agregarDetalleVacio">Agregar Producto</button>
+      <table class="venta-table">
         <thead>
           <tr>
             <th>Código</th>
@@ -150,17 +150,17 @@ export default {
         </thead>
         <tbody>
           <tr v-for="(item, index) in facturaDetails" :key="index">
-            <td><input v-model="item.codigo" placeholder="Código" @blur="buscarProductoPorCodigoODescripcion(index, 'codigo')"></td>
-            <td><input v-model="item.descripcion" placeholder="Descripción" @blur="buscarProductoPorCodigoODescripcion(index, 'descripcion')"></td>
-            <td><input type="number" v-model.number="item.cantidad" @change="updateProductTotal(index)"></td>
-            <td><input type="number" v-model.number="item.precio" @change="updateProductTotal(index)" readonly></td>
+            <td><input class="venta-input" v-model="item.codigo" placeholder="Código" @blur="buscarProductoPorCodigoODescripcion(index, 'codigo')"></td>
+            <td><input class="venta-input" v-model="item.descripcion" placeholder="Descripción" @blur="buscarProductoPorCodigoODescripcion(index, 'descripcion')"></td>
+            <td><input class="venta-input" type="number" v-model.number="item.cantidad" @change="updateProductTotal(index)"></td>
+            <td><input class="venta-input" type="number" v-model.number="item.precio" @change="updateProductTotal(index)" readonly></td>
             <td>{{ item.subtotal.toFixed(2) }}</td>
-            <td><button @click="eliminarDetalle(index)">Eliminar</button></td>
+            <td><button class="venta-button" @click="eliminarDetalle(index)">Eliminar</button></td>
           </tr>
         </tbody>
       </table>
       <div>Total Factura: {{ formatCurrency(calcularTotalFactura()) }}</div>
-      <button @click="generarVenta" :disabled="isSubmitting">Finalizar Factura</button>
+      <button class="venta-button" @click="generarVenta" :disabled="isSubmitting">Finalizar Factura</button>
     </div>
   `,
 }
