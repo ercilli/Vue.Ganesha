@@ -74,6 +74,23 @@
     margin-right: 10px;
 }
 
+.venta-total-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.venta-total {
+    font-size: 18px;
+    margin-right: 20px;
+}
+
+.venta-finalizar-button {
+    width: calc(100% - 40px); /* Ajusta el ancho del botón */
+    max-width: 200px; /* Ajusta el ancho máximo del botón */
+}
+
 /* Media query for smaller screens (430x932) */
 @media (max-width: 430px) {
     .venta-container {
@@ -120,21 +137,35 @@
     .venta-table tbody, .venta-table tr, .venta-table td {
         display: block;
         width: 100%;
+        border: none; /* Elimina los bordes */
+    }
+
+    .venta-table tr {
+        margin-bottom: 15px; /* Espacio entre filas */
     }
 
     .venta-table td {
-        text-align: right;
-        padding-left: 50%;
+        text-align: left;
+        padding: 10px;
         position: relative;
+        border: 1px solid #ddd; /* Agrega bordes a las celdas */
+        padding-left: 10px; /* Ajusta el padding izquierdo */
     }
 
     .venta-table td::before {
         content: attr(data-label);
-        position: absolute;
-        left: 0;
-        width: 50%;
-        padding-left: 10px;
+        display: block;
         font-weight: bold;
-        text-align: left;
+        margin-bottom: 5px; /* Espacio entre la etiqueta y el input */
+    }
+
+    .venta-total-container {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .venta-finalizar-button {
+        width: 100%;
+        max-width: none;
     }
 }
