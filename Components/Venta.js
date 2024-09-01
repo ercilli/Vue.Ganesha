@@ -113,30 +113,32 @@ export default {
         });
     }
   },
-  template: `
+    template: `
     <div class="venta-container">
       <h1 class="venta-header">Factura</h1>
-      <div class="venta-form">
-        <label>Nombre: </label>
-        <input class="venta-input" v-model="facturaHeader.nombre" placeholder="Nombre del Cliente">
-      </div>
-      <div class="venta-form">
-        <label>Apellido: </label>
-        <input class="venta-input" v-model="facturaHeader.apellido" placeholder="Apellido del Cliente">
-      </div>
-      <div class="venta-form">
-        <label>Fecha: </label>
-        <input class="venta-input" type="date" v-model="facturaHeader.fecha">
-      </div>
-      <div class="venta-form">
-        <label>Dirección: </label>
-        <input class="venta-input" v-model="facturaHeader.direccion" placeholder="Dirección del Cliente">
-      </div>
-      <div class="venta-form">
-        <label>Teléfono: </label>
-        <input class="venta-input" v-model="facturaHeader.telefono" placeholder="Teléfono del Cliente">
-      </div>
-      <button class="venta-button" @click="agregarDetalleVacio">Agregar Producto</button>
+      <form class="venta-form">
+        <div class="venta-form-group">
+          <label for="nombre">Nombre:</label>
+          <input id="nombre" class="venta-input" v-model="facturaHeader.nombre" placeholder="Nombre del Cliente">
+        </div>
+        <div class="venta-form-group">
+          <label for="apellido">Apellido:</label>
+          <input id="apellido" class="venta-input" v-model="facturaHeader.apellido" placeholder="Apellido del Cliente">
+        </div>
+        <div class="venta-form-group">
+          <label for="fecha">Fecha:</label>
+          <input id="fecha" class="venta-input" type="date" v-model="facturaHeader.fecha">
+        </div>
+        <div class="venta-form-group">
+          <label for="direccion">Dirección:</label>
+          <input id="direccion" class="venta-input" v-model="facturaHeader.direccion" placeholder="Dirección del Cliente">
+        </div>
+        <div class="venta-form-group">
+          <label for="telefono">Teléfono:</label>
+          <input id="telefono" class="venta-input" v-model="facturaHeader.telefono" placeholder="Teléfono del Cliente">
+        </div>
+        <button type="button" class="venta-button" @click="agregarDetalleVacio">Agregar Producto</button>
+      </form>
       <table class="venta-table">
         <thead>
           <tr>
@@ -159,7 +161,9 @@ export default {
           </tr>
         </tbody>
       </table>
-      <div>Total Factura: {{ formatCurrency(calcularTotalFactura()) }}</div>
+      <div class="venta-total">
+        <strong>Total Factura:</strong> {{ formatCurrency(calcularTotalFactura()) }}
+      </div>
       <button class="venta-button" @click="generarVenta" :disabled="isSubmitting">Finalizar Factura</button>
     </div>
   `,
