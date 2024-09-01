@@ -113,7 +113,7 @@ export default {
         });
     }
   },
-    template: `
+   template: `
     <div class="venta-container">
       <h1 class="venta-header">Factura</h1>
       <form class="venta-form">
@@ -152,19 +152,21 @@ export default {
         </thead>
         <tbody>
           <tr v-for="(item, index) in facturaDetails" :key="index">
-            <td><input class="venta-input" v-model="item.codigo" placeholder="Código" @blur="buscarProductoPorCodigoODescripcion(index, 'codigo')"></td>
-            <td><input class="venta-input" v-model="item.descripcion" placeholder="Descripción" @blur="buscarProductoPorCodigoODescripcion(index, 'descripcion')"></td>
-            <td><input class="venta-input" type="number" v-model.number="item.cantidad" @change="updateProductTotal(index)"></td>
-            <td><input class="venta-input" type="number" v-model.number="item.precio" @change="updateProductTotal(index)" readonly></td>
-            <td>{{ item.subtotal.toFixed(2) }}</td>
-            <td><button class="venta-button" @click="eliminarDetalle(index)">Eliminar</button></td>
+            <td data-label="Código"><input class="venta-input" v-model="item.codigo" placeholder="Código" @blur="buscarProductoPorCodigoODescripcion(index, 'codigo')"></td>
+            <td data-label="Descripción"><input class="venta-input" v-model="item.descripcion" placeholder="Descripción" @blur="buscarProductoPorCodigoODescripcion(index, 'descripcion')"></td>
+            <td data-label="Cantidad"><input class="venta-input" type="number" v-model.number="item.cantidad" @change="updateProductTotal(index)"></td>
+            <td data-label="Precio"><input class="venta-input" type="number" v-model.number="item.precio" @change="updateProductTotal(index)" readonly></td>
+            <td data-label="Subtotal">{{ item.subtotal.toFixed(2) }}</td>
+            <td data-label="Acciones"><button class="venta-button" @click="eliminarDetalle(index)">Eliminar</button></td>
           </tr>
         </tbody>
       </table>
-      <div class="venta-total">
-        <strong>Total Factura:</strong> {{ formatCurrency(calcularTotalFactura()) }}
+      <div class="venta-total-container">
+        <div class="venta-total">
+          <strong>Total Factura:</strong> {{ formatCurrency(calcularTotalFactura()) }}
+        </div>
+        <button class="venta-button venta-finalizar-button" @click="generarVenta" :disabled="isSubmitting">Finalizar Factura</button>
       </div>
-      <button class="venta-button" @click="generarVenta" :disabled="isSubmitting">Finalizar Factura</button>
     </div>
   `,
 }
