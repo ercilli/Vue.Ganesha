@@ -1,0 +1,115 @@
+/* Import global styles if necessary */
+@import url('style.css');
+
+/* Styles specific to Producto.js */
+.producto-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    color: #333333;
+}
+
+.producto-header {
+    font-family: 'Playfair Display', serif;
+    color: #2F4F4F;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.producto-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.producto-table th, .producto-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.producto-table th {
+    background-color: #f8f8f8;
+    color: #000;
+}
+
+.producto-button {
+    background-color: #2F4F4F;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background 0.3s;
+    margin-right: 10px; /* Space between buttons */
+}
+
+.producto-button:hover {
+    background-color: #333;
+}
+
+/* Styles for the input fields */
+.producto-input {
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 10px; /* Space between input and buttons */
+    width: calc(100% - 40px); /* Adjust input width */
+    box-sizing: border-box; /* Include padding and border in total width */
+}
+
+/* Additional styles for better appearance */
+.producto-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.producto-form label {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+/* Media query for smaller screens (430x932) */
+@media (max-width: 430px) {
+    .producto-container {
+        padding: 10px;
+    }
+
+    .producto-header {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .producto-table th, .producto-table td {
+        padding: 4px;
+        font-size: 14px;
+    }
+
+    .producto-button {
+        padding: 8px 16px;
+        font-size: 16px;
+        margin-right: 5px;
+    }
+
+    .producto-input {
+        padding: 8px;
+        font-size: 16px;
+        margin-right: 5px;
+        width: calc(100% - 26px); /* Adjust input width */
+    }
+
+    .producto-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .producto-form label {
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+}
