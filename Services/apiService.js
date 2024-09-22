@@ -47,7 +47,7 @@ export const createItem = (controller, item) => {
   })
     .then(response => {
       console.log(`Response from creating item in ${controller}:`, response);
-      if (response.status === 201) {
+      if (response.status === 201 || response.status === 200) {
         return response.json();
       } else {
         throw new Error('Error al crear el item');
