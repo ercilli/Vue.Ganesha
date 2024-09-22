@@ -1,5 +1,5 @@
-//const baseUrl = 'https://vivero-ganesha-api.fly.dev/api';
-const baseUrl = 'https://localhost:7182/api';
+const baseUrl = 'https://vivero-ganesha-api.fly.dev/api';
+//const baseUrl = 'https://localhost:7182/api';
 
 // Función genérica para obtener datos
 export const fetchItems = (controller) => {
