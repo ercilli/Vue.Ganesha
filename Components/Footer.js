@@ -7,7 +7,7 @@ export default {
                 <div class="footer-column">
                     <h3>Cactus</h3>
                     <ul>
-                        <li><a href="#">Mi Ituzaingo</a></li>
+                        <li><a href="#">Mi</a></li>
                         <li><a href="#">Page</a></li>
                         <li><a href="#">Page</a></li>
                         <li><a href="#">Page</a></li>
