@@ -10,8 +10,12 @@ export default {
       },
       facturaDetails: [],
       availableProducts: [],
-      availableClientes: [], // Nueva propiedad para almacenar los clientes
-      isSubmitting: false // Nueva propiedad
+      availableClientes: [],
+      isSubmitting: false,
+      showModal: false,
+      modalTitle: '',
+      modalMessage: '',
+      modalType: ''
     }
   },
   mounted() {
@@ -75,9 +79,9 @@ export default {
       this.facturaDetails.splice(index, 1);
     },
     generarVenta() {
-      if (this.isSubmitting) return; // Evitar múltiples envíos
+      if (this.isSubmitting) return;
 
-      this.isSubmitting = true; // Bloquear el botón
+      this.isSubmitting = true;
 
       const venta = {
         clienteID: this.facturaHeader.clienteid,
@@ -92,16 +96,27 @@ export default {
       createItem('Venta', venta)
         .then(response => {
           if (response) {
-            console.log('Venta creada con éxito:', response);
+            this.openModal('Éxito', 'Venta creada con éxito', 'success');
             this.finalizarFactura();
           } else {
-            console.error('Error al crear la venta');
+            this.openModal('Error', 'Error al crear la venta', 'error');
           }
         })
-        .catch(error => console.error('Error al crear la venta:', error))
+        .catch(error => {
+          this.openModal('Error', 'Error al crear la venta: ' + error.message, 'error');
+        })
         .finally(() => {
-          this.isSubmitting = false; // Desbloquear el botón
+          this.isSubmitting = false;
         });
+    },
+    openModal(title, message, type) {
+      this.modalTitle = title;
+      this.modalMessage = message;
+      this.modalType = type;
+      this.showModal = true;
+    },
+    closeModal() {
+      this.showModal = false;
     }
   },
   template: `
@@ -144,6 +159,13 @@ export default {
         </div>
         <button class="venta-button venta-finalizar-button" @click="generarVenta" :disabled="isSubmitting">Finalizar Factura</button>
       </div>
+      <modal 
+        :show="showModal" 
+        :title="modalTitle" 
+        :message="modalMessage" 
+        :type="modalType" 
+        @close="closeModal">
+      </modal>
     </div>
   `,
 }
