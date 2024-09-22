@@ -1,0 +1,171 @@
+/* Importa los estilos globales */
+@import url('style.css');
+
+/* Estilos específicos para Proveedor.js */
+.proveedor-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    color: #333333;
+}
+
+.proveedor-header {
+    font-family: 'Playfair Display', serif;
+    color: #2F4F4F;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.proveedor-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.proveedor-table th, .proveedor-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.proveedor-table th {
+    background-color: #f8f8f8;
+    color: #000;
+}
+
+.proveedor-button {
+    background-color: #2F4F4F;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background 0.3s;
+    margin-right: 10px; /* Agrega un margen derecho para el espacio entre botones */
+}
+
+.proveedor-button:hover {
+    background-color: #333;
+}
+
+/* Estilos para el input */
+.proveedor-input {
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 10px; /* Espacio entre el input y los botones */
+    width: calc(100% - 40px); /* Ajusta el ancho del input */
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
+}
+
+/* Estilos adicionales para mejorar la apariencia */
+.proveedor-form {
+    display: flex;
+    flex-direction: column; /* Cambia la dirección del flex a columna */
+    align-items: stretch; /* Alinea los elementos para que ocupen todo el ancho */
+    margin-bottom: 20px;
+}
+
+.proveedor-form label {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.proveedor-total-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.proveedor-total {
+    font-size: 18px;
+    margin-right: 20px;
+}
+
+.proveedor-finalizar-button {
+    width: calc(100% - 40px); /* Ajusta el ancho del botón */
+    max-width: 200px; /* Ajusta el ancho máximo del botón */
+}
+
+/* Media query for smaller screens (430x932) */
+@media (max-width: 430px) {
+    .proveedor-container {
+        padding: 10px;
+    }
+    .proveedor-header {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    .proveedor-table th, .proveedor-table td {
+        padding: 4px;
+        font-size: 14px;
+    }
+    .proveedor-button {
+        padding: 8px 16px;
+        font-size: 16px;
+        margin-right: 5px;
+    }
+    .proveedor-input {
+        padding: 8px;
+        font-size: 16px;
+        margin-right: 5px;
+        width: calc(100% - 26px); /* Ajusta el ancho del input */
+    }
+    .proveedor-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .proveedor-form label {
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    /* Ajustes específicos para la tabla en dispositivos móviles */
+    .proveedor-table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .proveedor-table thead {
+        display: none;
+    }
+
+    .proveedor-table tbody, .proveedor-table tr, .proveedor-table td {
+        display: block;
+        width: 100%;
+        border: none; /* Elimina los bordes */
+    }
+
+    .proveedor-table tr {
+        margin-bottom: 15px; /* Espacio entre filas */
+    }
+
+    .proveedor-table td {
+        text-align: left;
+        padding: 10px;
+        position: relative;
+        border: 1px solid #ddd; /* Agrega bordes a las celdas */
+        padding-left: 10px; /* Ajusta el padding izquierdo */
+    }
+
+    .proveedor-table td::before {
+        content: attr(data-label);
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px; /* Espacio entre la etiqueta y el input */
+    }
+
+    .proveedor-total-container {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .proveedor-finalizar-button {
+        width: 100%;
+        max-width: none;
+    }
+}
