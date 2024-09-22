@@ -7,6 +7,7 @@ export default {
       tabs: ['Stock', 'Ingreso de Stock', 'Perdida de Stock'],
       stockItems: [],
       availableProducts: [],
+      availableProveedores: [], // Agregar estado para proveedores
       newStockEntry: {
         codigo: '',
         descripcion: '',
@@ -29,7 +30,7 @@ export default {
   methods: {
     loadData() {
       console.log('Loading data');
-      Promise.all([this.fetchStockItems(), this.fetchAvailableProducts()])
+      Promise.all([this.fetchStockItems(), this.fetchAvailableProducts(), this.fetchAvailableProveedores()])
         .then(() => {
           this.updateStockItemsWithProductDetails();
         });
@@ -53,10 +54,19 @@ export default {
         console.error('Error fetching available products:', error);
       });
     },
+    fetchAvailableProveedores() {
+      console.log('Fetching available proveedores');
+      return fetchItems('Proveedor').then(proveedores => {
+        console.log('Available proveedores fetched:', proveedores);
+        this.availableProveedores = proveedores;
+      }).catch(error => {
+        console.error('Error fetching available proveedores:', error);
+      });
+    },
     updateStockItemsWithProductDetails() {
       console.log('Updating stock items with product details');
       this.stockItems = this.stockItems.map(stockItem => {
-        const product = this.availableProducts.find(product => product.productoid === stockItem.productoId);
+        const product = this.availableProducts.find(product => product.id === stockItem.productoId);
         return {
           ...stockItem,
           codigo: product ? product.codigo : '-',
@@ -70,7 +80,7 @@ export default {
       const productoEncontrado = this.availableProducts.find(producto => producto.descripcion === this.newStockEntry.descripcion);
       if (productoEncontrado) {
         const stockData = {
-          productoid: productoEncontrado.productoid,
+          productoid: productoEncontrado.id,
           proveedorid: parseInt(this.newStockEntry.proveedor),
           fecha: this.newStockEntry.fecha,
           cantidad: this.newStockEntry.cantidad
@@ -95,18 +105,28 @@ export default {
     },
     agregarPerdidaStock() {
       console.log('Adding stock loss entry:', this.stockLoss);
-      createItem('StockLoss', this.stockLoss).then(() => {
-        console.log('Stock loss entry added successfully');
-        this.fetchStockItems();
-        this.stockLoss = {
-          codigo: '',
-          descripcion: '',
-          cantidad: 0,
-          fecha: new Date().toISOString().slice(0, 10)
+      const productoEncontrado = this.availableProducts.find(producto => producto.codigo === this.stockLoss.codigo);
+      if (productoEncontrado) {
+        const stockLossData = {
+          productoid: productoEncontrado.id,
+          cantidad: this.stockLoss.cantidad,
+          fecha: this.stockLoss.fecha
         };
-      }).catch(error => {
-        console.error('Error adding stock loss entry:', error);
-      });
+        console.log('Stock loss data to be added:', stockLossData);
+        createItem('PerdidaStock', stockLossData).then(() => {
+          console.log('Stock loss entry added successfully');
+          this.stockLoss = {
+            codigo: '',
+            descripcion: '',
+            cantidad: 0,
+            fecha: new Date().toISOString().slice(0, 10)
+          };
+        }).catch(error => {
+          console.error('Error adding stock loss entry:', error);
+        });
+      } else {
+        console.error('Producto no encontrado');
+      }
     },
     buscarProductoPorCodigoODescripcion(tipo, model) {
       console.log(`Searching product by ${tipo}:`, model);
@@ -164,7 +184,9 @@ export default {
           <input v-model="newStockEntry.descripcion" placeholder="Descripción" @blur="buscarProductoPorCodigoODescripcion('descripcion', newStockEntry)" class="stock-input">
           <input type="number" v-model.number="newStockEntry.cantidad" class="stock-input">
           <input type="date" v-model="newStockEntry.fecha" class="stock-input">
-          <input v-model="newStockEntry.proveedor" placeholder="Proveedor" class="stock-input">
+          <select v-model="newStockEntry.proveedor" class="stock-input">
+            <option v-for="proveedor in availableProveedores" :key="proveedor.id" :value="proveedor.id">{{ proveedor.nombre }}</option>
+          </select>
           <button @click="agregarNuevoStock" class="stock-button">Agregar</button>
         </div>
       </div>
