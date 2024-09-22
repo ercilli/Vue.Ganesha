@@ -39,14 +39,14 @@ export default {
     },
     obtenerCodigoProducto(productoId) {
       console.log("Getting product code for productId:", productoId);
-      const producto = this.availableProducts.find(product => product.productoid === productoId);
+      const producto = this.availableProducts.find(product => product.id === productoId);
       const codigo = producto ? producto.codigo : 'N/A';
       console.log("Product code:", codigo);
       return codigo;
     },
     obtenerDescripcionProducto(productoId) {
       console.log("Getting product description for productId:", productoId);
-      const producto = this.availableProducts.find(product => product.productoid === productoId);
+      const producto = this.availableProducts.find(product => product.id === productoId);
       const descripcion = producto ? producto.descripcion : 'N/A';
       console.log("Product description:", descripcion);
       return descripcion;
