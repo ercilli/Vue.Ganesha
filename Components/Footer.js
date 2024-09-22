@@ -33,9 +33,9 @@ export default {
                 </div>
             </div>
             <div class="social-icons">
-                <a href="#"><img src="../img/facebook.png" alt="Facebook"></a>
-                <a href="#"><img src="../img/linkedin.png" alt="LinkedIn"></a>
-                <a href="#"><img src="../img/youtube.png" alt="YouTube"></a>
+                <a href="#"><img src="/img/facebook.png" alt="Facebook"></a>
+                <a href="#"><img src="/img/linkedin.png" alt="LinkedIn"></a>
+                <a href="#"><img src="/img/youtube.png" alt="YouTube"></a>
                 <a href="https://www.instagram.com/viveroganesha?igsh=eGxyODYycXdhbmdz"><img src="../img/instagram.png" alt="Instagram"></a>
             </div>
         </div>
