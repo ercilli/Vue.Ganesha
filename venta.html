@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vivero Ganesha</title>
     <link rel="stylesheet" href="./Styles/venta.css">
+    <link rel="stylesheet" href="./Styles/modal.css"> <!-- Asegúrate de que la ruta sea correcta -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
@@ -12,6 +13,13 @@
         <app-header></app-header>
         <venta></venta>
         <app-footer></app-footer>
+        <modal 
+          :show="showModal" 
+          :title="modalTitle" 
+          :message="modalMessage" 
+          :type="modalType" 
+          @close="closeModal">
+        </modal>
     </main> 
     <script type="module" src="./app.js"></script>
 </body>
