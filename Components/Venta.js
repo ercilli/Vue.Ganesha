@@ -4,20 +4,22 @@ export default {
   data() {
     return {
       facturaHeader: {
+        clienteid: null,
         nombre: '',
-        apellido: '',
-        fecha: new Date().toISOString().slice(0, 10),
-        direccion: '',
-        telefono: ''
+        fecha: new Date().toISOString().slice(0, 10)
       },
       facturaDetails: [],
       availableProducts: [],
+      availableClientes: [], // Nueva propiedad para almacenar los clientes
       isSubmitting: false // Nueva propiedad
     }
   },
   mounted() {
     fetchItems('Producto').then(products => {
       this.availableProducts = products;
+    });
+    fetchItems('Cliente').then(clientes => {
+      this.availableClientes = clientes;
     });
   },
   methods: {
@@ -34,7 +36,7 @@ export default {
       if (productoEncontrado) {
         this.facturaDetails[index] = {
           ...detalle,
-          productoid : productoEncontrado.productoid,
+          productoid : productoEncontrado.id,
           codigo: productoEncontrado.codigo,
           descripcion: productoEncontrado.descripcion,
           precio: productoEncontrado.precio,
@@ -63,11 +65,9 @@ export default {
       console.log('Factura finalizada con éxito. Total: ', this.calcularTotalFactura());
       this.generarVenta();
       this.facturaHeader = {
+        clienteid: null,
         nombre: '',
-        apellido: '',
-        fecha: new Date().toISOString().slice(0, 10),
-        direccion: '',
-        telefono: ''
+        fecha: new Date().toISOString().slice(0, 10)
       };
       this.facturaDetails = [];
     },
@@ -80,24 +80,15 @@ export default {
       this.isSubmitting = true; // Bloquear el botón
 
       const venta = {
-        clienteid: 1,
-        cliente: {
-          clienteid: 1,
-          nombre: this.facturaHeader.nombre,
-          apellido: this.facturaHeader.apellido,
-          fecha: this.facturaHeader.fecha,
-          direccion: this.facturaHeader.direccion,
-          telefono: this.facturaHeader.telefono
-        },
+        clienteID: this.facturaHeader.clienteid,
         productos: this.facturaDetails.map(detalle => ({
-          productoid: detalle.productoid,
-          codigo: detalle.codigo,
-          descripcion: detalle.descripcion,
+          productoID: detalle.productoid,
           cantidad: detalle.cantidad,
-          precio: detalle.precio
-        }))
+          subtotal: detalle.subtotal
+        })),
+        total: this.calcularTotalFactura()
       };
-  
+
       createItem('Venta', venta)
         .then(response => {
           if (response) {
@@ -113,29 +104,15 @@ export default {
         });
     }
   },
-   template: `
+  template: `
     <div class="venta-container">
       <h1 class="venta-header">Factura</h1>
       <form class="venta-form">
         <div class="venta-form-group">
-          <label for="nombre">Nombre:</label>
-          <input id="nombre" class="venta-input" v-model="facturaHeader.nombre" placeholder="Nombre del Cliente">
-        </div>
-        <div class="venta-form-group">
-          <label for="apellido">Apellido:</label>
-          <input id="apellido" class="venta-input" v-model="facturaHeader.apellido" placeholder="Apellido del Cliente">
-        </div>
-        <div class="venta-form-group">
-          <label for="fecha">Fecha:</label>
-          <input id="fecha" class="venta-input" type="date" v-model="facturaHeader.fecha">
-        </div>
-        <div class="venta-form-group">
-          <label for="direccion">Dirección:</label>
-          <input id="direccion" class="venta-input" v-model="facturaHeader.direccion" placeholder="Dirección del Cliente">
-        </div>
-        <div class="venta-form-group">
-          <label for="telefono">Teléfono:</label>
-          <input id="telefono" class="venta-input" v-model="facturaHeader.telefono" placeholder="Teléfono del Cliente">
+          <label for="cliente">Cliente:</label>
+          <select id="cliente" class="venta-input" v-model="facturaHeader.clienteid">
+            <option v-for="cliente in availableClientes" :key="cliente.id" :value="cliente.id">{{ cliente.nombre }} {{ cliente.apellido }}</option>
+          </select>
         </div>
         <button type="button" class="venta-button" @click="agregarDetalleVacio">Agregar Producto</button>
       </form>
