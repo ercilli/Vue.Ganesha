@@ -96,28 +96,19 @@ export default {
       createItem('Venta', venta)
         .then(response => {
           if (response) {
-            this.openModal('Éxito', 'Venta creada con éxito', 'success');
+            this.$root.openModal('Éxito', 'Venta creada con éxito', 'success');
             this.finalizarFactura();
           } else {
-            this.openModal('Error', 'Error al crear la venta', 'error');
+            this.$root.openModal('Error', 'Error al crear la venta', 'error');
           }
         })
         .catch(error => {
-          this.openModal('Error', 'Error al crear la venta: ' + error.message, 'error');
+          this.$root.openModal('Error', 'Error al crear la venta: ' + error.message, 'error');
         })
         .finally(() => {
           this.isSubmitting = false;
         });
     },
-    openModal(title, message, type) {
-      this.modalTitle = title;
-      this.modalMessage = message;
-      this.modalType = type;
-      this.showModal = true;
-    },
-    closeModal() {
-      this.showModal = false;
-    }
   },
   template: `
     <div class="venta-container">
