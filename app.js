@@ -6,7 +6,7 @@ import Footer from './Components/Footer.js';
 import Header from './Components/Header.js';
 import Cliente from './Components/Cliente.js';
 import Proveedor from './Components/Proveedor.js';
-import Modal from './Components/Modal.js'; // Asegúrate de que la ruta sea correcta
+import MyModal from './Components/MyModal.js'; // Asegúrate de que la ruta sea correcta
 
 const app = Vue.createApp({
   data() {
@@ -38,7 +38,7 @@ const app = Vue.createApp({
     'app-header': Header,
     'cliente': Cliente,
     'proveedor': Proveedor,
-    'modal': Modal // Asegúrate de que el nombre del componente esté en minúsculas
+    'modal': MyModal // Asegúrate de que el nombre del componente esté en minúsculas
   }
 });
 
