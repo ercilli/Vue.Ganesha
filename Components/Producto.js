@@ -12,8 +12,20 @@ export default {
       },
       error: null,
       sortColumn: null,
-      sortOrder: 'asc'
+      sortOrder: 'asc',
+      currentPage: 1,
+      itemsPerPage: 5
     };
+  },
+  computed: {
+    paginatedProductos() {
+      const start = (this.currentPage - 1) * this.itemsPerPage;
+      const end = start + this.itemsPerPage;
+      return this.productos.slice(start, end);
+    },
+    totalPages() {
+      return Math.ceil(this.productos.length / this.itemsPerPage);
+    }
   },
   methods: {
     fetchProductos() {
@@ -88,6 +100,11 @@ export default {
           return valA < valB ? 1 : valA > valB ? -1 : 0;
         }
       });
+    },
+    changePage(page) {
+      if (page > 0 && page <= this.totalPages) {
+        this.currentPage = page;
+      }
     }
   },
   mounted() {
@@ -123,7 +140,7 @@ export default {
           </tr>
         </thead>
         <tbody>
-          <tr v-for="producto in productos" :key="producto.productoid">
+          <tr v-for="producto in paginatedProductos" :key="producto.productoid">
             <td data-label="Código">
               <span v-if="!producto.editando">{{ producto.codigo }}</span>
               <input v-else v-model="producto.codigo" class="producto-input" />
@@ -149,6 +166,11 @@ export default {
           </tr>
         </tbody>
       </table>
+      <div class="pagination">
+        <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1" class="producto-button">Anterior</button>
+        <span>Página {{ currentPage }} de {{ totalPages }}</span>
+        <button @click="changePage(currentPage + 1)" :disabled="currentPage === totalPages" class="producto-button">Siguiente</button>
+      </div>
     </div>
   `
 };
