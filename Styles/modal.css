@@ -14,18 +14,20 @@
 
 .modal {
   background: white;
-  border-radius: 5px;
+  border-radius: 10px; /* Asegúrate de que el borde esté redondeado */
   width: 300px;
   max-width: 80%;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Asegúrate de que los bordes redondeados se apliquen a todo el contenido */
 }
 
 .modal-header {
-  padding: 10px;
+  padding: 10px; /* Ajusta el padding para hacer el header más pequeño en altura */
   border-bottom: 1px solid #eee;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #f5f5f5; /* Color de fondo del header */
 }
 
 .modal-header.error {
@@ -51,15 +53,21 @@
   padding: 10px;
   border-top: 1px solid #eee;
   text-align: right;
+  background-color: #f5f5f5; /* Color de fondo del footer */
 }
 
 .modal-button {
   padding: 5px 10px;
   border: none;
-  background: #007bff;
+  background: #007bff; /* Color del botón */
   color: white;
   border-radius: 3px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.modal-button:hover {
+  background: #0056b3; /* Color del botón al pasar el ratón por encima */
 }
 
 .close-button {
@@ -67,4 +75,9 @@
   border: none;
   font-size: 20px;
   cursor: pointer;
+  color: #333; /* Color del botón de cierre */
+}
+
+.close-button:hover {
+  color: #000; /* Color del botón de cierre al pasar el ratón por encima */
 }
