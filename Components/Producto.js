@@ -1,10 +1,15 @@
 import { fetchItems, createItem, updateItem, deleteItem } from '../Services/apiService.js';
+import Pagination from './Pagination.js';
 
 export default {
   name: 'Producto',
+  components: {
+    Pagination
+  },
   data() {
     return {
       productos: [],
+      paginatedProductos: [],
       nuevoProducto: {
         descripcion: '',
         categoria: '',
@@ -13,25 +18,15 @@ export default {
       error: null,
       sortColumn: null,
       sortOrder: 'asc',
-      currentPage: 1,
       itemsPerPage: 5
     };
-  },
-  computed: {
-    paginatedProductos() {
-      const start = (this.currentPage - 1) * this.itemsPerPage;
-      const end = start + this.itemsPerPage;
-      return this.productos.slice(start, end);
-    },
-    totalPages() {
-      return Math.ceil(this.productos.length / this.itemsPerPage);
-    }
   },
   methods: {
     fetchProductos() {
       fetchItems('Producto')
         .then(data => {
           this.productos = data.map(producto => ({ ...producto, editando: false }));
+          this.paginatedProductos = this.productos.slice(0, this.itemsPerPage);
         })
         .catch(error => {
           console.error('Error al cargar los productos:', error);
@@ -101,10 +96,8 @@ export default {
         }
       });
     },
-    changePage(page) {
-      if (page > 0 && page <= this.totalPages) {
-        this.currentPage = page;
-      }
+    updatePaginatedItems(items) {
+      this.paginatedProductos = items;
     }
   },
   mounted() {
@@ -166,11 +159,7 @@ export default {
           </tr>
         </tbody>
       </table>
-      <div class="pagination">
-        <button @click="changePage(currentPage - 1)" :disabled="currentPage === 1" class="producto-button">Anterior</button>
-        <span>Página {{ currentPage }} de {{ totalPages }}</span>
-        <button @click="changePage(currentPage + 1)" :disabled="currentPage === totalPages" class="producto-button">Siguiente</button>
-      </div>
+      <Pagination :items="productos" :itemsPerPage="itemsPerPage" @page-changed="updatePaginatedItems" />
     </div>
   `
 };
