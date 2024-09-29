@@ -3,7 +3,8 @@
 
 /* Estilos específicos para Venta.js */
 .venta-container {
-    max-width: 1200px;
+    width: 100%;
+    height: calc(100vh - var(--altura_header));
     margin: 0 auto;
     padding: 20px;
     background-color: #fff;
