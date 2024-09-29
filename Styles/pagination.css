@@ -1,0 +1,30 @@
+@import url('style.css');
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 10px 20px;
+  border: none;
+  background: #2F4F4F; /* Color del botón */
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 18px;
+  margin: 0 5px;
+}
+
+.pagination button:hover {
+  background: #333; /* Color del botón al pasar el ratón por encima */
+}
+
+.pagination span {
+  font-size: 18px;
+  color: #333;
+  margin: 0 10px;
+}
