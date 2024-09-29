@@ -3,11 +3,13 @@
 
 /* Styles specific to Producto.js */
 .producto-container {
-    max-width: 1200px;
-    margin: 0 auto;
+    width: 100%; /* Ocupa el total del ancho */
+    height: calc(100vh - var(--altura_header)); /* Ocupa el total del alto menos la altura del header */
+    margin: 0;
     padding: 20px;
     background-color: #fff;
     color: #333333;
+    box-sizing: border-box; /* Asegura que el padding se incluya en el tamaño total */
 }
 
 .producto-header {
@@ -74,10 +76,11 @@
     margin-right: 10px;
 }
 
-/* Media query for smaller screens (430x932) */
-@media (max-width: 430px) {
+/* Media query for smaller screens (max-width: 767px) */
+@media (max-width: 767px) {
     .producto-container {
         padding: 10px;
+        height: calc(100vh - var(--altura_header)); /* Ocupa el total del alto menos la altura del header */
     }
 
     .producto-header {
