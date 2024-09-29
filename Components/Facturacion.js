@@ -84,7 +84,6 @@ export default {
       <div v-if="error">{{ error }}</div>
       <div v-else>
         <div v-if="facturacion">
-          <h2 class="facturacion-header">Facturación</h2>
           <table class="facturacion-table">
             <thead>
               <tr>
