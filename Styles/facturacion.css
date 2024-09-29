@@ -3,11 +3,12 @@
 
 /* Estilos específicos para Facturacion.js */
 .facturacion-container {
-    max-width: 1200px;
-    margin: 0 auto;
+    width: 100%; /* Ocupa el total del ancho de cualquier resolución */
+    margin: 0;
     padding: 20px;
     background-color: #fff;
     color: #333333;
+    box-sizing: border-box; /* Asegura que el padding se incluya en el tamaño total */
 }
 
 .facturacion-header {
