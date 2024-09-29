@@ -69,7 +69,6 @@ export default {
   },
   template: `
     <div class="proveedor-container">
-      <h1 class="proveedor-header">Gestión de Proveedores</h1>
       <div v-if="error" class="error">{{ error }}</div>
       <form class="proveedor-form" @submit.prevent="agregarProveedor">
         <div class="proveedor-form-group">
