@@ -3,11 +3,13 @@
 
 /* Estilos específicos para Cliente.js */
 .venta-container {
-    max-width: 1200px;
-    margin: 0 auto;
+    width: 100%; /* Ocupa el total del ancho */
+    height: calc(100vh - var(--altura_header)); /* Ocupa el total del alto menos la altura del header */
+    margin: 0;
     padding: 20px;
     background-color: #fff;
     color: #333333;
+    box-sizing: border-box; /* Asegura que el padding se incluya en el tamaño total */
 }
 
 .venta-header {
@@ -91,18 +93,88 @@
     max-width: 200px; /* Ajusta el ancho máximo del botón */
 }
 
-/* Media query for smaller screens (430x932) */
-@media (max-width: 430px) {
+/* Media query for smaller screens (max-width: 767px) */
+@media (max-width: 767px) {
     .venta-container {
         padding: 10px;
+        height: calc(100vh - var(--altura_header)); /* Ocupa el total del alto menos la altura del header */
     }
+
     .venta-header {
         font-size: 24px;
         margin-bottom: 10px;
     }
+
     .venta-table th, .venta-table td {
         padding: 4px;
         font-size: 14px;
     }
+
     .venta-button {
-        padding: 8px 16
+        padding: 8px 16px;
+        font-size: 16px;
+        margin-right: 5px;
+    }
+
+    .venta-input {
+        padding: 8px;
+        font-size: 16px;
+        margin-right: 5px;
+        width: calc(100% - 26px); /* Ajusta el ancho del input */
+    }
+
+    .venta-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .venta-form label {
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    /* Ajustes específicos para la tabla en dispositivos móviles */
+    .venta-table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .venta-table thead {
+        display: none;
+    }
+
+    .venta-table tbody, .venta-table tr, .venta-table td {
+        display: block;
+        width: 100%;
+        border: none; /* Elimina los bordes */
+    }
+
+    .venta-table tr {
+        margin-bottom: 15px; /* Espacio entre filas */
+    }
+
+    .venta-table td {
+        text-align: left;
+        padding: 10px;
+        position: relative;
+        border: 1px solid #ddd; /* Agrega bordes a las celdas */
+        padding-left: 10px; /* Ajusta el padding izquierdo */
+    }
+
+    .venta-table td::before {
+        content: attr(data-label);
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px; /* Espacio entre la etiqueta y el input */
+    }
+
+    .venta-total-container {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .venta-finalizar-button {
+        width: 100%;
+        max-width: none;
+    }
+}
