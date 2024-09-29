@@ -70,7 +70,6 @@ export default {
   },
   template: `
     <div class="venta-container">
-      <h1 class="venta-header">Gestión de Clientes</h1>
       <div v-if="error" class="error">{{ error }}</div>
       <form class="venta-form" @submit.prevent="agregarCliente">
         <div class="venta-form-group">
