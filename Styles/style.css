@@ -1,9 +1,11 @@
+/* Reset de estilos básicos */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Estilos generales */
 body {
   display: flex;
   flex-direction: column;
@@ -21,12 +23,14 @@ ol, ul {
   list-style: none;
 }
 
+/* Estilos del header */
 .header {
   height: 80px; /* Reemplazar var(--altura_header) */
   background-color: #2F4F4F; /* Reemplazar var(--color_primario) */
   width: 100%; /* Asegurar que el header ocupe el 100% del ancho */
 }
 
+/* Estilos de la navbar */
 .navbar {
   height: 80px; /* Reemplazar var(--altura_nav) */
   display: flex;
@@ -51,14 +55,12 @@ ol, ul {
   color: #fff; /* Reemplazar var(--color_blanco) */
 }
 
-.labe_hamburguesa {
-}
-
 .list_icon {
   color: #fff; /* Reemplazar var(--color_blanco) */
   cursor: pointer;
 }
 
+/* Estilos del menú desplegable */
 .ul_links {
   width: 100%;
   background-color: transparent; /* Fondo transparente por defecto */
@@ -74,9 +76,6 @@ ol, ul {
   gap: 3rem;
   transition: all .3s;
   z-index: 20; /* Asegurar que el menú desplegable esté por encima del contenido */
-}
-
-.li_links {
 }
 
 .link {
@@ -132,6 +131,7 @@ ol, ul {
   color: #fff; /* Reemplazar var(--color_blanco) */
 }
 
+/* Media queries */
 @media (min-width: 768px) {
   .labe_hamburguesa {
     display: none;
