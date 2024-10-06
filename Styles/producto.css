@@ -9,6 +9,8 @@
     background-color: #fff;
     color: #333333;
     flex-grow: 1; /* Permitir que el contenedor crezca para ocupar el espacio disponible */
+    box-sizing: border-box; /* Asegura que el padding se incluya en el tamaño total */
+    overflow-x: hidden; /* Desactivar el scroll horizontal */
 }
 
 .producto-header {
@@ -22,7 +24,7 @@
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
-    flex-grow: 1; /* Permitir que la tabla crezca para ocupar el espacio disponible */
+    overflow-x: auto; /* Permitir desplazamiento horizontal si la tabla es demasiado ancha */
 }
 
 .producto-table th, .producto-table td {
@@ -45,35 +47,54 @@
     cursor: pointer;
     font-size: 18px;
     transition: background 0.3s;
-    margin-right: 10px; /* Space between buttons */
+    margin-right: 10px; /* Agrega un margen derecho para el espacio entre botones */
 }
 
 .producto-button:hover {
     background-color: #333;
 }
 
-/* Styles for the input fields */
+/* Estilos para el input */
 .producto-input {
     padding: 10px;
     font-size: 18px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    margin-right: 10px; /* Space between input and buttons */
-    width: calc(100% - 40px); /* Adjust input width */
-    box-sizing: border-box; /* Include padding and border in total width */
+    margin-right: 10px; /* Espacio entre el input y los botones */
+    width: 100%; /* Ajusta el ancho del input */
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
 }
 
-/* Additional styles for better appearance */
+/* Estilos adicionales para mejorar la apariencia */
 .producto-form {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
+    width: 100%; /* Asegura que el formulario no exceda el ancho del contenedor */
 }
 
 .producto-form label {
     font-size: 18px;
     margin-right: 10px;
+}
+
+.producto-total-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%; /* Asegura que el contenedor no exceda el ancho del contenedor padre */
+}
+
+.producto-total {
+    font-size: 18px;
+    margin-right: 20px;
+}
+
+.producto-finalizar-button {
+    width: 100%; /* Ajusta el ancho del botón */
+    max-width: 200px; /* Ajusta el ancho máximo del botón */
 }
 
 /* Media query para pantallas pequeñas */
@@ -118,5 +139,15 @@
 
     .producto-table {
         overflow-x: auto; /* Permitir desplazamiento horizontal si la tabla es demasiado ancha */
+    }
+
+    .producto-total-container {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .producto-finalizar-button {
+        width: 100%;
+        max-width: none;
     }
 }
