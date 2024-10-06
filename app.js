@@ -7,6 +7,7 @@ import Header from './Components/Header.js';
 import Cliente from './Components/Cliente.js';
 import Proveedor from './Components/Proveedor.js';
 import MyModal from './Components/MyModal.js'; // Asegúrate de que la ruta sea correcta
+import Login from './Components/Login.js';
 
 const app = Vue.createApp({
   data() {
@@ -30,6 +31,7 @@ const app = Vue.createApp({
     }
   },
   components: {
+    'login': Login,
     'producto': Producto,
     'venta': Venta,
     'stock': Stock,
