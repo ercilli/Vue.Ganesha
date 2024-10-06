@@ -1,60 +1,69 @@
-:root {
-  --color_primario: #2F4F4F;
-  --color_primario_suave: #f8f8f8;
-  --color_blanco: #fff;
-  --altura_header: 80px;
-  --padding_left_right: 2rem;
-  --ancho_maximo: 1200px;
-}
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   background-color: #333;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  overflow-x: hidden; /* Desactivar el scroll horizontal */
 }
+
 a {
   text-decoration: none;
 }
+
 ol, ul {
   list-style: none;
 }
+
 .header {
-  height: var(--altura_header);
-  background-color: var(--color_primario);
+  height: 80px; /* Reemplazar var(--altura_header) */
+  background-color: #2F4F4F; /* Reemplazar var(--color_primario) */
+  width: 100%; /* Asegurar que el header ocupe el 100% del ancho */
 }
+
 .navbar {
-  height: 100%;
+  height: 80px; /* Reemplazar var(--altura_nav) */
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  padding: 0 var(--padding_left_right);
+  padding: 0 2rem; /* Reemplazar var(--padding_left_right) */
   position: relative; /* Asegurar que el navbar tenga una posición relativa */
   z-index: 10; /* Asegurar que el navbar esté por encima del contenido */
+  width: 100%; /* Asegurar que el navbar ocupe el 100% del ancho */
 }
+
 .menu_hamburguesa {
   display: none;
 }
+
 .menu_hamburguesa:checked + .ul_links {
-  height: calc(100vh - var(--altura_header));
+  height: calc(100vh - 80px); /* Reemplazar var(--altura_nav) */
 }
+
 .logo {
-  color: var(--color_blanco);
+  color: #fff; /* Reemplazar var(--color_blanco) */
 }
+
 .labe_hamburguesa {
 }
+
 .list_icon {
-  color: var(--color_blanco);
+  color: #fff; /* Reemplazar var(--color_blanco) */
   cursor: pointer;
 }
+
 .ul_links {
   width: 100%;
   background-color: transparent; /* Fondo transparente por defecto */
   position: absolute;
-  top: var(--altura_header);
+  top: 80px; /* Reemplazar var(--altura_nav) */
   left: 0;
   height: 0;
   overflow: hidden;
@@ -66,18 +75,20 @@ ol, ul {
   transition: all .3s;
   z-index: 20; /* Asegurar que el menú desplegable esté por encima del contenido */
 }
+
 .li_links {
 }
+
 .link {
   font-size: 3em;
-  color: var(--color_blanco);
+  color: #fff; /* Reemplazar var(--color_blanco) */
   font-weight: bold;
 }
 
 /* Estilos para los botones */
 .button {
-  background-color: var(--color_primario);
-  color: var(--color_blanco);
+  background-color: #2F4F4F; /* Reemplazar var(--color_primario) */
+  color: #fff; /* Reemplazar var(--color_blanco) */
   padding: 10px 20px;
   border: none;
   border-radius: 8px; /* Bordes redondeados */
@@ -99,10 +110,10 @@ ol, ul {
 
 /* Estilos para los botones del menú */
 .about-button {
-  background-color: var(--color_primario_suave); /* Fondo claro para contraste */
-  color: var(--color_primario); /* Texto oscuro para contraste */
+  background-color: #f8f8f8; /* Reemplazar var(--color_primario_suave) */
+  color: #2F4F4F; /* Reemplazar var(--color_primario) */
   padding: 10px 20px;
-  border: 2px solid var(--color_primario); /* Borde oscuro para contraste */
+  border: 2px solid #2F4F4F; /* Reemplazar var(--color_primario) */
   border-radius: 8px; /* Bordes redondeados */
   cursor: pointer;
   font-size: 18px;
@@ -112,13 +123,13 @@ ol, ul {
 }
 
 .about-button:hover {
-  background-color: var(--color_primario); /* Fondo oscuro al pasar el ratón */
-  color: var(--color_blanco); /* Texto claro al pasar el ratón */
+  background-color: #2F4F4F; /* Reemplazar var(--color_primario) */
+  color: #fff; /* Reemplazar var(--color_blanco) */
 }
 
 .about-button:active {
   background-color: #1e3d3d; /* Fondo más oscuro al hacer clic */
-  color: var(--color_blanco); /* Texto claro al hacer clic */
+  color: #fff; /* Reemplazar var(--color_blanco) */
 }
 
 @media (min-width: 768px) {
@@ -131,22 +142,22 @@ ol, ul {
     height: auto;
     flex-direction: row;
     gap: 2rem;
-    background-color: var(--color_primario); /* Fondo oscuro en resoluciones normales */
+    background-color: #2F4F4F; /* Reemplazar var(--color_primario) */
   }
   .link {
     font-size: 1.2rem;
     transition: all .3s;
     padding: .2rem .7rem;
-    color: var(--color_blanco); /* Texto claro para mejor contraste */
+    color: #fff; /* Reemplazar var(--color_blanco) */
   }
   .link:hover {
-    background-color: var(--color_primario_suave);
-    color: var(--color_primario); /* Texto oscuro al pasar el ratón */
+    background-color: #f8f8f8; /* Reemplazar var(--color_primario_suave) */
+    color: #2F4F4F; /* Reemplazar var(--color_primario) */
   }
 }
 
 @media (max-width: 767px) {
   .ul_links {
-    background-color: var(--color_primario_suave); /* Fondo suave en modo móvil */
+    background-color: #f8f8f8; /* Reemplazar var(--color_primario_suave) */
   }
 }
