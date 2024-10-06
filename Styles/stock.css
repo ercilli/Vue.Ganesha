@@ -3,13 +3,16 @@
 
 /* Estilos específicos para Stock.js */
 .stock-container {
-    width: 100%; /* Ocupa el total del ancho */
-    height: calc(100vh - var(--altura_header)); /* Ocupa el total del alto menos la altura del header */
-    margin: 0;
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ocupa al menos el 100% de la altura de la ventana */
+    padding: 20px 5px; /* Agregar padding de 5px a la izquierda y derecha */
     background-color: #fff;
     color: #333333;
+    flex-grow: 1; /* Permitir que el contenedor crezca para ocupar el espacio disponible */
     box-sizing: border-box; /* Asegura que el padding se incluya en el tamaño total */
+    overflow-x: hidden; /* Desactivar el scroll horizontal */
+    max-width: 100%; /* Asegura que el contenedor no exceda el ancho del body */
 }
 
 .stock-header {
@@ -17,12 +20,16 @@
     color: #2F4F4F;
     text-align: center;
     margin-bottom: 20px;
+    padding: 0 5px; /* Agregar padding de 5px a la izquierda y derecha */
 }
 
 .stock-table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
+    overflow-x: auto; /* Permitir desplazamiento horizontal si la tabla es demasiado ancha */
+    padding: 0 5px; /* Agregar padding de 5px a la izquierda y derecha */
+    max-width: 100%; /* Asegura que la tabla no exceda el ancho del contenedor padre */
 }
 
 .stock-table th, .stock-table td {
@@ -59,7 +66,7 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     margin-right: 10px; /* Espacio entre el input y los botones */
-    width: calc(100% - 40px); /* Ajusta el ancho del input */
+    width: 100%; /* Ajusta el ancho del input */
     box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
 }
 
@@ -69,6 +76,7 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
+    width: 100%; /* Asegura que el formulario no exceda el ancho del contenedor */
 }
 
 .stock-form label {
@@ -76,43 +84,76 @@
     margin-right: 10px;
 }
 
-/* Media query for smaller screens (max-width: 767px) */
-@media (max-width: 767px) {
+.stock-total-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%; /* Asegura que el contenedor no exceda el ancho del contenedor padre */
+}
+
+.stock-total {
+    font-size: 18px;
+    margin-right: 20px;
+}
+
+.stock-finalizar-button {
+    width: 100%; /* Ajusta el ancho del botón */
+    max-width: 200px; /* Ajusta el ancho máximo del botón */
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 768px) {
     .stock-container {
-        padding: 10px;
-        height: calc(100vh - var(--altura_header)); /* Ocupa el total del alto menos la altura del header */
+        padding: 10px 5px; /* Reducir el padding en pantallas más pequeñas */
     }
 
     .stock-header {
-        font-size: 24px;
+        font-size: 24px; /* Ajustar el tamaño de la fuente del encabezado */
         margin-bottom: 10px;
     }
 
+    .stock-table {
+        width: auto; /* Permitir que la tabla ocupe solo lo necesario */
+        overflow-x: auto; /* Permitir desplazamiento horizontal si la tabla es demasiado ancha */
+    }
+
     .stock-table th, .stock-table td {
-        padding: 4px;
-        font-size: 14px;
+        padding: 6px; /* Reducir padding en la tabla */
+        font-size: 14px; /* Reducir el tamaño de la fuente en la tabla */
     }
 
     .stock-button {
-        padding: 8px 16px;
-        font-size: 16px;
+        padding: 8px 16px; /* Reducir el tamaño de los botones */
+        font-size: 16px; /* Ajustar el tamaño de la fuente de los botones */
         margin-right: 5px;
     }
 
     .stock-input {
-        padding: 8px;
+        padding: 8px; /* Reducir padding de los campos de entrada */
         font-size: 16px;
         margin-right: 5px;
-        width: calc(100% - 26px); /* Ajusta el ancho del input */
+        width: 100%; /* Hacer que los campos de entrada ocupen el ancho total */
+        box-sizing: border-box; /* Asegurar que el padding esté incluido en el ancho */
     }
 
     .stock-form {
-        flex-direction: column;
+        flex-direction: column; /* Alinear los elementos del formulario en columna */
         align-items: stretch;
     }
 
     .stock-form label {
         font-size: 16px;
         margin-bottom: 5px;
+    }
+
+    .stock-total-container {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .stock-finalizar-button {
+        width: 100%;
+        max-width: none;
     }
 }
