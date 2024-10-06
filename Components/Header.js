@@ -1,4 +1,12 @@
+import { logoutUser } from '../Services/authService.js';
+
 export default {
+  methods: {
+    handleLogout() {
+      logoutUser();
+      window.location.href = '/login.html'; // Redirigir a la página de inicio de sesión
+    }
+  },
   template: `
     <header class="header">
       <nav class="navbar">
@@ -30,7 +38,7 @@ export default {
             <a href="./stock.html" class="about-button">Inventario</a>
           </li>
           <li class="li_links">
-            <a href="./index.html" class="about-button">Producto</a>
+            <a href="./producto.html" class="about-button">Producto</a>
           </li>
           <li class="li_links">
             <a href="./proveedor.html" class="about-button">Proveedor</a>
@@ -40,6 +48,9 @@ export default {
           </li>
           <li class="li_links">
             <a href="./venta.html" class="about-button">Venta</a>
+          </li>
+          <li class="li_links">
+            <a href="#" class="about-button" @click="handleLogout">Cerrar sesión</a>
           </li>
         </ul>
       </nav>
