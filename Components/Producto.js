@@ -105,7 +105,6 @@ export default {
   },
   template: `
     <div class="producto-container">
-      <h1 class="producto-header">Gestión de Productos</h1>
       <div v-if="error" class="error">{{ error }}</div>
       <form class="producto-form" @submit.prevent="agregarProducto">
         <div class="producto-form-group">
