@@ -4,7 +4,7 @@ export default {
   methods: {
     handleLogout() {
       logoutUser();
-      window.location.href = '/index.html'; // Redirigir a la página de inicio de sesión
+      window.location.href = './index.html'; // Redirigir a la página de inicio de sesión
     }
   },
   template: `
