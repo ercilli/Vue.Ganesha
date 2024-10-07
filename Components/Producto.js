@@ -95,6 +95,9 @@ export default {
           return valA < valB ? 1 : valA > valB ? -1 : 0;
         }
       });
+
+      // Actualizar los productos paginados después de ordenar
+      this.paginatedProductos = this.productos.slice(0, this.itemsPerPage);
     },
     updatePaginatedItems(items) {
       this.paginatedProductos = items;
