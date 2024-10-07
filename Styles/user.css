@@ -1,0 +1,162 @@
+/* Importa los estilos globales */
+@import url('style.css');
+
+/* Estilos específicos para User.js */
+.user-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ocupa al menos el 100% de la altura de la ventana */
+    padding: 20px 5px; /* Agregar padding de 5px a la izquierda y derecha */
+    background-color: #fff;
+    color: #333333;
+    flex-grow: 1; /* Permitir que el contenedor crezca para ocupar el espacio disponible */
+    box-sizing: border-box; /* Asegura que el padding se incluya en el tamaño total */
+    overflow-x: hidden; /* Desactivar el scroll horizontal */
+    max-width: 100%; /* Asegura que el contenedor no exceda el ancho del body */
+    overflow-y: auto; /* Permitir desplazamiento vertical si el contenido es demasiado alto */
+}
+
+.user-header {
+    font-family: 'Playfair Display', serif;
+    color: #2F4F4F;
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 0 5px; /* Agregar padding de 5px a la izquierda y derecha */
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    overflow-x: auto; /* Permitir desplazamiento horizontal si la tabla es demasiado ancha */
+    padding: 0 5px; /* Agregar padding de 5px a la izquierda y derecha */
+    max-width: 100%; /* Asegura que la tabla no exceda el ancho del contenedor padre */
+}
+
+.user-table th, .user-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.user-table th {
+    background-color: #f8f8f8;
+    color: #000;
+}
+
+.user-button {
+    background-color: #2F4F4F;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background 0.3s;
+    margin-right: 10px; /* Agrega un margen derecho para el espacio entre botones */
+    white-space: nowrap; /* Evitar que el texto del botón se divida en varias líneas */
+}
+
+.user-button:hover {
+    background-color: #333;
+}
+
+/* Estilos para el input */
+.user-input {
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 10px; /* Espacio entre el input y los botones */
+    width: 100%; /* Ajusta el ancho del input */
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
+}
+
+/* Estilos adicionales para mejorar la apariencia */
+.user-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    width: 100%; /* Asegura que el formulario no exceda el ancho del contenedor */
+}
+
+.user-form label {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.user-total-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%; /* Asegura que el contenedor no exceda el ancho del contenedor padre */
+}
+
+.user-total {
+    font-size: 18px;
+    margin-right: 20px;
+}
+
+.user-finalizar-button {
+    width: 100%; /* Ajusta el ancho del botón */
+    max-width: 200px; /* Ajusta el ancho máximo del botón */
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 768px) {
+    .user-container {
+        padding: 10px 5px; /* Reducir el padding en pantallas más pequeñas */
+    }
+
+    .user-header {
+        font-size: 24px; /* Ajustar el tamaño de la fuente del encabezado */
+        margin-bottom: 10px;
+    }
+
+    .user-table {
+        width: auto; /* Permitir que la tabla ocupe solo lo necesario */
+        overflow-x: auto; /* Permitir desplazamiento horizontal si la tabla es demasiado ancha */
+    }
+
+    .user-table th, .user-table td {
+        padding: 6px; /* Reducir padding en la tabla */
+        font-size: 14px; /* Reducir el tamaño de la fuente en la tabla */
+    }
+
+    .user-button {
+        padding: 8px 16px; /* Reducir el tamaño de los botones */
+        font-size: 16px; /* Ajustar el tamaño de la fuente de los botones */
+        margin-right: 5px;
+        white-space: nowrap; /* Evitar que el texto del botón se divida en varias líneas */
+    }
+
+    .user-input {
+        padding: 8px; /* Reducir padding de los campos de entrada */
+        font-size: 16px;
+        margin-right: 5px;
+        width: 100%; /* Hacer que los campos de entrada ocupen el ancho total */
+        box-sizing: border-box; /* Asegurar que el padding esté incluido en el ancho */
+    }
+
+    .user-form {
+        flex-direction: column; /* Alinear los elementos del formulario en columna */
+        align-items: stretch;
+    }
+
+    .user-form label {
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    .user-total-container {
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .user-finalizar-button {
+        width: 100%;
+        max-width: none;
+    }
+}
