@@ -50,7 +50,7 @@ export default {
             <a href="./venta.html" class="about-button">Venta</a>
           </li>
           <li class="li_links">
-            <a href="#" class="about-button" @click="handleLogout">Cerrar sesión</a>
+            <a href="./index.html" class="about-button" @click="handleLogout">Cerrar sesión</a>
           </li>
         </ul>
       </nav>
