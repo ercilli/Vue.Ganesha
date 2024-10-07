@@ -1,6 +1,15 @@
-import { logoutUser } from '../Services/authService.js';
+import { logoutUser, getUserRole } from '../Services/authService.js';
 
 export default {
+  data() {
+    return {
+      userRole: null
+    };
+  },
+  created() {
+    this.userRole = getUserRole();
+    console.log('User role:', this.userRole); // Agregar log para verificar el rol del usuario
+  },
   methods: {
     handleLogout() {
       logoutUser();
@@ -48,6 +57,9 @@ export default {
           </li>
           <li class="li_links">
             <a href="./venta.html" class="about-button">Venta</a>
+          </li>
+          <li class="li_links" v-if="userRole === 'Admin'">
+            <a href="./user.html" class="about-button">Gestión de Usuarios</a>
           </li>
           <li class="li_links">
             <a href="./index.html" class="about-button" @click="handleLogout">Cerrar sesión</a>
