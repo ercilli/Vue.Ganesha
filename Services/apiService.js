@@ -3,6 +3,17 @@ import { getAccessToken } from './authService.js';
 //const baseUrl = 'https://localhost:7182/api';
 const baseUrl = 'https://vivero-ganesha-api.fly.dev/api';
 
+// Determinar el entorno y configurar la URL base
+const isProduction = window.location.hostname.includes('github.io');
+const redirectBaseUrl = isProduction ? '/Vue.Ganesha/' : './index.html';
+
+// Función auxiliar para manejar errores
+const handleError = (error, action) => {
+  console.error(`Error ${action}:`, error);
+  // Redirigir al usuario a la página de inicio de sesión si el token ha expirado
+  window.location.href = redirectBaseUrl;
+};
+
 // Función genérica para obtener datos
 export const fetchItems = (controller) => {
   try {
@@ -20,13 +31,11 @@ export const fetchItems = (controller) => {
         return data;
       })
       .catch(error => {
-        console.error(`Error fetching items from ${controller}:`, error);
+        handleError(error, `fetching items from ${controller}`);
         throw error;
       });
   } catch (error) {
-    console.error('Error fetching items:', error);
-    // Redirigir al usuario a la página de inicio de sesión si el token ha expirado
-    window.location.href = '/index.html';
+    handleError(error, 'fetching items');
   }
 };
 
@@ -47,13 +56,11 @@ export const getItemById = (controller, itemId) => {
         return data;
       })
       .catch(error => {
-        console.error(`Error fetching item ${itemId} from ${controller}:`, error);
+        handleError(error, `fetching item ${itemId} from ${controller}`);
         throw error;
       });
   } catch (error) {
-    console.error('Error fetching item:', error);
-    // Redirigir al usuario a la página de inicio de sesión si el token ha expirado
-    window.location.href = '/index.html';
+    handleError(error, 'fetching item');
   }
 };
 
@@ -83,13 +90,11 @@ export const createItem = (controller, item) => {
         return data;
       })
       .catch(error => {
-        console.error(`Error creating item in ${controller}:`, error);
+        handleError(error, `creating item in ${controller}`);
         throw error;
       });
   } catch (error) {
-    console.error('Error creating item:', error);
-    // Redirigir al usuario a la página de inicio de sesión si el token ha expirado
-    window.location.href = '/index.html';
+    handleError(error, 'creating item');
   }
 };
 
@@ -119,13 +124,11 @@ export const updateItem = (controller, item) => {
         return data;
       })
       .catch(error => {
-        console.error(`Error updating item ${item.id} in ${controller}:`, error);
+        handleError(error, `updating item ${item.id} in ${controller}`);
         throw error;
       });
   } catch (error) {
-    console.error('Error updating item:', error);
-    // Redirigir al usuario a la página de inicio de sesión si el token ha expirado
-    window.location.href = '/index.html';
+    handleError(error, 'updating item');
   }
 };
 
@@ -145,12 +148,10 @@ export const deleteItem = (controller, itemId) => {
         }
       })
       .catch(error => {
-        console.error(`Error deleting item ${itemId} from ${controller}:`, error);
+        handleError(error, `deleting item ${itemId} from ${controller}`);
         throw error;
       });
   } catch (error) {
-    console.error('Error deleting item:', error);
-    // Redirigir al usuario a la página de inicio de sesión si el token ha expirado
-    window.location.href = '/index.html';
+    handleError(error, 'deleting item');
   }
 };
