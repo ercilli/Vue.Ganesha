@@ -1,4 +1,4 @@
-import { loginUser } from '../Services/authService.js';
+import { loginUser, registerUser } from '../Services/authService.js';
 
 export default {
   name: 'Login',
@@ -9,7 +9,9 @@ export default {
         password: ''
       },
       isCreatingAccount: false,
-      error: null
+      error: null,
+      successMessage: null,
+      validationErrors: []
     };
   },
   methods: {
@@ -35,18 +37,65 @@ export default {
           this.error = 'Error al iniciar sesión';
         });
     },
+    validatePassword(password) {
+      const errors = [];
+      if (password.length < 8) {
+        errors.push('La contraseña debe tener al menos 8 caracteres.');
+      }
+      if (!/[A-Z]/.test(password)) {
+        errors.push('La contraseña debe tener al menos una letra mayúscula.');
+      }
+      if (!/[a-z]/.test(password)) {
+        errors.push('La contraseña debe tener al menos una letra minúscula.');
+      }
+      if (!/[0-9]/.test(password)) {
+        errors.push('La contraseña debe tener al menos un número.');
+      }
+      if (!/[!@#$%^&*]/.test(password)) {
+        errors.push('La contraseña debe tener al menos un carácter especial (!@#$%^&*).');
+      }
+      return errors;
+    },
     createAccount() {
-      // Aquí puedes implementar la lógica para crear una cuenta si es necesario
-      console.log('Función de creación de cuenta no implementada');
+      const passwordErrors = this.validatePassword(this.usuario.password);
+      if (passwordErrors.length > 0) {
+        this.validationErrors = passwordErrors;
+        return;
+      }
+
+      registerUser(this.usuario)
+        .then(response => {
+          // Manejar la respuesta de la creación de cuenta
+          console.log('Cuenta creada exitosamente:', response);
+          this.successMessage = 'Cuenta creada exitosamente. Por favor, inicie sesión.';
+          this.error = null;
+          this.validationErrors = [];
+          this.isCreatingAccount = false;
+        })
+        .catch(error => {
+          console.error('Error al crear la cuenta:', error);
+          if (error.response && error.response.data && error.response.data.message) {
+            // Mostrar el mensaje de error devuelto por el servicio
+            this.error = error.response.data.message || 'Error al crear la cuenta';
+          } else {
+            this.error = 'Error al crear la cuenta';
+          }
+        });
     },
     toggleCreateAccount() {
       this.isCreatingAccount = !this.isCreatingAccount;
       this.error = null;
+      this.successMessage = null;
+      this.validationErrors = [];
     }
   },
   template: `
     <div class="login-container">
       <div v-if="error" class="error">{{ error }}</div>
+      <div v-if="successMessage" class="success">{{ successMessage }}</div>
+      <ul v-if="validationErrors.length" class="error-list">
+        <li v-for="(error, index) in validationErrors" :key="index">{{ error }}</li>
+      </ul>
       <form class="login-form" @submit.prevent="handleSubmit">
         <div class="login-form-group">
           <label for="email">Email:</label>
