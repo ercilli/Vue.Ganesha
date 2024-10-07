@@ -1,18 +1,8 @@
 import { getAccessToken } from './authService.js';
+import { handleError } from '../Components/ErrorHandler.js';
 
 //const baseUrl = 'https://localhost:7182/api';
 const baseUrl = 'https://vivero-ganesha-api.fly.dev/api';
-
-// Determinar el entorno y configurar la URL base
-const isProduction = window.location.hostname.includes('github.io');
-const redirectBaseUrl = isProduction ? '/Vue.Ganesha/' : './index.html';
-
-// Función auxiliar para manejar errores
-const handleError = (error, action) => {
-  console.error(`Error ${action}:`, error);
-  // Redirigir al usuario a la página de inicio de sesión si el token ha expirado
-  window.location.href = redirectBaseUrl;
-};
 
 // Función genérica para obtener datos
 export const fetchItems = (controller) => {
