@@ -218,7 +218,7 @@ export default {
                 <button v-if="!item.editando" class="stock-button" @click="seleccionarStock(item)">Editar</button>
                 <button v-else class="stock-button" @click="actualizarStock(item)">Guardar</button>
                 <button v-if="item.editando" class="stock-button" @click="cancelarEdicion(item)">Cancelar</button>
-                <button class="stock-button" @click="eliminarStock(item.id)">Eliminar</button>
+                <button class="stock-button" @click="eliminarStock(item.stockId)">Eliminar</button>
               </td>
             </tr>
           </tbody>
