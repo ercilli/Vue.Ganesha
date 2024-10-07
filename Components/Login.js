@@ -51,9 +51,6 @@ export default {
       if (!/[0-9]/.test(password)) {
         errors.push('La contraseña debe tener al menos un número.');
       }
-      if (!/[!@#$%^&*]/.test(password)) {
-        errors.push('La contraseña debe tener al menos un carácter especial (!@#$%^&*).');
-      }
       return errors;
     },
     createAccount() {
