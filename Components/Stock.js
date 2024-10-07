@@ -1,4 +1,4 @@
-import { fetchItems, createItem } from '../Services/apiService.js';
+import { fetchItems, createItem, updateItem, deleteItem } from '../Services/apiService.js';
 
 export default {
   data() {
@@ -143,6 +143,40 @@ export default {
       } else {
         console.error('Product not found');
       }
+    },
+    seleccionarStock(stock) {
+      stock.editando = true;
+    },
+    actualizarStock(stock) {
+      const stockData = {
+        id: stock.stockId,
+        productoid: stock.productoId,
+        cantidad: stock.cantidad,
+        fecha: stock.fecha
+      };
+      updateItem('Stock', stockData)
+        .then(() => {
+          stock.editando = false;
+          this.fetchStockItems();
+        })
+        .catch(error => {
+          console.error('Error al actualizar el stock:', error);
+          this.error = 'Error al actualizar el stock';
+        });
+    },
+    cancelarEdicion(stock) {
+      stock.editando = false;
+      this.fetchStockItems();
+    },
+    eliminarStock(stockId) {
+      deleteItem('Stock', stockId)
+        .then(() => {
+          this.fetchStockItems();
+        })
+        .catch(error => {
+          console.error('Error al eliminar el stock:', error);
+          this.error = 'Error al eliminar el stock';
+        });
     }
   },
   watch: {
@@ -166,13 +200,26 @@ export default {
               <th>Código</th>
               <th>Descripción</th>
               <th>Cantidad</th>
+              <th>Acciones</th> <!-- Nueva columna para acciones -->
             </tr>
           </thead>
           <tbody>
             <tr v-for="item in stockItems" :key="item.codigo">
               <td>{{ item.codigo }}</td>
-              <td>{{ item.descripcion }}</td>
-              <td>{{ item.cantidad }}</td>
+              <td>
+                <span v-if="!item.editando">{{ item.descripcion }}</span>
+                <input v-else v-model="item.descripcion" class="stock-input" />
+              </td>
+              <td>
+                <span v-if="!item.editando">{{ item.cantidad }}</span>
+                <input v-else type="number" v-model="item.cantidad" class="stock-input" />
+              </td>
+              <td>
+                <button v-if="!item.editando" class="stock-button" @click="seleccionarStock(item)">Editar</button>
+                <button v-else class="stock-button" @click="actualizarStock(item)">Guardar</button>
+                <button v-if="item.editando" class="stock-button" @click="cancelarEdicion(item)">Cancelar</button>
+                <button class="stock-button" @click="eliminarStock(item.id)">Eliminar</button>
+              </td>
             </tr>
           </tbody>
         </table>
