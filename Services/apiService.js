@@ -5,9 +5,9 @@ import { handleError } from '../Components/ErrorHandler.js';
 const baseUrl = 'https://vivero-ganesha-api.fly.dev/api';
 
 // Función genérica para obtener datos
-export const fetchItems = (controller) => {
+export const fetchItems = async (controller) => {
   try {
-    const token = getAccessToken();
+    const token = await getAccessToken();
     console.log(`Fetching items from ${controller}`);
     return fetch(`${baseUrl}/${controller}`, {
       headers: { 'Authorization': `Bearer ${token}` }
@@ -30,9 +30,9 @@ export const fetchItems = (controller) => {
 };
 
 // Función genérica para obtener un ítem por ID
-export const getItemById = (controller, itemId) => {
+export const getItemById = async (controller, itemId) => {
   try {
-    const token = getAccessToken();
+    const token = await getAccessToken();
     console.log(`Fetching item ${itemId} from ${controller}`);
     return fetch(`${baseUrl}/${controller}/${itemId}`, {
       headers: { 'Authorization': `Bearer ${token}` }
@@ -55,9 +55,9 @@ export const getItemById = (controller, itemId) => {
 };
 
 // Función genérica para crear un nuevo item
-export const createItem = (controller, item) => {
+export const createItem = async (controller, item) => {
   try {
-    const token = getAccessToken();
+    const token = await getAccessToken();
     console.log(`Creating item in ${controller}:`, item);
     return fetch(`${baseUrl}/${controller}`, {
       method: 'POST',
@@ -89,9 +89,9 @@ export const createItem = (controller, item) => {
 };
 
 // Función genérica para actualizar un item
-export const updateItem = (controller, item) => {
+export const updateItem = async (controller, item) => {
   try {
-    const token = getAccessToken();
+    const token = await getAccessToken();
     console.log(`Updating item ${item.id} in ${controller}:`, item);
     return fetch(`${baseUrl}/${controller}/${item.id}`, {
       method: 'PUT',
@@ -123,9 +123,9 @@ export const updateItem = (controller, item) => {
 };
 
 // Función genérica para eliminar un item
-export const deleteItem = (controller, itemId) => {
+export const deleteItem = async (controller, itemId) => {
   try {
-    const token = getAccessToken();
+    const token = await getAccessToken();
     console.log(`Deleting item ${itemId} from ${controller}`);
     return fetch(`${baseUrl}/${controller}/${itemId}`, {
       method: 'DELETE',
