@@ -6,9 +6,13 @@ export default {
       userRole: null
     };
   },
-  created() {
-    this.userRole = getUserRole();
-    console.log('User role:', this.userRole); // Agregar log para verificar el rol del usuario
+  async created() {
+    try {
+      this.userRole = await getUserRole();
+      console.log('User role:', this.userRole); // Agregar log para verificar el rol del usuario
+    } catch (error) {
+      console.error('Error al obtener el rol del usuario:', error);
+    }
   },
   methods: {
     handleLogout() {
