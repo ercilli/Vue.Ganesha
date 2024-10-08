@@ -18,6 +18,15 @@ export default {
         this.error = null; // Reset error before loading users
         this.loading = true; // Iniciar estado de carga
         this.users = await fetchUsers();
+        console.log('Loaded users:', this.users); // Verificar los datos recibidos
+        // Asegurarse de que cada usuario tenga un rol seleccionado
+        this.users.forEach(user => {
+          if (user.roles && user.roles.length > 0) {
+            user.selectedRole = user.roles[0];
+          } else {
+            user.selectedRole = 'User'; // Valor por defecto si no hay roles
+          }
+        });
       } catch (error) {
         console.error('Error loading users:', error); // Log del error
         this.error = 'Error loading users';
@@ -30,7 +39,11 @@ export default {
         this.error = null; // Reset error before changing user role
         this.loadingUserId = userId; // Iniciar estado de carga específico para el usuario
         await updateUserRole(userId, newRole);
-        await this.loadUsers(); // Reload users after role change
+        // Actualizar el rol seleccionado localmente
+        const user = this.users.find(user => user.id === userId);
+        if (user) {
+          user.selectedRole = newRole;
+        }
       } catch (error) {
         console.error('Error changing user role:', error); // Log del error
         this.error = 'Error changing user role';
@@ -71,9 +84,10 @@ export default {
             <td>{{ user.username }}</td>
             <td>{{ user.email }}</td>
             <td>
-              <select v-model="user.role" @change="changeUserRole(user.id, user.role)" :disabled="loadingUserId === user.id" class="user-input">
+              <select v-model="user.selectedRole" @change="changeUserRole(user.id, user.selectedRole)" :disabled="loadingUserId === user.id" class="user-input">
                 <option value="User">User</option>
                 <option value="Admin">Admin</option>
+                <option value="PendingApproval">Pending</option>
               </select>
             </td>
             <td>
