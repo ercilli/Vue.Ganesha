@@ -15,9 +15,10 @@ async function handleResponse(response) {
 
 export async function fetchUsers() {
   try {
+    const token = await getAccessToken();
     const response = await fetch(`${baseUrl}/admin/users`, {
       headers: {
-        'Authorization': `Bearer ${getAccessToken()}`
+        'Authorization': `Bearer ${token}`
       }
     });
 
@@ -34,11 +35,12 @@ export async function fetchUsers() {
 
 export async function updateUserRole(userId, newRole) {
   try {
+    const token = await getAccessToken();
     const response = await fetch(`${baseUrl}/admin/update-role`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${getAccessToken()}`
+        'Authorization': `Bearer ${token}`
       },
       body: JSON.stringify({ userId, newRole })
     });
@@ -56,10 +58,11 @@ export async function updateUserRole(userId, newRole) {
 
 export async function deleteUser(userId) {
   try {
+    const token = await getAccessToken();
     const response = await fetch(`${baseUrl}/admin/delete/${userId}`, {
       method: 'DELETE',
       headers: {
-        'Authorization': `Bearer ${getAccessToken()}`
+        'Authorization': `Bearer ${token}`
       }
     });
 
