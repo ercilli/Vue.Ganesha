@@ -27,8 +27,10 @@ export default {
         .then(response => {
           // Manejar la respuesta del login, por ejemplo, guardar el token y redirigir
           console.log('Login exitoso:', response);
-          // Guardar el token en el almacenamiento local
-          localStorage.setItem('accessToken', response.token);
+          // Guardar los tokens en el almacenamiento local
+          localStorage.setItem('accessToken', response.accessToken);
+          localStorage.setItem('refreshToken', response.refreshToken);
+          localStorage.setItem('tokenExpiry', response.tokenExpiry);
           // Redirigir a la página de ventas
           window.location.href = 'venta.html';
         })
