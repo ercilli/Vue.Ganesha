@@ -80,58 +80,60 @@ export default {
     this.fetchAvailableProducts();
   },
   template: `
-    <div class="facturacion-container">
-      <div v-if="error">{{ error }}</div>
-      <div v-else>
-        <div v-if="facturacion">
-          <table class="facturacion-table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Fecha</th>
-                <th>Cliente</th>
-                <th>Importe</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="factura in facturacion" :key="factura.facturacionid">
-                <td>{{ factura.facturacionid }}</td>
-                <td>{{ factura.fecha }}</td>
-                <td>{{ factura.cliente.nombre }} {{ factura.cliente.apellido }}</td>
-                <td>{{ formatearImporte(factura.total) }}</td>
-                <td><button class="facturacion-button" @click="mostrarDetalle(factura)">Detalle</button></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div v-if="facturaSeleccionada">
-          <h2 class="facturacion-header">Detalle de Factura</h2>
-          <table class="facturacion-table">
-            <thead>
-              <tr>
-                <th>Código</th>
-                <th>Descripción</th>
-                <th>Cantidad</th>
-                <th>Precio</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="item in facturaSeleccionada.facturas" :key="item.facturaid">
-                <td>{{ obtenerCodigoProducto(item.productoid) }}</td>
-                <td>{{ obtenerDescripcionProducto(item.productoid) }}</td>
-                <td>{{ item.cantidad }}</td>
-                <td>{{ formatearImporte(item.precio) }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div>
-          <h3>Total Semanal: {{ formatearImporte(totalSemanal) }}</h3>
-          <h3>Total Mensual: {{ formatearImporte(totalMensual) }}</h3>
-          <h3>Total Facturación Realizada: {{ formatearImporte(totalFacturacion) }}</h3>
+      <div class="facturacion-container">
+        <div v-if="error">{{ error }}</div>
+        <div v-else>
+          <div v-if="facturacion">
+            <table class="facturacion-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Fecha</th>
+                  <th>Cliente</th>
+                  <th>Importe</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="factura in facturacion" :key="factura.facturacionid">
+                  <td>{{ factura.facturacionid }}</td>
+                  <td>{{ factura.fecha }}</td>
+                  <td>{{ factura.cliente.nombre }} {{ factura.cliente.apellido }}</td>
+                  <td>{{ formatearImporte(factura.total) }}</td>
+                  <td><button class="facturacion-button" @click="mostrarDetalle(factura)">Detalle</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div v-if="facturaSeleccionada">
+            <h2 class="facturacion-header">Detalle de Factura</h2>
+            <table class="facturacion-table">
+              <thead>
+                <tr>
+                  <th>Código</th>
+                  <th>Descripción</th>
+                  <th>Cantidad</th>
+                  <th>Precio</th>
+                  <th>Descuento Aplicado</th> <!-- Nueva columna para el descuento aplicado -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="item in facturaSeleccionada.facturas" :key="item.facturaid">
+                  <td>{{ obtenerCodigoProducto(item.productoid) }}</td>
+                  <td>{{ obtenerDescripcionProducto(item.productoid) }}</td>
+                  <td>{{ item.cantidad }}</td>
+                  <td>{{ formatearImporte(item.precio) }}</td>
+                  <td>{{ formatearImporte(item.descuentoaplicado || 0) }}</td> <!-- Mostrar el descuento aplicado -->
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <h3>Total Semanal: {{ formatearImporte(totalSemanal) }}</h3>
+            <h3>Total Mensual: {{ formatearImporte(totalMensual) }}</h3>
+            <h3>Total Facturación Realizada: {{ formatearImporte(totalFacturacion) }}</h3>
+          </div>
         </div>
       </div>
-    </div>
-  `
+    `
 };
