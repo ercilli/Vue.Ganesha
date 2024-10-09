@@ -9,6 +9,7 @@ import Proveedor from './Components/Proveedor.js';
 import MyModal from './Components/MyModal.js'; // Asegúrate de que la ruta sea correcta
 import Login from './Components/Login.js';
 import User from './Components/User.js';
+import DescuentoCantidad from './Components/DescuentoCantidad.js';
 
 const app = Vue.createApp({
   data() {
@@ -32,6 +33,7 @@ const app = Vue.createApp({
     }
   },
   components: {
+    'descuento-cantidad': DescuentoCantidad,
     'user': User,
     'login': Login,
     'producto': Producto,
