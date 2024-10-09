@@ -62,6 +62,9 @@ export default {
           <li class="li_links">
             <a href="./venta.html" class="about-button">Venta</a>
           </li>
+          <li class="li_links">
+            <a href="./descuentocantidad.html" class="about-button">Promo</a>
+          </li>
           <li class="li_links" v-if="userRole === 'Admin'">
             <a href="./user.html" class="about-button">Gestión de Usuarios</a>
           </li>
