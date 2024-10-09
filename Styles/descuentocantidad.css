@@ -1,0 +1,119 @@
+/* Importa los estilos globales */
+@import url('style.css');
+
+/* Estilos generales */
+.descuento-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  color: #333333;
+  box-sizing: border-box;
+}
+
+.descuento-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.descuento-form-group {
+  flex: 1 1 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.descuento-input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.descuento-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #2F4F4F;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.descuento-button:hover {
+  background-color: #333;
+}
+
+.descuento-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  box-sizing: border-box;
+}
+
+.descuento-table th,
+.descuento-table td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.descuento-table th {
+  cursor: pointer;
+  background-color: #f8f8f8;
+  color: #000;
+}
+
+.descuento-table th:hover {
+  background-color: #e9ecef;
+}
+
+.error {
+  color: red;
+  margin-bottom: 20px;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+  .descuento-form {
+    flex-direction: column;
+  }
+
+  .descuento-form-group {
+    flex: 1 1 100%;
+  }
+
+  .descuento-table thead {
+    display: none;
+  }
+
+  .descuento-table tr {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .descuento-table td {
+    display: block;
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+  }
+
+  .descuento-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    width: calc(50% - 20px);
+    text-align: left;
+    font-weight: bold;
+  }
+
+  .descuento-button {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
