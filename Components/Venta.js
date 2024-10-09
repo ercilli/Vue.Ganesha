@@ -11,6 +11,7 @@ export default {
       facturaDetails: [],
       availableProducts: [],
       availableClientes: [],
+      availableDescuentos: [], // Nuevo estado para almacenar los descuentos
       isSubmitting: false,
       showModal: false,
       modalTitle: '',
@@ -25,6 +26,9 @@ export default {
     fetchItems('Cliente').then(clientes => {
       this.availableClientes = clientes;
     });
+    fetchItems('DescuentoCantidad').then(descuentos => {
+      this.availableDescuentos = descuentos;
+    });
   },
   methods: {
     formatCurrency(value) {
@@ -33,19 +37,24 @@ export default {
     buscarProductoPorCodigoODescripcion(index, tipo) {
       const detalle = this.facturaDetails[index];
       const busqueda = tipo === 'codigo' ? detalle.codigo : detalle.descripcion.toLowerCase();
-      const productoEncontrado = this.availableProducts.find(producto => 
+      const productoEncontrado = this.availableProducts.find(producto =>
         tipo === 'codigo' ? producto.codigo == busqueda : producto.descripcion.toLowerCase().includes(busqueda)
       );
-    
+
       if (productoEncontrado) {
+        const descuento = this.availableDescuentos.find(d => d.productoId === productoEncontrado.id && detalle.cantidad >= d.cantidadMinima);
+        const porcentajeDescuento = descuento ? descuento.porcentaje : 0;
+        const precioConDescuento = productoEncontrado.precio * (1 - porcentajeDescuento / 100);
+
         this.facturaDetails[index] = {
           ...detalle,
-          productoid : productoEncontrado.id,
+          productoid: productoEncontrado.id,
           codigo: productoEncontrado.codigo,
           descripcion: productoEncontrado.descripcion,
-          precio: productoEncontrado.precio,
+          precio: precioConDescuento,
           cantidad: detalle.cantidad || 1,
-          subtotal: productoEncontrado.precio * (detalle.cantidad || 1)
+          subtotal: precioConDescuento * (detalle.cantidad || 1),
+          descuento: porcentajeDescuento // Nuevo campo para almacenar el porcentaje de descuento
         };
       }
     },
@@ -60,7 +69,12 @@ export default {
     },
     updateProductTotal(index) {
       const product = this.facturaDetails[index];
-      product.subtotal = product.cantidad * product.precio;
+      const descuento = this.availableDescuentos.find(d => d.productoId === product.productoid && product.cantidad >= d.cantidadMinima);
+      const porcentajeDescuento = descuento ? descuento.porcentaje : 0;
+      const precioConDescuento = product.precio * (1 - porcentajeDescuento / 100);
+
+      product.subtotal = product.cantidad * precioConDescuento;
+      product.descuento = porcentajeDescuento; // Actualizar el porcentaje de descuento
     },
     calcularTotalFactura() {
       return this.facturaDetails.reduce((subtotal, item) => subtotal + item.subtotal, 0);
@@ -88,13 +102,18 @@ export default {
         productos: this.facturaDetails.map(detalle => ({
           productoID: detalle.productoid,
           cantidad: detalle.cantidad,
-          subtotal: detalle.subtotal
+          subtotal: detalle.subtotal,
+          precio: detalle.precio,
+          descuento: detalle.descuento
         })),
-        total: this.calcularTotalFactura()
+        total: this.calcularTotalFactura(),
+        fecha: this.facturaHeader.fecha,
+        tiposDescuento: ['cantidad'] // Lista de tipos de descuentos a aplicar
       };
 
       createItem('Venta', venta)
         .then(response => {
+          console.log('Venta respuesta:', response);
           if (response) {
             this.$root.openModal('Éxito', 'Venta creada con éxito', 'success');
             this.finalizarFactura();
@@ -110,7 +129,7 @@ export default {
         });
     },
   },
-  template: `
+    template: `
     <div class="venta-container">
       <h1 class="venta-header">Factura</h1>
       <form class="venta-form">
@@ -129,6 +148,7 @@ export default {
             <th>Descripción</th>
             <th>Cantidad</th>
             <th>Precio</th>
+            <th>Descuento (%)</th>
             <th>Subtotal</th>
             <th>Acciones</th>
           </tr>
@@ -139,6 +159,7 @@ export default {
             <td data-label="Descripción"><input class="venta-input" v-model="item.descripcion" placeholder="Descripción" @blur="buscarProductoPorCodigoODescripcion(index, 'descripcion')"></td>
             <td data-label="Cantidad"><input class="venta-input" type="number" v-model.number="item.cantidad" @change="updateProductTotal(index)"></td>
             <td data-label="Precio"><input class="venta-input" type="number" v-model.number="item.precio" @change="updateProductTotal(index)" readonly></td>
+            <td data-label="Descuento">{{ item.descuento || 0 }}</td>
             <td data-label="Subtotal">{{ item.subtotal.toFixed(2) }}</td>
             <td data-label="Acciones"><button class="venta-button" @click="eliminarDetalle(index)">Eliminar</button></td>
           </tr>
@@ -158,5 +179,5 @@ export default {
         @close="closeModal">
       </modal>
     </div>
-  `,
+  `
 }
