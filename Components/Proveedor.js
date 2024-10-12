@@ -109,10 +109,10 @@ export default {
               <input v-else v-model="proveedor.telefono" class="proveedor-input" />
             </td>
             <td data-label="Acciones">
-              <button v-if="!proveedor.editando" class="proveedor-button" @click="seleccionarProveedor(proveedor)">Editar</button>
-              <button v-else class="proveedor-button" @click="actualizarProveedor(proveedor)">Guardar</button>
-              <button v-if="proveedor.editando" class="proveedor-button" @click="cancelarEdicion(proveedor)">Cancelar</button>
-              <button class="proveedor-button" @click="eliminarProveedor(proveedor.id)">Eliminar</button>
+              <i v-if="!proveedor.editando" class="fas fa-edit proveedor-icon" @click="seleccionarProveedor(proveedor)"></i>
+              <i v-else class="fas fa-save proveedor-icon" @click="actualizarProveedor(proveedor)"></i>
+              <i v-if="proveedor.editando" class="fas fa-times proveedor-icon" @click="cancelarEdicion(proveedor)"></i>
+              <i class="fas fa-trash proveedor-icon" @click="eliminarProveedor(proveedor.id)"></i>
             </td>
           </tr>
         </tbody>
