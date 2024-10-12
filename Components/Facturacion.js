@@ -100,7 +100,9 @@ export default {
                   <td>{{ factura.fecha }}</td>
                   <td>{{ factura.cliente.nombre }} {{ factura.cliente.apellido }}</td>
                   <td>{{ formatearImporte(factura.total) }}</td>
-                  <td><button class="facturacion-button" @click="mostrarDetalle(factura)">Detalle</button></td>
+                  <td>
+                    <i class="fas fa-info-circle facturacion-icon" @click="mostrarDetalle(factura)"></i>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -110,9 +112,9 @@ export default {
             <table class="facturacion-table">
               <thead>
                 <tr>
-                  <th>Código</th>
+                  <th>#</th>
                   <th>Descripción</th>
-                  <th>Cantidad</th>
+                  <th>Un.</th>
                   <th>Precio</th>
                   <th>Descuento Aplicado</th> <!-- Nueva columna para el descuento aplicado -->
                 </tr>
