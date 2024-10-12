@@ -105,10 +105,20 @@
     max-width: 200px; /* Ajusta el ancho máximo del botón */
 }
 
+.cliente-icon {
+  cursor: pointer;
+  color: #2F4F4F;
+  font-size: 1.2em;
+  margin: 0 5px;
+}
+.cliente-icon:hover {
+  color: #2F4F4F;
+}
+
 /* Media query para pantallas pequeñas */
 @media (max-width: 768px) {
     .cliente-container {
-        padding: 10px 5px; /* Reducir el padding en pantallas más pequeñas */
+        padding: 5px 5px; /* Reducir el padding en pantallas más pequeñas */
     }
 
     .cliente-header {
@@ -123,7 +133,7 @@
 
     .cliente-table th, .cliente-table td {
         padding: 6px; /* Reducir padding en la tabla */
-        font-size: 14px; /* Reducir el tamaño de la fuente en la tabla */
+        font-size: 10px; /* Reducir el tamaño de la fuente en la tabla */
     }
 
     .cliente-button {
