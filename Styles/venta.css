@@ -121,7 +121,7 @@
 
     .venta-table th, .venta-table td {
         padding: 6px; /* Reducir padding en la tabla */
-        font-size: 14px; /* Reducir el tamaño de la fuente en la tabla */
+        font-size: 10px; /* Reducir el tamaño de la fuente en la tabla */
     }
 
     .venta-button {
@@ -132,7 +132,7 @@
 
     .venta-input {
         padding: 8px; /* Reducir padding de los campos de entrada */
-        font-size: 16px;
+        font-size: 10px;
         margin-right: 5px;
         width: 100%; /* Hacer que los campos de entrada ocupen el ancho total */
         box-sizing: border-box; /* Asegurar que el padding esté incluido en el ancho */
