@@ -136,9 +136,8 @@
     }
 
     .stock-button {
-        padding: 8px 16px; /* Reducir el tamaño de los botones */
         font-size: 16px; /* Ajustar el tamaño de la fuente de los botones */
-        margin-right: 5px;
+        margin: 5px;
     }
 
     .stock-input {
