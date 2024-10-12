@@ -195,7 +195,7 @@ export default {
               <td><input v-model="producto.cantidadMinima" type="number" class="descuento-input" /></td>
               <td><input v-model="producto.porcentaje" type="number" class="descuento-input" @input="handlePorcentajeInput(producto)" /></td>
               <td><input v-model="producto.precioDescuento" type="number" class="descuento-input" :disabled="producto.porcentaje !== 0" @input="handlePrecioDescuentoInput(producto)" /></td>
-              <td><button class="descuento-button" @click="agregarDescuentoDesdeProducto(producto)">Agregar</button></td>
+              <td><button class="descuento-button agregar" @click="agregarDescuentoDesdeProducto(producto)"><i class="fas fa-plus"></i></button></td>
             </tr>
           </tbody>
         </table>
@@ -236,10 +236,10 @@ export default {
               <input v-else v-model="descuento.precioDescuento" type="number" class="descuento-input" />
             </td>
             <td data-label="Acciones">
-              <button v-if="!descuento.editando" class="descuento-button" @click="seleccionarDescuento(descuento)">Editar</button>
+              <button v-if="!descuento.editando" class="descuento-button editar" @click="seleccionarDescuento(descuento)"><i class="fas fa-edit"></i></button>
               <button v-else class="descuento-button" @click="actualizarDescuento(descuento)">Guardar</button>
               <button v-if="descuento.editando" class="descuento-button" @click="cancelarEdicion(descuento)">Cancelar</button>
-              <button class="descuento-button" @click="eliminarDescuento(descuento.id)">Eliminar</button>
+              <button class="descuento-button eliminar" @click="eliminarDescuento(descuento.descuentoCantidadId)"><i class="fas fa-trash"></i></button>
             </td>
           </tr>
         </tbody>
