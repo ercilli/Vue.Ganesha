@@ -202,7 +202,7 @@ export default {
               <button v-if="!descuento.editando" class="descuento-button editar" @click="seleccionarDescuento(descuento)"><i class="fas fa-edit"></i></button>
               <button v-else class="descuento-button" @click="actualizarDescuento(descuento)">Guardar</button>
               <button v-if="descuento.editando" class="descuento-button" @click="cancelarEdicion(descuento)">Cancelar</button>
-              <button class="descuento-button eliminar" @click="eliminarDescuento(descuento.descuentoCantidadId)"><i class="fas fa-trash"></i></button>
+              <button class="descuento-button eliminar" @click="eliminarDescuento(descuento.id)"><i class="fas fa-trash"></i></button>
             </td>
           </tr>
         </tbody>
