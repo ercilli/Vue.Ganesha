@@ -35,7 +35,7 @@
 
 .venta-table th, .venta-table td {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 1px;
     text-align: left;
 }
 
@@ -62,11 +62,9 @@
 
 /* Estilos para el input */
 .venta-input {
-    padding: 10px;
     font-size: 18px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    margin-right: 10px; /* Espacio entre el input y los botones */
     width: 100%; /* Ajusta el ancho del input */
     box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
 }
@@ -103,6 +101,18 @@
     max-width: 200px; /* Ajusta el ancho máximo del botón */
 }
 
+/* Estilos específicos para el botón eliminar en pantallas móviles */
+.venta-button.eliminar {
+    padding: 8px; /* Reducir el padding del botón */
+    font-size: 16px; /* Ajustar el tamaño de la fuente */
+    background-color: transparent; /* Hacer el fondo transparente */
+    color: #2F4F4F; /* Cambiar el color del icono */
+}
+
+.venta-button.eliminar i {
+    font-size: 16px; /* Ajustar el tamaño del icono */
+}
+
 /* Media query para pantallas pequeñas */
 @media (max-width: 768px) {
     .venta-container {
@@ -120,7 +130,7 @@
     }
 
     .venta-table th, .venta-table td {
-        padding: 6px; /* Reducir padding en la tabla */
+        padding: 2px; /* Reducir padding en la tabla */
         font-size: 10px; /* Reducir el tamaño de la fuente en la tabla */
     }
 
@@ -131,9 +141,7 @@
     }
 
     .venta-input {
-        padding: 8px; /* Reducir padding de los campos de entrada */
         font-size: 10px;
-        margin-right: 5px;
         width: 100%; /* Hacer que los campos de entrada ocupen el ancho total */
         box-sizing: border-box; /* Asegurar que el padding esté incluido en el ancho */
     }
@@ -156,18 +164,5 @@
     .venta-finalizar-button {
         width: 100%;
         max-width: none;
-    }
-
-    /* Estilos específicos para el botón eliminar en pantallas móviles */
-    .venta-button.eliminar {
-        padding: 8px; /* Reducir el padding del botón */
-        font-size: 16px; /* Ajustar el tamaño de la fuente */
-        margin-right: 5px;
-        background-color: transparent; /* Hacer el fondo transparente */
-        color: #2F4F4F; /* Cambiar el color del icono */
-    }
-
-    .venta-button.eliminar i {
-        font-size: 16px; /* Ajustar el tamaño del icono */
     }
 }
