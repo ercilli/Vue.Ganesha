@@ -32,7 +32,7 @@
   box-sizing: border-box;
   width: auto; /* Ajustar el ancho automáticamente */
   min-width: 50px; /* Ancho mínimo */
-  max-width: 100px; /* Ancho máximo */
+  max-width: 75px; /* Ancho máximo */
 }
 
 .descuento-button {
