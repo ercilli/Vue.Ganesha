@@ -73,10 +73,10 @@ export default {
       <table class="user-table" v-if="!loading">
         <thead>
           <tr>
-            <th>Nombre de Usuario</th>
+            <th>User</th>
             <th>Email</th>
             <th>Rol</th>
-            <th>Acciones</th>
+            <th>#</th>
           </tr>
         </thead>
         <tbody>
@@ -91,7 +91,7 @@ export default {
               </select>
             </td>
             <td>
-              <button @click="removeUser(user.id)" :disabled="loadingUserId === user.id" class="user-button">Eliminar</button>
+              <i class="fas fa-trash user-icon" @click="removeUser(user.id)" :disabled="loadingUserId === user.id"></i>
             </td>
           </tr>
         </tbody>
