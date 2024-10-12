@@ -30,6 +30,9 @@
   border: 1px solid #ddd;
   border-radius: 4px;
   box-sizing: border-box;
+  width: auto; /* Ajustar el ancho automáticamente */
+  min-width: 50px; /* Ancho mínimo */
+  max-width: 100px; /* Ancho máximo */
 }
 
 .descuento-button {
@@ -114,39 +117,6 @@
 
 /* Estilos para dispositivos móviles */
 @media (max-width: 768px) {
-  .descuento-table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
-  .descuento-table th, .descuento-table td {
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  .descuento-table th {
-    background-color: #f8f8f8;
-    position: sticky;
-    top: 0;
-  }
-  .descuento-table tr {
-    display: block;
-    margin-bottom: 10px;
-  }
-  .descuento-table td {
-    text-align: right;
-    padding-left: 50%;
-    position: relative;
-  }
-  .descuento-table td::before {
-    content: attr(data-label);
-    position: absolute;
-    left: 0;
-    width: 50%;
-    padding-left: 10px;
-    font-weight: bold;
-    text-align: left;
-  }
   .toggle-button {
     display: block;
     width: 100%;
@@ -162,25 +132,4 @@
   .toggle-button.active:after {
     content: '-';
   }
-}
-
-/* Ajustar el ancho de las celdas que contienen .descuento-input */
-.descuento-table td .descuento-input {
-  width: auto;
-  min-width: 50px;
-  max-width: 100px;
-  flex: 1;
-}
-
-/* Ajustar el ancho de las celdas que contienen .descuento-input en modo flex */
-.descuento-table td {
-  display: flex;
-  align-items: center;
-}
-
-.descuento-table td .descuento-input {
-  flex: 1;
-  min-width: 50px;
-  max-width: 100px;
-  margin-right: 10px;
 }
