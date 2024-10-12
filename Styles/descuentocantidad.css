@@ -53,6 +53,7 @@
   margin-bottom: 20px;
   overflow-x: auto;
   box-sizing: border-box;
+  table-layout: auto; /* Ajustar automáticamente el ancho de las columnas */
 }
 
 .descuento-table th,
@@ -66,10 +67,44 @@
   cursor: pointer;
   background-color: #f8f8f8;
   color: #000;
+  white-space: nowrap; /* Ocupa el mínimo espacio necesario */
 }
 
 .descuento-table th:hover {
   background-color: #e9ecef;
+}
+
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-icon {
+  position: absolute;
+  right: 10px;
+  pointer-events: none;
+}
+
+.coincidencias-table {
+  width: 80%; /* Ajustar el ancho máximo al 80% */
+  max-width: 80%; /* Asegurar que no supere el 80% */
+  margin: 0 auto; /* Centrar la tabla */
+  border-collapse: collapse;
+  margin-bottom: 10px;
+  table-layout: auto; /* Ajustar automáticamente el ancho de las columnas */
+}
+
+.coincidencias-table th, .coincidencias-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.coincidencias-table th {
+  background-color: #f2f2f2;
+  text-align: left;
+  white-space: nowrap; /* Ocupa el mínimo espacio necesario */
 }
 
 .error {
@@ -79,41 +114,73 @@
 
 /* Estilos para dispositivos móviles */
 @media (max-width: 768px) {
-  .descuento-form {
-    flex-direction: column;
+  .descuento-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
   }
-
-  .descuento-form-group {
-    flex: 1 1 100%;
+  .descuento-table th, .descuento-table td {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
   }
-
-  .descuento-table thead {
-    display: none;
+  .descuento-table th {
+    background-color: #f8f8f8;
+    position: sticky;
+    top: 0;
   }
-
   .descuento-table tr {
     display: block;
     margin-bottom: 10px;
   }
-
   .descuento-table td {
-    display: block;
     text-align: right;
     padding-left: 50%;
     position: relative;
   }
-
   .descuento-table td::before {
     content: attr(data-label);
     position: absolute;
-    left: 10px;
-    width: calc(50% - 20px);
-    text-align: left;
+    left: 0;
+    width: 50%;
+    padding-left: 10px;
     font-weight: bold;
+    text-align: left;
   }
-
-  .descuento-button {
+  .toggle-button {
+    display: block;
     width: 100%;
-    margin-top: 10px;
+    text-align: center;
+    background-color: #f1f1f1;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
   }
+  .toggle-button:after {
+    content: '+';
+  }
+  .toggle-button.active:after {
+    content: '-';
+  }
+}
+
+/* Ajustar el ancho de las celdas que contienen .descuento-input */
+.descuento-table td .descuento-input {
+  width: auto;
+  min-width: 50px;
+  max-width: 100px;
+  flex: 1;
+}
+
+/* Ajustar el ancho de las celdas que contienen .descuento-input en modo flex */
+.descuento-table td {
+  display: flex;
+  align-items: center;
+}
+
+.descuento-table td .descuento-input {
+  flex: 1;
+  min-width: 50px;
+  max-width: 100px;
+  margin-right: 10px;
 }
