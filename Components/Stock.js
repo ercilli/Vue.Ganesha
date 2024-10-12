@@ -215,10 +215,10 @@ export default {
                 <input v-else type="number" v-model="item.cantidad" class="stock-input" />
               </td>
               <td>
-                <button v-if="!item.editando" class="stock-button" @click="seleccionarStock(item)">Editar</button>
-                <button v-else class="stock-button" @click="actualizarStock(item)">Guardar</button>
-                <button v-if="item.editando" class="stock-button" @click="cancelarEdicion(item)">Cancelar</button>
-                <button class="stock-button" @click="eliminarStock(item.stockId)">Eliminar</button>
+                <i v-if="!item.editando" class="fas fa-edit stock-icon" @click="seleccionarStock(item)"></i>
+                <i v-else class="fas fa-save stock-icon" @click="actualizarStock(item)"></i>
+                <i v-if="item.editando" class="fas fa-times stock-icon" @click="cancelarEdicion(item)"></i>
+                <i class="fas fa-trash stock-icon" @click="eliminarStock(item.stockId)"></i>
               </td>
             </tr>
           </tbody>
