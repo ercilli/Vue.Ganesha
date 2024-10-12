@@ -132,4 +132,17 @@
   .toggle-button.active:after {
     content: '-';
   }
+
+  /* Estilos específicos para los botones eliminar, editar y agregar en pantallas móviles */
+  .descuento-button.eliminar, .descuento-button.editar, .descuento-button.agregar {
+    padding: 8px; /* Reducir el padding del botón */
+    font-size: 16px; /* Ajustar el tamaño de la fuente */
+    margin-right: 5px;
+    background-color: transparent; /* Hacer el fondo transparente */
+    color: #2F4F4F; /* Cambiar el color del icono */
+  }
+
+  .descuento-button.eliminar i, .descuento-button.editar i, .descuento-button.agregar i {
+    font-size: 16px; /* Ajustar el tamaño del icono */
+  }
 }
