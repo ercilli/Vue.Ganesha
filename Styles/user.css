@@ -65,11 +65,9 @@
 
 /* Estilos para el input */
 .user-input {
-    padding: 10px;
     font-size: 18px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    margin-right: 10px; /* Espacio entre el input y los botones */
     width: 100%; /* Ajusta el ancho del input */
     box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
 }
@@ -106,6 +104,16 @@
     max-width: 200px; /* Ajusta el ancho máximo del botón */
 }
 
+.user-icon {
+  cursor: pointer;
+  color: #2F4F4F;
+  font-size: 1.2em;
+  margin: 0 5px;
+}
+.user-icon:hover {
+  color: #2F4F4F;
+}
+
 /* Media query para pantallas pequeñas */
 @media (max-width: 768px) {
     .user-container {
@@ -123,21 +131,19 @@
     }
 
     .user-table th, .user-table td {
-        padding: 6px; /* Reducir padding en la tabla */
-        font-size: 14px; /* Reducir el tamaño de la fuente en la tabla */
+        padding: 5px; /* Reducir padding en la tabla */
+        font-size: 10px; /* Reducir el tamaño de la fuente en la tabla */
     }
 
     .user-button {
-        padding: 8px 16px; /* Reducir el tamaño de los botones */
         font-size: 16px; /* Ajustar el tamaño de la fuente de los botones */
         margin-right: 5px;
         white-space: nowrap; /* Evitar que el texto del botón se divida en varias líneas */
     }
 
     .user-input {
-        padding: 8px; /* Reducir padding de los campos de entrada */
-        font-size: 16px;
-        margin-right: 5px;
+        padding: 10px 8px; /* Reducir padding de los campos de entrada */
+        font-size: 10px;
         width: 100%; /* Hacer que los campos de entrada ocupen el ancho total */
         box-sizing: border-box; /* Asegurar que el padding esté incluido en el ancho */
     }
