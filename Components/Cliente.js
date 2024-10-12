@@ -119,10 +119,10 @@ export default {
               <input v-else v-model="cliente.email" class="cliente-input" />
             </td>
             <td data-label="Acciones">
-              <button v-if="!cliente.editando" class="cliente-button" @click="seleccionarCliente(cliente)">Editar</button>
-              <button v-else class="cliente-button" @click="actualizarCliente(cliente)">Guardar</button>
-              <button v-if="cliente.editando" class="cliente-button" @click="cancelarEdicion(cliente)">Cancelar</button>
-              <button class="cliente-button" @click="eliminarCliente(cliente.id)">Eliminar</button>
+              <i v-if="!cliente.editando" class="fas fa-edit cliente-icon" @click="seleccionarCliente(cliente)"></i>
+              <i v-else class="fas fa-save cliente-icon" @click="actualizarCliente(cliente)"></i>
+              <i v-if="cliente.editando" class="fas fa-times cliente-icon" @click="cancelarEdicion(cliente)"></i>
+              <i class="fas fa-trash cliente-icon" @click="eliminarCliente(cliente.id)"></i>
             </td>
           </tr>
         </tbody>
