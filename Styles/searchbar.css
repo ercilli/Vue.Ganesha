@@ -1,23 +1,27 @@
-
 .searchbar-container {
   position: relative;
   margin-bottom: 10px;
   display: flex;
   flex-direction: column; /* Asegura que los elementos hijos se apilen verticalmente */
   align-items: center; /* Centra los elementos horizontalmente */
-  z-index: 10; /* Asegura que el buscador esté por encima */
+  z-index: 1; /* Asegura que el buscador esté por encima */
   width: 100%; /* Asegura que el contenedor ocupe el 100% del ancho */
 }
 
+.searchbar-input-container {
+  position: relative; /* Añadir posición relativa al contenedor del input */
+  width: 100%;
+}
+
 .searchbar-input {
-    margin-bottom: 10px;
-  padding: 12px 20px 12px 20px; /* Añade padding para el icono de búsqueda */
+  padding: 12px 40px 12px 20px; /* Añade padding para el icono de búsqueda */
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 25px; /* Bordes redondeados */
   width: 100%;
   box-sizing: border-box;
   transition: border-color 0.3s; /* Transición suave para el borde */
+  height: 40px; /* Asegura una altura consistente */
 }
 
 .searchbar-input:focus {
