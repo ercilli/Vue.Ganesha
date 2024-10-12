@@ -106,12 +106,12 @@ export default {
         descuentoId = descuento.id;
         if (descuento.porcentaje !== 0) {
           porcentajeDescuento = descuento.porcentaje;
+          precioConDescuento = product.precio * (1 - porcentajeDescuento / 100);
           tipoDescuento = '%';
-          precioConDescuento = product.precio - (product.precio * (descuento.porcentaje / 100));
-        } else {
+        } else if (descuento.precioDescuento !== 0) {
           precioDescuento = descuento.precioDescuento;
+          precioConDescuento = product.precio;
           tipoDescuento = '$';
-          precioConDescuento = product.precio - descuento.precioDescuento;
         }
 
         // Limitar la cantidad a la cantidad mínima del descuento
