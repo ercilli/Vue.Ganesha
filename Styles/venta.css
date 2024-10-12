@@ -156,4 +156,17 @@
         width: 100%;
         max-width: none;
     }
+
+    /* Estilos específicos para el botón eliminar en pantallas móviles */
+    .venta-button.eliminar {
+        padding: 8px; /* Reducir el padding del botón */
+        font-size: 16px; /* Ajustar el tamaño de la fuente */
+        margin-right: 5px;
+        background-color: transparent; /* Hacer el fondo transparente */
+        color: #2F4F4F; /* Cambiar el color del icono */
+    }
+
+    .venta-button.eliminar i {
+        font-size: 16px; /* Ajustar el tamaño del icono */
+    }
 }
