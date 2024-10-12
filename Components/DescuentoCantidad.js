@@ -19,8 +19,15 @@ export default {
       error: null,
       sortColumn: null,
       sortOrder: 'asc',
-      itemsPerPage: 5
+      itemsPerPage: 5,
+      searchQuery: '', // Nuevo campo de búsqueda
+      productos: [], // Lista de productos
+      productosFiltrados: [] // Lista de productos filtrados
     };
+  },
+  created() {
+    this.fetchDescuentos();
+    this.fetchProductos(); // Cargar productos al crear el componente
   },
   methods: {
     fetchDescuentos() {
@@ -34,11 +41,55 @@ export default {
           this.error = 'Error al cargar los descuentos';
         });
     },
+    fetchProductos() {
+      fetchItems('Producto')
+        .then(data => {
+          this.productos = data.map(producto => ({
+            ...producto,
+            cantidadMinima: 0,
+            porcentaje: 0,
+            precioDescuento: 0 // Inicializar en 0
+          }));
+        })
+        .catch(error => {
+          console.error('Error al cargar los productos:', error);
+          this.error = 'Error al cargar los productos';
+        });
+    },
+    buscarProducto() {
+      const query = this.searchQuery.toLowerCase();
+      if (query === '') {
+        this.productosFiltrados = [];
+      } else {
+        this.productosFiltrados = this.productos.filter(producto => {
+          return producto.descripcion.toLowerCase().includes(query);
+        });
+      }
+    },
+    handlePorcentajeInput(producto) {
+      if (producto.porcentaje !== 0) {
+        producto.precioDescuento = 0;
+      }
+    },
+    handlePrecioDescuentoInput(producto) {
+      if (producto.precioDescuento !== 0) {
+        producto.porcentaje = 0;
+      }
+    },
+    agregarDescuentoDesdeProducto(producto) {
+      this.nuevoDescuento = {
+        productoId: producto.id,
+        cantidadMinima: producto.cantidadMinima,
+        porcentaje: producto.porcentaje,
+        precioDescuento: producto.precioDescuento
+      };
+      this.agregarDescuento();
+    },
     agregarDescuento() {
       createItem('DescuentoCantidad', this.nuevoDescuento)
         .then(() => {
           this.fetchDescuentos();
-          this.nuevoDescuento = { productoId: '', cantidadMinima: 0, porcentaje: 0, precioDescuento: null };
+          this.nuevoDescuento = { productoId: '', cantidadMinima: 0, porcentaje: 0, precioDescuento: 0 };
         })
         .catch(error => {
           console.error('Error al agregar el descuento:', error);
@@ -102,33 +153,50 @@ export default {
     },
     updatePaginatedItems(items) {
       this.paginatedDescuentos = items;
+    },
+    obtenerDescripcionProducto(productoId) {
+      const producto = this.productos.find(p => p.id === productoId);
+      return producto ? producto.descripcion : '';
+    },
+    formatCurrency(value) {
+      return new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(value);
     }
   },
   mounted() {
     this.fetchDescuentos();
+    this.fetchProductos(); // Asegurarse de que los productos se carguen al montar el componente
   },
   template: `
     <div class="descuento-container">
       <div v-if="error" class="error">{{ error }}</div>
-      <form class="descuento-form" @submit.prevent="agregarDescuento">
-        <div class="descuento-form-group">
-          <label for="productoId">Producto ID:</label>
-          <input id="productoId" class="descuento-input" v-model="nuevoDescuento.productoId" placeholder="Producto ID" required />
-        </div>
-        <div class="descuento-form-group">
-          <label for="cantidadMinima">Cantidad Mínima:</label>
-          <input id="cantidadMinima" class="descuento-input" v-model="nuevoDescuento.cantidadMinima" type="number" placeholder="Cantidad Mínima" required />
-        </div>
-        <div class="descuento-form-group">
-          <label for="porcentaje">Porcentaje:</label>
-          <input id="porcentaje" class="descuento-input" v-model="nuevoDescuento.porcentaje" type="number" placeholder="Porcentaje" required />
-        </div>
-        <div class="descuento-form-group">
-          <label for="precioDescuento">Precio Descuento:</label>
-          <input id="precioDescuento" class="descuento-input" v-model="nuevoDescuento.precioDescuento" type="number" placeholder="Precio Descuento" />
-        </div>
-        <button type="submit" class="descuento-button">Agregar Descuento</button>
-      </form>
+      <div class="search-container">
+        <input id="search" class="descuento-input" v-model="searchQuery" @input="buscarProducto" placeholder="Buscar Producto" />
+        <span class="search-icon">🔍</span>
+      </div>
+      <div v-if="productosFiltrados.length > 0">
+        <table class="coincidencias-table">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Descripción</th>
+              <th>Unidad</th>
+              <th>%</th>
+              <th>$</th>
+              <th>#</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="producto in productosFiltrados" :key="producto.id">
+              <td>{{ producto.id }}</td>
+              <td>{{ producto.descripcion }}</td>
+              <td><input v-model="producto.cantidadMinima" type="number" class="descuento-input" /></td>
+              <td><input v-model="producto.porcentaje" type="number" class="descuento-input" @input="handlePorcentajeInput(producto)" /></td>
+              <td><input v-model="producto.precioDescuento" type="number" class="descuento-input" :disabled="producto.porcentaje !== 0" @input="handlePrecioDescuentoInput(producto)" /></td>
+              <td><button class="descuento-button" @click="agregarDescuentoDesdeProducto(producto)">Agregar</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <table class="descuento-table">
         <thead>
           <tr>
