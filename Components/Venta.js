@@ -1,6 +1,10 @@
 import { fetchItems, createItem } from '../Services/apiService.js';
+import SearchBar from './SearchBar.js';
 
 export default {
+  components: {
+    SearchBar
+  },
   data() {
     return {
       facturaHeader: {
@@ -16,7 +20,8 @@ export default {
       showModal: false,
       modalTitle: '',
       modalMessage: '',
-      modalType: ''
+      modalType: '',
+      productosFiltrados: [] // Lista de productos filtrados
     }
   },
   mounted() {
@@ -188,6 +193,9 @@ export default {
     },
     formatCurrency(value) {
       return value.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 2 }).replace('COP', '').trim();
+    },
+    handleFilteredProductos(filteredProductos) {
+      this.productosFiltrados = filteredProductos;
     }
   },
   template: `
@@ -202,6 +210,12 @@ export default {
         </div>
         <button type="button" class="venta-button" @click="agregarDetalleVacio">Agregar Producto</button>
       </form>
+      <search-bar 
+        :items="availableProducts" 
+        searchKey="descripcion" 
+        placeholder="Buscar producto..." 
+        @filtered="handleFilteredProductos"
+      />
       <table class="venta-table">
         <thead>
           <tr>
