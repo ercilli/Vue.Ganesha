@@ -1,10 +1,12 @@
 import { fetchItems, createItem, updateItem, deleteItem } from '../Services/apiService.js';
 import Pagination from './Pagination.js';
+import SearchBar from './SearchBar.js';
 
 export default {
   name: 'DescuentoCantidad',
   components: {
-    Pagination
+    Pagination,
+    SearchBar
   },
   data() {
     return {
@@ -20,7 +22,6 @@ export default {
       sortColumn: null,
       sortOrder: 'asc',
       itemsPerPage: 5,
-      searchQuery: '', // Nuevo campo de búsqueda
       productos: [], // Lista de productos
       productosFiltrados: [] // Lista de productos filtrados
     };
@@ -55,26 +56,6 @@ export default {
           console.error('Error al cargar los productos:', error);
           this.error = 'Error al cargar los productos';
         });
-    },
-    buscarProducto() {
-      const query = this.searchQuery.toLowerCase();
-      if (query === '') {
-        this.productosFiltrados = [];
-      } else {
-        this.productosFiltrados = this.productos.filter(producto => {
-          return producto.descripcion.toLowerCase().includes(query);
-        });
-      }
-    },
-    handlePorcentajeInput(producto) {
-      if (producto.porcentaje !== 0) {
-        producto.precioDescuento = 0;
-      }
-    },
-    handlePrecioDescuentoInput(producto) {
-      if (producto.precioDescuento !== 0) {
-        producto.porcentaje = 0;
-      }
     },
     agregarDescuentoDesdeProducto(producto) {
       this.nuevoDescuento = {
@@ -163,6 +144,9 @@ export default {
     },
     formatPercentage(value) {
       return `${value}%`;
+    },
+    handleFilteredProductos(filteredProductos) {
+      this.productosFiltrados = filteredProductos;
     }
   },
   mounted() {
@@ -172,34 +156,13 @@ export default {
   template: `
     <div class="descuento-container">
       <div v-if="error" class="error">{{ error }}</div>
-      <div class="search-container">
-        <input id="search" class="descuento-input" v-model="searchQuery" @input="buscarProducto" placeholder="Buscar" />
-        <span class="search-icon">🔍</span>
-      </div>
-      <div v-if="productosFiltrados.length > 0">
-        <table class="coincidencias-table">
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Descripción</th>
-              <th>Unidad</th>
-              <th>%</th>
-              <th>$</th>
-              <th>#</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="producto in productosFiltrados" :key="producto.id">
-              <td>{{ producto.id }}</td>
-              <td>{{ producto.descripcion }}</td>
-              <td><input v-model="producto.cantidadMinima" type="number" class="descuento-input" /></td>
-              <td><input v-model="producto.porcentaje" type="number" class="descuento-input" @input="handlePorcentajeInput(producto)" /></td>
-              <td><input v-model="producto.precioDescuento" type="number" class="descuento-input" :disabled="producto.porcentaje !== 0" @input="handlePrecioDescuentoInput(producto)" /></td>
-              <td><button class="descuento-button agregar" @click="agregarDescuentoDesdeProducto(producto)"><i class="fas fa-plus"></i></button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <search-bar 
+        :items="productos" 
+        searchKey="descripcion" 
+        placeholder="Buscar producto..." 
+        @filtered="handleFilteredProductos"
+        @agregar-descuento="agregarDescuentoDesdeProducto"
+      />
       <table class="descuento-table">
         <thead>
           <tr>
@@ -209,7 +172,7 @@ export default {
             <th @click="sortDescuentos('cantidadMinima')">Unidad</th>
             <th @click="sortDescuentos('porcentaje')">%</th>
             <th @click="sortDescuentos('precioDescuento')">$</th>
-            <th>Acciones</th>
+            <th>#</th>
           </tr>
         </thead>
         <tbody>
