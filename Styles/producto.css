@@ -99,6 +99,16 @@
     max-width: 200px; /* Ajusta el ancho máximo del botón */
 }
 
+.producto-icon {
+  cursor: pointer;
+  color: #2F4F4F;
+  font-size: 1.2em;
+  margin: 0 5px;
+}
+.producto-icon:hover {
+  color: #2F4F4F;
+}
+
 /* Media query para pantallas pequeñas */
 @media (max-width: 768px) {
     .producto-container {
@@ -112,7 +122,7 @@
 
     .producto-table th, .producto-table td {
         padding: 6px; /* Reducir padding en la tabla */
-        font-size: 14px; /* Reducir el tamaño de la fuente en la tabla */
+        font-size: 12px; /* Reducir el tamaño de la fuente en la tabla */
     }
 
     .producto-button {
