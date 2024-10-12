@@ -137,11 +137,13 @@
     .venta-button {
         padding: 8px 16px; /* Reducir el tamaño de los botones */
         font-size: 16px; /* Ajustar el tamaño de la fuente de los botones */
+        margin-top: 10px;
         margin-right: 5px;
     }
 
     .venta-input {
-        font-size: 10px;
+        font-size: 11px;
+        height: 30px; /* Ajustar la altura de los campos de entrada */
         width: 100%; /* Hacer que los campos de entrada ocupen el ancho total */
         box-sizing: border-box; /* Asegurar que el padding esté incluido en el ancho */
     }
