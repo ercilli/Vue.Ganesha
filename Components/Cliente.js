@@ -69,28 +69,28 @@ export default {
     this.fetchClientes();
   },
   template: `
-    <div class="venta-container">
-      <div v-if="error" class="error">{{ error }}</div>
-      <form class="venta-form" @submit.prevent="agregarCliente">
-        <div class="venta-form-group">
+    <div class="cliente-container">
+      <div v-if="error" class="cliente-error">{{ error }}</div>
+      <form class="cliente-form" @submit.prevent="agregarCliente">
+        <div class="cliente-form-group">
           <label for="nombre">Nombre:</label>
-          <input id="nombre" class="venta-input" v-model="nuevoCliente.nombre" placeholder="Nombre" required />
+          <input id="nombre" class="cliente-input" v-model="nuevoCliente.nombre" placeholder="Nombre" required />
         </div>
-        <div class="venta-form-group">
+        <div class="cliente-form-group">
           <label for="direccion">Dirección:</label>
-          <input id="direccion" class="venta-input" v-model="nuevoCliente.direccion" placeholder="Dirección" required />
+          <input id="direccion" class="cliente-input" v-model="nuevoCliente.direccion" placeholder="Dirección" required />
         </div>
-        <div class="venta-form-group">
+        <div class="cliente-form-group">
           <label for="telefono">Teléfono:</label>
-          <input id="telefono" class="venta-input" v-model="nuevoCliente.telefono" placeholder="Teléfono" required />
+          <input id="telefono" class="cliente-input" v-model="nuevoCliente.telefono" placeholder="Teléfono" required />
         </div>
-        <div class="venta-form-group">
+        <div class="cliente-form-group">
           <label for="email">Email:</label>
-          <input id="email" class="venta-input" v-model="nuevoCliente.email" placeholder="Email" required />
+          <input id="email" class="cliente-input" v-model="nuevoCliente.email" placeholder="Email" required />
         </div>
-        <button type="submit" class="venta-button">Agregar Cliente</button>
+        <button type="submit" class="cliente-button">Agregar Cliente</button>
       </form>
-      <table class="venta-table">
+      <table class="cliente-table">
         <thead>
           <tr>
             <th>Nombre</th>
@@ -104,25 +104,25 @@ export default {
           <tr v-for="cliente in clientes" :key="cliente.clienteid">
             <td data-label="Nombre">
               <span v-if="!cliente.editando">{{ cliente.nombre }}</span>
-              <input v-else v-model="cliente.nombre" class="venta-input" />
+              <input v-else v-model="cliente.nombre" class="cliente-input" />
             </td>
             <td data-label="Dirección">
               <span v-if="!cliente.editando">{{ cliente.direccion }}</span>
-              <input v-else v-model="cliente.direccion" class="venta-input" />
+              <input v-else v-model="cliente.direccion" class="cliente-input" />
             </td>
             <td data-label="Teléfono">
               <span v-if="!cliente.editando">{{ cliente.telefono }}</span>
-              <input v-else v-model="cliente.telefono" class="venta-input" />
+              <input v-else v-model="cliente.telefono" class="cliente-input" />
             </td>
             <td data-label="Email">
               <span v-if="!cliente.editando">{{ cliente.email }}</span>
-              <input v-else v-model="cliente.email" class="venta-input" />
+              <input v-else v-model="cliente.email" class="cliente-input" />
             </td>
             <td data-label="Acciones">
-              <button v-if="!cliente.editando" class="venta-button" @click="seleccionarCliente(cliente)">Editar</button>
-              <button v-else class="venta-button" @click="actualizarCliente(cliente)">Guardar</button>
-              <button v-if="cliente.editando" class="venta-button" @click="cancelarEdicion(cliente)">Cancelar</button>
-              <button class="venta-button" @click="eliminarCliente(cliente.id)">Eliminar</button>
+              <button v-if="!cliente.editando" class="cliente-button" @click="seleccionarCliente(cliente)">Editar</button>
+              <button v-else class="cliente-button" @click="actualizarCliente(cliente)">Guardar</button>
+              <button v-if="cliente.editando" class="cliente-button" @click="cancelarEdicion(cliente)">Cancelar</button>
+              <button class="cliente-button" @click="eliminarCliente(cliente.id)">Eliminar</button>
             </td>
           </tr>
         </tbody>
