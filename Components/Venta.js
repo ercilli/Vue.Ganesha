@@ -31,8 +31,15 @@ export default {
     });
   },
   methods: {
-    formatCurrency(value) {
-      return value.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 2 }).replace('COP', '').trim();
+    fetchDescuentos() {
+      fetchItems('DescuentoCantidad')
+        .then(data => {
+          this.availableDescuentos = data;
+        })
+        .catch(error => {
+          console.error('Error al cargar los descuentos:', error);
+          this.error = 'Error al cargar los descuentos';
+        });
     },
     buscarProductoPorCodigoODescripcion(index, tipo) {
       const detalle = this.facturaDetails[index];
@@ -43,8 +50,24 @@ export default {
 
       if (productoEncontrado) {
         const descuento = this.availableDescuentos.find(d => d.productoId === productoEncontrado.id && detalle.cantidad >= d.cantidadMinima);
-        const porcentajeDescuento = descuento ? descuento.porcentaje : 0;
-        const precioConDescuento = productoEncontrado.precio * (1 - porcentajeDescuento / 100);
+        let precioConDescuento = productoEncontrado.precio;
+        let porcentajeDescuento = 0;
+        let precioDescuento = 0;
+        let descuentoId = null;
+        let tipoDescuento = '';
+
+        if (descuento) {
+          descuentoId = descuento.id;
+          if (descuento.porcentaje !== 0) {
+            porcentajeDescuento = descuento.porcentaje;
+            precioConDescuento = productoEncontrado.precio * (1 - porcentajeDescuento / 100);
+            tipoDescuento = '%';
+          } else if (descuento.precioDescuento !== 0) {
+            precioDescuento = descuento.precioDescuento;
+            precioConDescuento = productoEncontrado.precio - precioDescuento;
+            tipoDescuento = '$';
+          }
+        }
 
         this.facturaDetails[index] = {
           ...detalle,
@@ -54,27 +77,43 @@ export default {
           precio: precioConDescuento,
           cantidad: detalle.cantidad || 1,
           subtotal: precioConDescuento * (detalle.cantidad || 1),
-          descuento: porcentajeDescuento // Nuevo campo para almacenar el porcentaje de descuento
+          descuento: porcentajeDescuento || precioDescuento, // Nuevo campo para almacenar el descuento aplicado
+          descuentoId: descuentoId, // Nuevo campo para almacenar el ID del descuento aplicado
+          tipoDescuento: tipoDescuento // Nuevo campo para almacenar el tipo de descuento
         };
       }
-    },
-    agregarDetalleVacio() {
-      this.facturaDetails.push({
-        codigo: '',
-        descripcion: '',
-        cantidad: 0,
-        precio: 0.00,
-        subtotal: 0.00
-      });
     },
     updateProductTotal(index) {
       const product = this.facturaDetails[index];
       const descuento = this.availableDescuentos.find(d => d.productoId === product.productoid && product.cantidad >= d.cantidadMinima);
-      const porcentajeDescuento = descuento ? descuento.porcentaje : 0;
-      const precioConDescuento = product.precio * (1 - porcentajeDescuento / 100);
+      let precioConDescuento = product.precio;
+      let porcentajeDescuento = 0;
+      let precioDescuento = 0;
+      let descuentoId = null;
+      let tipoDescuento = '';
 
-      product.subtotal = product.cantidad * precioConDescuento;
-      product.descuento = porcentajeDescuento; // Actualizar el porcentaje de descuento
+      if (descuento) {
+        descuentoId = descuento.id;
+        if (descuento.porcentaje !== 0) {
+          porcentajeDescuento = descuento.porcentaje;
+          precioConDescuento = product.precio * (1 - porcentajeDescuento / 100);
+          tipoDescuento = '%';
+        } else if (descuento.precioDescuento !== 0) {
+          precioDescuento = descuento.precioDescuento;
+          precioConDescuento = product.precio;
+          tipoDescuento = '$';
+        }
+
+        // Limitar la cantidad a la cantidad mínima del descuento
+        if (product.cantidad > descuento.cantidadMinima) {
+          product.cantidad = descuento.cantidadMinima;
+        }
+      }
+
+      product.subtotal = product.cantidad * precioConDescuento - (precioDescuento || 0);
+      product.descuento = porcentajeDescuento || precioDescuento; // Actualizar el descuento aplicado
+      product.descuentoId = descuentoId; // Actualizar el ID del descuento aplicado
+      product.tipoDescuento = tipoDescuento; // Actualizar el tipo de descuento
     },
     calcularTotalFactura() {
       return this.facturaDetails.reduce((subtotal, item) => subtotal + item.subtotal, 0);
@@ -97,19 +136,34 @@ export default {
 
       this.isSubmitting = true;
 
+      let totalDescuento = 0;
+
       const venta = {
         clienteID: this.facturaHeader.clienteid,
-        productos: this.facturaDetails.map(detalle => ({
-          productoID: detalle.productoid,
-          cantidad: detalle.cantidad,
-          subtotal: detalle.subtotal,
-          precio: detalle.precio,
-          descuento: detalle.descuento
-        })),
+        productos: this.facturaDetails.map(detalle => {
+          const producto = {
+            productoID: detalle.productoid,
+            cantidad: detalle.cantidad,
+            subtotal: detalle.subtotal,
+            descuento: detalle.descuento,
+            tipoDescuento: detalle.descuentoId !== null ? 'cantidad' : 'no_aplica'
+          };
+
+          if (detalle.descuentoId !== null) {
+            producto.descuentoId = parseInt(detalle.descuentoId, 10);
+            const descuento = this.availableDescuentos.find(d => d.id === producto.descuentoId);
+            if (descuento && descuento.precioDescuento !== 0) {
+              totalDescuento += descuento.precioDescuento;
+            }
+          }
+
+          return producto;
+        }),
         total: this.calcularTotalFactura(),
-        fecha: this.facturaHeader.fecha,
-        tiposDescuento: ['cantidad'] // Lista de tipos de descuentos a aplicar
+        fecha: this.facturaHeader.fecha
       };
+
+      console.log('Venta enviada al backend:', venta);
 
       createItem('Venta', venta)
         .then(response => {
@@ -128,8 +182,24 @@ export default {
           this.isSubmitting = false;
         });
     },
+    agregarDetalleVacio() {
+      this.facturaDetails.push({
+        codigo: '',
+        descripcion: '',
+        cantidad: 1,
+        precio: 0,
+        subtotal: 0,
+        descuento: 0,
+        descuentoId: null, // Inicializar el ID del descuento aplicado
+        tipoDescuento: null, // Inicializar el tipo de descuento
+        productoid: null
+      });
+    },
+    formatCurrency(value) {
+      return value.toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 2 }).replace('COP', '').trim();
+    }
   },
-    template: `
+  template: `
     <div class="venta-container">
       <h1 class="venta-header">Factura</h1>
       <form class="venta-form">
@@ -148,7 +218,7 @@ export default {
             <th>Descripción</th>
             <th>Cantidad</th>
             <th>Precio</th>
-            <th>Descuento (%)</th>
+            <th>Descuento</th>
             <th>Subtotal</th>
             <th>Acciones</th>
           </tr>
@@ -157,10 +227,10 @@ export default {
           <tr v-for="(item, index) in facturaDetails" :key="index">
             <td data-label="Código"><input class="venta-input" v-model="item.codigo" placeholder="Código" @blur="buscarProductoPorCodigoODescripcion(index, 'codigo')"></td>
             <td data-label="Descripción"><input class="venta-input" v-model="item.descripcion" placeholder="Descripción" @blur="buscarProductoPorCodigoODescripcion(index, 'descripcion')"></td>
-            <td data-label="Cantidad"><input class="venta-input" type="number" v-model.number="item.cantidad" @change="updateProductTotal(index)"></td>
-            <td data-label="Precio"><input class="venta-input" type="number" v-model.number="item.precio" @change="updateProductTotal(index)" readonly></td>
-            <td data-label="Descuento">{{ item.descuento || 0 }}</td>
-            <td data-label="Subtotal">{{ item.subtotal.toFixed(2) }}</td>
+            <td data-label="Cantidad"><input class="venta-input" type="number" v-model.number="item.cantidad" @change="updateProductTotal(index)" :disabled="item.descuentoId !== null"></td>
+            <td data-label="Precio">{{ formatCurrency(item.precio) }}</td>
+            <td data-label="Descuento">{{ item.descuento ? (item.descuento + item.tipoDescuento) : '0%' }}</td>
+            <td data-label="Subtotal">{{ formatCurrency(item.subtotal) }}</td>
             <td data-label="Acciones"><button class="venta-button" @click="eliminarDetalle(index)">Eliminar</button></td>
           </tr>
         </tbody>
