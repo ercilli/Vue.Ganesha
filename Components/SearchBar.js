@@ -58,26 +58,7 @@ export default {
         <span class="searchbar-icon">🔍</span>
       </div>
       <div v-if="filteredItems.length > 0">
-        <table class="searchbar-coincidencias-table">
-          <thead>
-            <tr>
-              <th>Descripción</th>
-              <th>Unidad</th>
-              <th>%</th>
-              <th>$</th>
-              <th>#</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="producto in filteredItems" :key="producto.id">
-              <td>{{ producto.descripcion }}</td>
-              <td><input v-model="producto.cantidadMinima" type="number" class="searchbar-descuento-input" /></td>
-              <td><input v-model="producto.porcentaje" type="number" class="searchbar-descuento-input" @input="handlePorcentajeInput(producto)" /></td>
-              <td><input v-model="producto.precioDescuento" type="number" class="searchbar-descuento-input" :disabled="producto.porcentaje !== 0" @input="handlePrecioDescuentoInput(producto)" /></td>
-              <td><button class="searchbar-descuento-button agregar" @click="agregarDescuentoDesdeProducto(producto)"><i class="fas fa-plus"></i></button></td>
-            </tr>
-          </tbody>
-        </table>
+        <slot name="results" :items="filteredItems"></slot>
       </div>
     </div>
   `
