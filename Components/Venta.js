@@ -151,12 +151,15 @@ export default {
             cantidad: detalle.cantidad,
             subtotal: detalle.subtotal,
             descuento: detalle.descuento,
-            descuentoId: detalle.descuentoId,
             tipoDescuento: detalle.descuentoId !== null ? 'cantidad' : 'no_aplica'
           };
 
           if (detalle.descuentoId !== null) {
-            totalDescuento += detalle.descuento;
+            producto.descuentoId = parseInt(detalle.descuentoId, 10);
+            const descuento = this.availableDescuentos.find(d => d.id === producto.descuentoId);
+            if (descuento && descuento.precioDescuento !== 0) {
+              totalDescuento += descuento.precioDescuento;
+            }
           }
 
           return producto;
@@ -164,7 +167,6 @@ export default {
         total: this.calcularTotalFactura(),
         fecha: this.facturaHeader.fecha
       };
-
       console.log('Venta enviada al backend:', venta);
 
       createItem('Venta', venta)
