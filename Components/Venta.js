@@ -151,6 +151,7 @@ export default {
             cantidad: detalle.cantidad,
             subtotal: detalle.subtotal,
             descuento: detalle.descuento,
+            descuentoId: detalle.descuentoId,
             tipoDescuento: detalle.descuentoId !== null ? 'cantidad' : 'no_aplica'
           };
 
