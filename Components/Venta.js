@@ -1,12 +1,18 @@
 import { fetchItems, createItem } from '../Services/apiService.js';
 import SearchBar from './SearchBar.js';
+import MyModal from './Modal.js';
 
 export default {
   components: {
-    SearchBar
+    SearchBar,
+    MyModal
   },
   data() {
     return {
+      showModal: false,
+      modalTitle: '',
+      modalMessage: '',
+      modalType: '',
       facturaHeader: {
         clienteid: null,
         nombre: '',
@@ -32,6 +38,9 @@ export default {
     });
   },
   methods: {
+    closeModal() {
+      this.showModal = false;
+    },
     fetchDescuentos() {
       fetchItems('DescuentoCantidad')
         .then(data => {
@@ -163,15 +172,29 @@ export default {
         total: this.calcularTotalFactura(),
         fecha: this.facturaHeader.fecha
       };
+
       console.log('Venta enviada al backend:', venta);
 
       createItem('Venta', venta)
         .then(response => {
-          console.log('Venta creada con éxito:', response);
-          this.finalizarFactura();
+          if (response) {
+            this.modalTitle = 'Éxito';
+            this.modalMessage = 'Venta creada con éxito.';
+            this.modalType = 'success'; // Asegúrate de que este valor sea válido
+            this.showModal = true;
+            this.finalizarFactura();
+          } else {
+            this.modalTitle = 'Error';
+            this.modalMessage = 'Error al crear la venta.';
+            this.modalType = 'error'; // Asegúrate de que este valor sea válido
+            this.showModal = true;
+          }
         })
         .catch(error => {
-          console.error('Error al crear la venta:', error);
+          this.modalTitle = 'Error';
+          this.modalMessage = 'Error al crear la venta: ' + error.message;
+          this.modalType = 'error'; // Asegúrate de que este valor sea válido
+          this.showModal = true;
         })
         .finally(() => {
           this.isSubmitting = false;
@@ -239,6 +262,13 @@ export default {
         </div>
         <button class="venta-button venta-finalizar-button" @click="generarVenta" :disabled="isSubmitting">Finalizar Factura</button>
       </div>
+      <MyModal 
+        :show="showModal" 
+        :title="modalTitle" 
+        :message="modalMessage" 
+        :type="modalType" 
+        @close="closeModal">
+      </MyModal>
     </div>
   `
 }
