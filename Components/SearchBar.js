@@ -47,20 +47,22 @@ export default {
   },
   template: `
     <div class="searchbar-container">
-      <input 
-        type="text" 
-        class="searchbar-input" 
-        v-model="query" 
-        @input="onInput" 
-        :placeholder="placeholder" 
-      />
-      <span class="searchbar-icon">🔍</span>
+      <div class="searchbar-input-container">
+        <input 
+          type="text" 
+          class="searchbar-input" 
+          v-model="query" 
+          @input="onInput" 
+          :placeholder="placeholder" 
+        />
+        <span class="searchbar-icon">🔍</span>
+      </div>
       <div v-if="filteredItems.length > 0">
         <table class="searchbar-coincidencias-table">
           <thead>
             <tr>
               <th>Descripción</th>
-              <th>Un.</th>
+              <th>Unidad</th>
               <th>%</th>
               <th>$</th>
               <th>#</th>
