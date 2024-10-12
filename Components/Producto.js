@@ -127,7 +127,7 @@ export default {
       <table class="producto-table">
         <thead>
           <tr>
-            <th @click="sortProducts('codigo')">Código</th>
+            <th @click="sortProducts('codigo')">#</th>
             <th @click="sortProducts('descripcion')">Descripción</th>
             <th @click="sortProducts('categoria')">Categoría</th>
             <th @click="sortProducts('precio')">Precio</th>
@@ -153,10 +153,10 @@ export default {
               <input v-else v-model="producto.precio" type="number" class="producto-input" />
             </td>
             <td data-label="Acciones">
-              <button v-if="!producto.editando" class="producto-button" @click="seleccionarProducto(producto)">Editar</button>
-              <button v-else class="producto-button" @click="actualizarProducto(producto)">Guardar</button>
-              <button v-if="producto.editando" class="producto-button" @click="cancelarEdicion(producto)">Cancelar</button>
-              <button class="producto-button" @click="eliminarProducto(producto.id)">Eliminar</button>
+              <i v-if="!producto.editando" class="fas fa-edit producto-icon" @click="seleccionarProducto(producto)"></i>
+              <i v-else class="fas fa-save producto-icon" @click="actualizarProducto(producto)"></i>
+              <i v-if="producto.editando" class="fas fa-times producto-icon" @click="cancelarEdicion(producto)"></i>
+              <i class="fas fa-trash producto-icon" @click="eliminarProducto(producto.id)"></i>
             </td>
           </tr>
         </tbody>
