@@ -1,0 +1,90 @@
+
+.searchbar-container {
+  position: relative;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column; /* Asegura que los elementos hijos se apilen verticalmente */
+  align-items: center; /* Centra los elementos horizontalmente */
+  z-index: 10; /* Asegura que el buscador esté por encima */
+  width: 100%; /* Asegura que el contenedor ocupe el 100% del ancho */
+}
+
+.searchbar-input {
+    margin-bottom: 10px;
+  padding: 12px 20px 12px 20px; /* Añade padding para el icono de búsqueda */
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 25px; /* Bordes redondeados */
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.3s; /* Transición suave para el borde */
+}
+
+.searchbar-input:focus {
+  border-color: #4CAF50; /* Cambia el color del borde al enfocar */
+  outline: none; /* Elimina el borde de enfoque predeterminado */
+}
+
+.searchbar-icon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 18px;
+  color: #aaa;
+}
+
+.searchbar-coincidencias-table {
+  width: 100%;
+  margin: 0px;
+  font-size: 10px;
+  border-collapse: collapse;
+  z-index: 1; /* Asegura que la tabla esté por debajo del buscador */
+}
+
+.searchbar-coincidencias-table th, .searchbar-coincidencias-table td {
+  border: 1px solid #ddd;
+  padding: 3px;
+  text-align: left;
+}
+
+.searchbar-coincidencias-table th {
+  background-color: #f9f9f9;
+  font-weight: bold;
+}
+
+.searchbar-coincidencias-table tr:nth-child(even) {
+  background-color: #f2f2f2; /* Color de fondo alternativo para las filas */
+}
+
+.searchbar-descuento-input {
+  width: 100%;
+  padding: 8px;
+  font-size: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.searchbar-descuento-button {
+  background-color: #2F4F4F;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s; /* Transición suave para el color de fondo */
+}
+
+.searchbar-descuento-button:hover {
+  background-color: #2F4F4F; /* Color de fondo al pasar el ratón */
+}
+
+.searchbar-descuento-button.agregar {
+  background-color: #2F4F4F;
+}
+
+.searchbar-descuento-button i {
+  pointer-events: none;
+}
