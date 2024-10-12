@@ -5,7 +5,7 @@
 .descuento-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 10px;
   background-color: #fff;
   color: #333333;
   box-sizing: border-box;
@@ -75,39 +75,6 @@
 
 .descuento-table th:hover {
   background-color: #e9ecef;
-}
-
-.search-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.search-icon {
-  position: absolute;
-  right: 10px;
-  pointer-events: none;
-}
-
-.coincidencias-table {
-  width: 80%; /* Ajustar el ancho máximo al 80% */
-  max-width: 80%; /* Asegurar que no supere el 80% */
-  margin: 0 auto; /* Centrar la tabla */
-  border-collapse: collapse;
-  margin-bottom: 10px;
-  table-layout: auto; /* Ajustar automáticamente el ancho de las columnas */
-}
-
-.coincidencias-table th, .coincidencias-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-.coincidencias-table th {
-  background-color: #f2f2f2;
-  text-align: left;
-  white-space: nowrap; /* Ocupa el mínimo espacio necesario */
 }
 
 .error {
