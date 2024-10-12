@@ -210,22 +210,16 @@ export default {
         </div>
         <button type="button" class="venta-button" @click="agregarDetalleVacio">Agregar Producto</button>
       </form>
-      <search-bar 
-        :items="availableProducts" 
-        searchKey="descripcion" 
-        placeholder="Buscar producto..." 
-        @filtered="handleFilteredProductos"
-      />
       <table class="venta-table">
         <thead>
           <tr>
-            <th>Código</th>
+            <th>#</th>
             <th>Descripción</th>
-            <th>Cantidad</th>
+            <th>Un.</th>
             <th>Precio</th>
-            <th>Descuento</th>
+            <th>Promo</th>
             <th>Subtotal</th>
-            <th>Acciones</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
