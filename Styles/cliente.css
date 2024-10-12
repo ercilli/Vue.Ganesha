@@ -1,5 +1,6 @@
 /* Importa los estilos globales */
 @import url('style.css');
+@import url('header.css');
 
 /* Estilos específicos para Cliente.js */
 .venta-container {
