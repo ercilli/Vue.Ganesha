@@ -17,10 +17,6 @@ export default {
       availableClientes: [],
       availableDescuentos: [], // Nuevo estado para almacenar los descuentos
       isSubmitting: false,
-      showModal: false,
-      modalTitle: '',
-      modalMessage: '',
-      modalType: '',
       productosFiltrados: [] // Lista de productos filtrados
     }
   },
@@ -243,13 +239,6 @@ export default {
         </div>
         <button class="venta-button venta-finalizar-button" @click="generarVenta" :disabled="isSubmitting">Finalizar Factura</button>
       </div>
-      <modal 
-        :show="showModal" 
-        :title="modalTitle" 
-        :message="modalMessage" 
-        :type="modalType" 
-        @close="closeModal">
-      </modal>
     </div>
   `
 }
