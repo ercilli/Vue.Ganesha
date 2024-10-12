@@ -160,6 +160,9 @@ export default {
     },
     formatCurrency(value) {
       return new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(value);
+    },
+    formatPercentage(value) {
+      return `${value}%`;
     }
   },
   mounted() {
@@ -170,7 +173,7 @@ export default {
     <div class="descuento-container">
       <div v-if="error" class="error">{{ error }}</div>
       <div class="search-container">
-        <input id="search" class="descuento-input" v-model="searchQuery" @input="buscarProducto" placeholder="Buscar Producto" />
+        <input id="search" class="descuento-input" v-model="searchQuery" @input="buscarProducto" placeholder="Buscar" />
         <span class="search-icon">🔍</span>
       </div>
       <div v-if="productosFiltrados.length > 0">
@@ -200,22 +203,24 @@ export default {
       <table class="descuento-table">
         <thead>
           <tr>
-            <th @click="sortDescuentos('descuentoCantidadId')">ID</th>
-            <th @click="sortDescuentos('productoId')">Producto ID</th>
-            <th @click="sortDescuentos('cantidadMinima')">Cantidad Mínima</th>
-            <th @click="sortDescuentos('porcentaje')">Porcentaje</th>
-            <th @click="sortDescuentos('precioDescuento')">Precio Descuento</th>
+            <!-- Ocultar la columna "Id" -->
+            <!-- <th @click="sortDescuentos('descuentoCantidadId')">Id</th> -->
+            <th @click="sortDescuentos('productoId')">Descripción</th>
+            <th @click="sortDescuentos('cantidadMinima')">Unidad</th>
+            <th @click="sortDescuentos('porcentaje')">%</th>
+            <th @click="sortDescuentos('precioDescuento')">$</th>
             <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="descuento in paginatedDescuentos" :key="descuento.descuentoCantidadId">
-            <td data-label="ID">
+            <!-- Ocultar la columna "Id" -->
+            <!-- <td data-label="ID">
               <span v-if="!descuento.editando">{{ descuento.descuentoCantidadId }}</span>
               <input v-else v-model="descuento.descuentoCantidadId" class="descuento-input" />
-            </td>
-            <td data-label="Producto ID">
-              <span v-if="!descuento.editando">{{ descuento.productoId }}</span>
+            </td> -->
+            <td data-label="Descripción">
+              <span v-if="!descuento.editando">{{ obtenerDescripcionProducto(descuento.productoId) }}</span>
               <input v-else v-model="descuento.productoId" class="descuento-input" />
             </td>
             <td data-label="Cantidad Mínima">
@@ -223,11 +228,11 @@ export default {
               <input v-else v-model="descuento.cantidadMinima" type="number" class="descuento-input" />
             </td>
             <td data-label="Porcentaje">
-              <span v-if="!descuento.editando">{{ descuento.porcentaje }}</span>
+              <span v-if="!descuento.editando">{{ formatPercentage(descuento.porcentaje) }}</span>
               <input v-else v-model="descuento.porcentaje" type="number" class="descuento-input" />
             </td>
             <td data-label="Precio Descuento">
-              <span v-if="!descuento.editando">{{ descuento.precioDescuento }}</span>
+              <span v-if="!descuento.editando">{{ formatCurrency(descuento.precioDescuento) }}</span>
               <input v-else v-model="descuento.precioDescuento" type="number" class="descuento-input" />
             </td>
             <td data-label="Acciones">
