@@ -1,0 +1,97 @@
+/* Estilos del header */
+.header {
+  height: 80px;
+  /* Reemplazar var(--altura_header) */
+  background-color: #2F4F4F;
+  /* Reemplazar var(--color_primario) */
+  width: 100%;
+  /* Asegurar que el header ocupe el 100% del ancho */
+}
+
+.logo {
+  color: #fff; /* Reemplazar var(--color_blanco) */
+}
+/* Estilos de la navbar */
+.navbar {
+  height: 80px;
+  /* Reemplazar var(--altura_nav) */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0 2rem;
+  /* Reemplazar var(--padding_left_right) */
+  position: relative;
+  /* Asegurar que el navbar tenga una posición relativa */
+  z-index: 10;
+  /* Asegurar que el navbar esté por encima del contenido */
+  width: 100%;
+  /* Asegurar que el navbar ocupe el 100% del ancho */
+}
+
+/* Estilos del menú desplegable */
+.ul_links {
+  width: 100%;
+  background-color: transparent;
+  /* Fondo transparente por defecto */
+  position: absolute;
+  top: 80px;
+  /* Reemplazar var(--altura_nav) */
+  left: 0;
+  height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  transition: all .3s;
+  z-index: 20;
+  /* Asegurar que el menú desplegable esté por encima del contenido */
+}
+
+.list_icon {
+  color: #fff;
+  /* Reemplazar var(--color_blanco) */
+  cursor: pointer;
+}
+
+.menu_hamburguesa {
+  display: none;
+}
+
+.menu_hamburguesa:checked+.ul_links {
+  height: calc(100vh - 80px);
+  /* Reemplazar var(--altura_nav) */
+}
+
+@media (max-width: 767px) {
+  .ul_links {
+    background-color: #f8f8f8; /* Reemplazar var(--color_primario_suave) */
+  }
+}
+
+/* Media queries */
+@media (min-width: 768px) {
+  .labe_hamburguesa {
+    display: none;
+  }
+  .ul_links {
+    position: static;
+    width: auto;
+    height: auto;
+    flex-direction: row;
+    gap: 2rem;
+    background-color: #2F4F4F; /* Reemplazar var(--color_primario) */
+  }
+  .link {
+    font-size: 1.2rem;
+    transition: all .3s;
+    padding: .2rem .7rem;
+    color: #fff; /* Reemplazar var(--color_blanco) */
+  }
+  .link:hover {
+    background-color: #f8f8f8; /* Reemplazar var(--color_primario_suave) */
+    color: #2F4F4F; /* Reemplazar var(--color_primario) */
+  }
+}
