@@ -1,5 +1,7 @@
 /* Import global styles */
 @import url('style.css');
+@import url('header.css');
+
 
 .producto-container {
     display: flex;
