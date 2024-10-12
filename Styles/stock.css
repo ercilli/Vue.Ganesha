@@ -104,6 +104,16 @@
     max-width: 200px; /* Ajusta el ancho máximo del botón */
 }
 
+.stock-icon {
+  cursor: pointer;
+  color: #2F4F4F;
+  font-size: 1.2em;
+  margin: 0 5px;
+}
+.stock-icon:hover {
+  color: #2F4F4F;
+}
+
 /* Media query para pantallas pequeñas */
 @media (max-width: 768px) {
     .stock-container {
