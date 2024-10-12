@@ -1,7 +1,5 @@
-/* Importa los estilos globales */
-@import url('style.css');
+@import url('header.css');
 
-/* Estilos generales */
 .descuento-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -9,6 +7,9 @@
   background-color: #fff;
   color: #333333;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Ocupa toda la altura de la ventana */
 }
 
 .descuento-form {
@@ -25,18 +26,22 @@
 }
 
 .descuento-input {
-  padding: 10px;
+  padding: 12px 20px; /* Ajustar padding para que coincida con searchbar-input */
   font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border: 1px solid #ccc;
+  border-radius: 25px; /* Bordes redondeados */
   box-sizing: border-box;
-  width: auto; /* Ajustar el ancho automáticamente */
-  min-width: 50px; /* Ancho mínimo */
-  max-width: 75px; /* Ancho máximo */
+  width: 100%; /* Asegura que el input ocupe el 100% del ancho del contenedor */
+  transition: border-color 0.3s; /* Transición suave para el borde */
+}
+
+.descuento-input:focus {
+  border-color: #4CAF50; /* Cambia el color del borde al enfocar */
+  outline: none; /* Elimina el borde de enfoque predeterminado */
 }
 
 .descuento-button {
-  padding: 10px 20px;
+  padding: 8px 12px; /* Ajustar padding para que coincida con searchbar-descuento-button */
   font-size: 16px;
   color: #fff;
   background-color: #2F4F4F;
@@ -50,6 +55,11 @@
   background-color: #333;
 }
 
+.descuento-table-container {
+  flex: 1; /* Permite que el contenedor de la tabla ocupe el espacio restante */
+  overflow-y: auto; /* Añade scroll vertical si el contenido es demasiado grande */
+}
+
 .descuento-table {
   width: 100%;
   border-collapse: collapse;
@@ -57,24 +67,30 @@
   overflow-x: auto;
   box-sizing: border-box;
   table-layout: auto; /* Ajustar automáticamente el ancho de las columnas */
+  font-size: 10px; /* Ajustar el tamaño de la fuente para que coincida con searchbar-coincidencias-table */
 }
 
 .descuento-table th,
 .descuento-table td {
-  padding: 8px;
+  padding: 3px; /* Ajustar padding para que coincida con searchbar-coincidencias-table */
   border: 1px solid #ddd;
   text-align: left;
 }
 
 .descuento-table th {
   cursor: pointer;
-  background-color: #f8f8f8;
+  background-color: #f9f9f9;
   color: #000;
   white-space: nowrap; /* Ocupa el mínimo espacio necesario */
+  font-weight: bold; /* Asegura que el texto del encabezado sea negrita */
 }
 
 .descuento-table th:hover {
   background-color: #e9ecef;
+}
+
+.descuento-table tr:nth-child(even) {
+  background-color: #f2f2f2; /* Color de fondo alternativo para las filas */
 }
 
 .error {
