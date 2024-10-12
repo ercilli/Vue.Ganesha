@@ -60,12 +60,12 @@ export default {
           descuentoId = descuento.id;
           if (descuento.porcentaje !== 0) {
             porcentajeDescuento = descuento.porcentaje;
-            precioConDescuento = productoEncontrado.precio * (1 - porcentajeDescuento / 100);
             tipoDescuento = '%';
-          } else if (descuento.precioDescuento !== 0) {
+            precioConDescuento = productoEncontrado.precio - (productoEncontrado.precio * (descuento.porcentaje / 100));
+          } else {
             precioDescuento = descuento.precioDescuento;
-            precioConDescuento = productoEncontrado.precio - precioDescuento;
             tipoDescuento = '$';
+            precioConDescuento = productoEncontrado.precio - descuento.precioDescuento;
           }
         }
 
@@ -77,9 +77,9 @@ export default {
           precio: precioConDescuento,
           cantidad: detalle.cantidad || 1,
           subtotal: precioConDescuento * (detalle.cantidad || 1),
-          descuento: porcentajeDescuento || precioDescuento, // Nuevo campo para almacenar el descuento aplicado
-          descuentoId: descuentoId, // Nuevo campo para almacenar el ID del descuento aplicado
-          tipoDescuento: tipoDescuento // Nuevo campo para almacenar el tipo de descuento
+          descuento: porcentajeDescuento || precioDescuento,
+          descuentoId: descuentoId,
+          tipoDescuento: tipoDescuento
         };
       }
     },
@@ -96,12 +96,12 @@ export default {
         descuentoId = descuento.id;
         if (descuento.porcentaje !== 0) {
           porcentajeDescuento = descuento.porcentaje;
-          precioConDescuento = product.precio * (1 - porcentajeDescuento / 100);
           tipoDescuento = '%';
-        } else if (descuento.precioDescuento !== 0) {
+          precioConDescuento = product.precio - (product.precio * (descuento.porcentaje / 100));
+        } else {
           precioDescuento = descuento.precioDescuento;
-          precioConDescuento = product.precio;
           tipoDescuento = '$';
+          precioConDescuento = product.precio - descuento.precioDescuento;
         }
 
         // Limitar la cantidad a la cantidad mínima del descuento
@@ -150,11 +150,7 @@ export default {
           };
 
           if (detalle.descuentoId !== null) {
-            producto.descuentoId = parseInt(detalle.descuentoId, 10);
-            const descuento = this.availableDescuentos.find(d => d.id === producto.descuentoId);
-            if (descuento && descuento.precioDescuento !== 0) {
-              totalDescuento += descuento.precioDescuento;
-            }
+            totalDescuento += detalle.descuento;
           }
 
           return producto;
@@ -167,16 +163,11 @@ export default {
 
       createItem('Venta', venta)
         .then(response => {
-          console.log('Venta respuesta:', response);
-          if (response) {
-            this.$root.openModal('Éxito', 'Venta creada con éxito', 'success');
-            this.finalizarFactura();
-          } else {
-            this.$root.openModal('Error', 'Error al crear la venta', 'error');
-          }
+          console.log('Venta creada con éxito:', response);
+          this.finalizarFactura();
         })
         .catch(error => {
-          this.$root.openModal('Error', 'Error al crear la venta: ' + error.message, 'error');
+          console.error('Error al crear la venta:', error);
         })
         .finally(() => {
           this.isSubmitting = false;
@@ -190,8 +181,8 @@ export default {
         precio: 0,
         subtotal: 0,
         descuento: 0,
-        descuentoId: null, // Inicializar el ID del descuento aplicado
-        tipoDescuento: null, // Inicializar el tipo de descuento
+        descuentoId: null,
+        tipoDescuento: null,
         productoid: null
       });
     },
@@ -231,7 +222,7 @@ export default {
             <td data-label="Precio">{{ formatCurrency(item.precio) }}</td>
             <td data-label="Descuento">{{ item.descuento ? (item.descuento + item.tipoDescuento) : '0%' }}</td>
             <td data-label="Subtotal">{{ formatCurrency(item.subtotal) }}</td>
-            <td data-label="Acciones"><button class="venta-button" @click="eliminarDetalle(index)">Eliminar</button></td>
+            <td data-label="Acciones"><button class="venta-button eliminar" @click="eliminarDetalle(index)"><i class="fas fa-trash"></i></button></td>
           </tr>
         </tbody>
       </table>
