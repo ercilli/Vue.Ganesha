@@ -1,14 +1,12 @@
 import { fetchItems, createItem, updateItem, deleteItem } from '../Services/apiService.js';
 import Pagination from './Pagination.js';
 import SearchBar from './SearchBar.js';
-import SearchResult from './SearchResult.js';
 
 export default {
   name: 'DescuentoCantidad',
   components: {
     Pagination,
-    SearchBar,
-    SearchResult
+    SearchBar
   },
   data() {
     return {
