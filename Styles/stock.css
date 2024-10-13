@@ -2,11 +2,10 @@
 @import url('style.css');
 @import url('header.css');
 
-
 /* Estilos específicos para Stock.js */
 .stock-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Alinear los elementos en columna */
     min-height: 100vh; /* Ocupa al menos el 100% de la altura de la ventana */
     padding: 20px 5px; /* Agregar padding de 5px a la izquierda y derecha */
     background-color: #fff;
@@ -23,6 +22,12 @@
     text-align: center;
     margin-bottom: 20px;
     padding: 0 5px; /* Agregar padding de 5px a la izquierda y derecha */
+}
+
+.stock-table-container {
+    display: flex;
+    justify-content: center; /* Centrar la tabla horizontalmente */
+    width: 100%;
 }
 
 .stock-table {
