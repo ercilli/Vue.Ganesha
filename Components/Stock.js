@@ -188,65 +188,67 @@ export default {
     }
   },
   template: `
-    <div class="stock-container">
-      <div class="stock-header">
-        <button v-for="tab in tabs" :key="tab" @click="currentTab = tab" class="stock-button">{{ tab }}</button>
-      </div>
-      <div v-if="currentTab === 'Stock'">
-        <h2>Stock Actual</h2>
-        <table class="stock-table">
-          <thead>
-            <tr>
-              <th>Código</th>
-              <th>Descripción</th>
-              <th>Cantidad</th>
-              <th>Acciones</th> <!-- Nueva columna para acciones -->
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="item in stockItems" :key="item.codigo">
-              <td>{{ item.codigo }}</td>
-              <td>
-                <span v-if="!item.editando">{{ item.descripcion }}</span>
-                <input v-else v-model="item.descripcion" class="stock-input" />
-              </td>
-              <td>
-                <span v-if="!item.editando">{{ item.cantidad }}</span>
-                <input v-else type="number" v-model="item.cantidad" class="stock-input" />
-              </td>
-              <td>
-                <i v-if="!item.editando" class="fas fa-edit stock-icon" @click="seleccionarStock(item)"></i>
-                <i v-else class="fas fa-save stock-icon" @click="actualizarStock(item)"></i>
-                <i v-if="item.editando" class="fas fa-times stock-icon" @click="cancelarEdicion(item)"></i>
-                <i class="fas fa-trash stock-icon" @click="eliminarStock(item.stockId)"></i>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div v-if="currentTab === 'Ingreso de Stock'">
-        <h2>Ingreso de Stock</h2>
-        <div class="stock-form">
-          <input v-model="newStockEntry.codigo" placeholder="Código" @blur="buscarProductoPorCodigoODescripcion('codigo', newStockEntry)" class="stock-input">
-          <input v-model="newStockEntry.descripcion" placeholder="Descripción" @blur="buscarProductoPorCodigoODescripcion('descripcion', newStockEntry)" class="stock-input">
-          <input type="number" v-model.number="newStockEntry.cantidad" class="stock-input">
-          <input type="date" v-model="newStockEntry.fecha" class="stock-input">
-          <select v-model="newStockEntry.proveedor" class="stock-input">
-            <option v-for="proveedor in availableProveedores" :key="proveedor.id" :value="proveedor.id">{{ proveedor.nombre }}</option>
-          </select>
-          <button @click="agregarNuevoStock" class="stock-button">Agregar</button>
+      <div class="stock-container">
+        <div class="stock-header">
+          <button v-for="tab in tabs" :key="tab" @click="currentTab = tab" class="stock-button">{{ tab }}</button>
+        </div>
+        <div v-if="currentTab === 'Stock'">
+          <h2>Stock Actual</h2>
+          <div class="stock-table-container"> <!-- Contenedor adicional para centrar la tabla -->
+            <table class="stock-table">
+              <thead>
+                <tr>
+                  <th>Código</th>
+                  <th>Descripción</th>
+                  <th>Cantidad</th>
+                  <th>Acciones</th> <!-- Nueva columna para acciones -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="item in stockItems" :key="item.codigo">
+                  <td>{{ item.codigo }}</td>
+                  <td>
+                    <span v-if="!item.editando">{{ item.descripcion }}</span>
+                    <input v-else v-model="item.descripcion" class="stock-input" />
+                  </td>
+                  <td>
+                    <span v-if="!item.editando">{{ item.cantidad }}</span>
+                    <input v-else type="number" v-model="item.cantidad" class="stock-input" />
+                  </td>
+                  <td>
+                    <i v-if="!item.editando" class="fas fa-edit stock-icon" @click="seleccionarStock(item)"></i>
+                    <i v-else class="fas fa-save stock-icon" @click="actualizarStock(item)"></i>
+                    <i v-if="item.editando" class="fas fa-times stock-icon" @click="cancelarEdicion(item)"></i>
+                    <i class="fas fa-trash stock-icon" @click="eliminarStock(item.stockId)"></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div v-if="currentTab === 'Ingreso de Stock'">
+          <h2>Ingreso de Stock</h2>
+          <div class="stock-form">
+            <input v-model="newStockEntry.codigo" placeholder="Código" @blur="buscarProductoPorCodigoODescripcion('codigo', newStockEntry)" class="stock-input">
+            <input v-model="newStockEntry.descripcion" placeholder="Descripción" @blur="buscarProductoPorCodigoODescripcion('descripcion', newStockEntry)" class="stock-input">
+            <input type="number" v-model.number="newStockEntry.cantidad" class="stock-input">
+            <input type="date" v-model="newStockEntry.fecha" class="stock-input">
+            <select v-model="newStockEntry.proveedor" class="stock-input">
+              <option v-for="proveedor in availableProveedores" :key="proveedor.id" :value="proveedor.id">{{ proveedor.nombre }}</option>
+            </select>
+            <button @click="agregarNuevoStock" class="stock-button">Agregar</button>
+          </div>
+        </div>
+        <div v-if="currentTab === 'Perdida de Stock'">
+          <h2>Perdida de Stock</h2>
+          <div class="stock-form">
+            <input v-model="stockLoss.codigo" placeholder="Código" @blur="buscarProductoPorCodigoODescripcion('codigo', stockLoss)" class="stock-input">
+            <input v-model="stockLoss.descripcion" placeholder="Descripción" @blur="buscarProductoPorCodigoODescripcion('descripcion', stockLoss)" class="stock-input">
+            <input type="number" v-model.number="stockLoss.cantidad" class="stock-input">
+            <input type="date" v-model="stockLoss.fecha" class="stock-input">
+            <button @click="agregarPerdidaStock" class="stock-button">Registrar Pérdida</button>
+          </div>
         </div>
       </div>
-      <div v-if="currentTab === 'Perdida de Stock'">
-        <h2>Perdida de Stock</h2>
-        <div class="stock-form">
-          <input v-model="stockLoss.codigo" placeholder="Código" @blur="buscarProductoPorCodigoODescripcion('codigo', stockLoss)" class="stock-input">
-          <input v-model="stockLoss.descripcion" placeholder="Descripción" @blur="buscarProductoPorCodigoODescripcion('descripcion', stockLoss)" class="stock-input">
-          <input type="number" v-model.number="stockLoss.cantidad" class="stock-input">
-          <input type="date" v-model="stockLoss.fecha" class="stock-input">
-          <button @click="agregarPerdidaStock" class="stock-button">Registrar Pérdida</button>
-        </div>
-      </div>
-    </div>
-  `,
+    `,
 }
