@@ -1,10 +1,12 @@
 import { fetchItems, createItem, updateItem, deleteItem } from '../Services/apiService.js';
 import Pagination from './Pagination.js';
+import GenericForm from './Form.js';
 
 export default {
   name: 'Producto',
   components: {
-    Pagination
+    Pagination,
+    GenericForm
   },
   data() {
     return {
@@ -18,7 +20,12 @@ export default {
       error: null,
       sortColumn: null,
       sortOrder: 'asc',
-      itemsPerPage: 5
+      itemsPerPage: 5,
+      formFields: [
+        { name: 'descripcion', label: 'Descripción', type: 'text', required: true },
+        { name: 'categoria', label: 'Categoría', type: 'text', required: true },
+        { name: 'precio', label: 'Precio', type: 'number', required: true }
+      ]
     };
   },
   methods: {
@@ -33,11 +40,10 @@ export default {
           this.error = 'Error al cargar los productos';
         });
     },
-    agregarProducto() {
-      createItem('Producto', this.nuevoProducto)
+    agregarProducto(formData) {
+      createItem('Producto', formData)
         .then(() => {
           this.fetchProductos();
-          this.nuevoProducto = { descripcion: '', categoria: '', precio: 0 };
         })
         .catch(error => {
           console.error('Error al agregar el producto:', error);
@@ -109,21 +115,12 @@ export default {
   template: `
     <div class="producto-container">
       <div v-if="error" class="error">{{ error }}</div>
-      <form class="producto-form" @submit.prevent="agregarProducto">
-        <div class="producto-form-group">
-          <label for="descripcion">Descripción:</label>
-          <input id="descripcion" class="producto-input" v-model="nuevoProducto.descripcion" placeholder="Descripción" required />
-        </div>
-        <div class="producto-form-group">
-          <label for="categoria">Categoría:</label>
-          <input id="categoria" class="producto-input" v-model="nuevoProducto.categoria" placeholder="Categoría" required />
-        </div>
-        <div class="producto-form-group">
-          <label for="precio">Precio:</label>
-          <input id="precio" class="producto-input" v-model="nuevoProducto.precio" type="number" placeholder="Precio" required />
-        </div>
-        <button type="submit" class="producto-button">Agregar Producto</button>
-      </form>
+      <generic-form 
+        :fields="formFields" 
+        submit-button-text="Agregar Producto" 
+        toggle-button-text="Crear Nuevo Producto" 
+        @submit="agregarProducto"
+      ></generic-form>
       <table class="producto-table">
         <thead>
           <tr>
