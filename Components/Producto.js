@@ -13,6 +13,7 @@ export default {
       productos: [],
       paginatedProductos: [],
       nuevoProducto: {
+        codigo: '',
         descripcion: '',
         categoria: '',
         precio: 0
@@ -22,6 +23,7 @@ export default {
       sortOrder: 'asc',
       itemsPerPage: 5,
       formFields: [
+        { name: 'codigo', label: 'Código', type: 'text', required: true },
         { name: 'descripcion', label: 'Descripción', type: 'text', required: true },
         { name: 'categoria', label: 'Categoría', type: 'text', required: true },
         { name: 'precio', label: 'Precio', type: 'number', required: true }
