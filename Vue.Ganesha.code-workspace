@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../../Projects/Vivero.Ganesha.Api"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Vue.Ganesha"
+	}
+}
