@@ -21,8 +21,8 @@ export default {
         console.log('Loaded users:', this.users); // Verificar los datos recibidos
         // Asegurarse de que cada usuario tenga un rol seleccionado
         this.users.forEach(user => {
-          if (user.roles && user.roles.length > 0) {
-            user.selectedRole = user.roles[0];
+          if (user.roles) {
+            user.selectedRole = user.roles; // Asignar el rol directamente
           } else {
             user.selectedRole = 'User'; // Valor por defecto si no hay roles
           }
