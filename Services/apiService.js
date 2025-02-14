@@ -1,8 +1,8 @@
 import { getAccessToken } from './authService.js';
 import { handleError } from '../Components/ErrorHandler.js';
 
-const baseUrl = 'https://localhost:7182/api';
-//const baseUrl = 'https://vivero-ganesha-api.fly.dev/api';
+//const baseUrl = 'https://localhost:7182/api';
+const baseUrl = 'https://vivero-ganesha-api.fly.dev/api';
 
 // Función genérica para obtener datos
 export const fetchItems = async (controller) => {
